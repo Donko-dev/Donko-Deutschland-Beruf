@@ -2,7 +2,7 @@
 
 **DONKO DEUTSCHLAND BERUF** est une application web vitrine — un **Warehouse Management System (WMS)** simulé, contenu dans un **fichier unique et autonome** (`index.html`, Tailwind CSS + JavaScript natif). Elle réunit mes compétences en gestion (Bac B), cloud AWS et développement logiciel, au service de ma préparation à un **Ausbildung en logistique en Allemagne**.
 
-* **Démo live :** [Ajoutez ici votre lien GitHub Pages, ex. `https://votre-pseudo.github.io/donko-deutschland-beruf/`]
+* **Démo live :** [https://donko-dev.github.io/Donko-Deutschland-Beruf/](https://donko-dev.github.io/Donko-Deutschland-Beruf/)
 * **Interface :** 100 % bilingue Français / Deutsch, bascule instantanée sans rechargement
 * **Stack :** HTML5 · Tailwind CSS (CDN) · JavaScript vanilla — aucune dépendance, aucun build
 
