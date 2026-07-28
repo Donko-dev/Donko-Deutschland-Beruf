@@ -62,10 +62,12 @@
   .font-mono{font-family:'JetBrains Mono',monospace}
   .card{background:var(--panel);border:1px solid var(--line);}
   .card-2{background:var(--panel-2);border:1px solid var(--line);}
-  .hazard-strip{
-    background: repeating-linear-gradient(135deg, var(--amber) 0 14px, #1a1508 14px 28px);
+  .flag-bar{
+    display:flex;
     height:5px;
+    width:100%;
   }
+  .flag-bar > span{ flex:1 1 0; }
   .card, .card-2, header, footer, .bin, input, select, .btn-outline{
     transition: background-color .35s ease, border-color .35s ease, color .35s ease;
   }
@@ -156,7 +158,11 @@
 
 <!-- ============ HEADER ============ -->
 <header class="sticky top-0 z-40 backdrop-blur bg-[#0B0F14]/85 border-b border-[var(--line)]">
-  <div class="hazard-strip"></div>
+  <div class="flag-bar" aria-hidden="true" title="🇧🇯 Bénin">
+    <span style="background:#008751"></span>
+    <span style="background:#FCD116"></span>
+    <span style="background:#E8112D"></span>
+  </div>
   <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
     <div class="flex items-center gap-3">
       <div class="w-9 h-9 rounded-md border border-[var(--amber-dim)] flex items-center justify-center font-mono text-[var(--amber)] text-sm font-bold">DD</div>
@@ -449,6 +455,12 @@
     </div>
   </div>
 </footer>
+
+<div class="flag-bar" aria-hidden="true" title="🇩🇪 Deutschland">
+  <span style="background:#000000"></span>
+  <span style="background:#DD0000"></span>
+  <span style="background:#FFCE00"></span>
+</div>
 
 <script>
 /* ================= PWA : SERVICE WORKER ================= */
