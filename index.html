@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DONKO DEUTSCHLAND BERUF</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0F14;
+    --panel:#11161D;
+    --panel-2:#161C25;
+    --line:#232B36;
+    --text:#E8ECEF;
+    --muted:#8A97A6;
+    --amber:#F2B705;
+    --amber-dim:#8a6a06;
+    --steel:#3E7CB1;
+    --danger:#E5484D;
+    --ok:#3FB27F;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1200px 600px at 85% -10%, rgba(62,124,177,0.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, rgba(242,183,5,0.06), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+  }
+  .font-display{font-family:'Space Grotesk',sans-serif}
+  .font-mono{font-family:'JetBrains Mono',monospace}
+  .card{background:var(--panel);border:1px solid var(--line);}
+  .card-2{background:var(--panel-2);border:1px solid var(--line);}
+  .hazard-strip{
+    background: repeating-linear-gradient(135deg, var(--amber) 0 14px, #1a1508 14px 28px);
+    height:5px;
+  }
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
+  .amber-text{color:var(--amber)}
+  .steel-text{color:var(--steel)}
+  .muted{color:var(--muted)}
+  .btn-amber{
+    background:var(--amber); color:#14110a; font-weight:700;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-amber:hover{transform:translateY(-1px); box-shadow:0 6px 24px -6px rgba(242,183,5,.45)}
+  .btn-outline{
+    border:1px solid var(--line); color:var(--text);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .btn-outline:hover{border-color:var(--steel); background:rgba(62,124,177,.08)}
+  .lang-btn{transition:all .15s ease}
+  .lang-btn.active{background:var(--amber); color:#14110a;}
+  .lang-btn:not(.active){color:var(--muted)}
+  .bin{
+    aspect-ratio:1/1;
+    border:1px solid var(--line);
+    background:var(--panel-2);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.62rem;
+    color:var(--muted);
+    border-radius:4px;
+    position:relative;
+    transition: background .5s ease, border-color .5s ease, transform .35s ease, color .5s ease;
+  }
+  .bin.lit{
+    background: rgba(242,183,5,.16);
+    border-color:var(--amber);
+    color:var(--amber);
+    transform:scale(1.08);
+    box-shadow:0 0 0 1px rgba(242,183,5,.25), 0 8px 22px -6px rgba(242,183,5,.35);
+  }
+  .bin.occupied{
+    background: rgba(139,151,166,.10);
+    color:var(--muted);
+  }
+  .row-critical{background:rgba(229,72,77,.08) !important}
+  .pulse-dot{
+    display:inline-block; width:7px; height:7px; border-radius:50%;
+    background:var(--ok); box-shadow:0 0 0 0 rgba(63,178,127,.6);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(63,178,127,.55)}
+    70%{box-shadow:0 0 0 8px rgba(63,178,127,0)}
+    100%{box-shadow:0 0 0 0 rgba(63,178,127,0)}
+  }
+  .cloud-line{
+    stroke:var(--line); stroke-width:1.5; fill:none;
+  }
+  .cloud-line.active{
+    stroke:var(--amber);
+    stroke-dasharray:6 5;
+    animation:dash 1.2s linear infinite;
+  }
+  @keyframes dash{to{stroke-dashoffset:-22}}
+  .step-num{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--amber); border:1px solid var(--amber-dim);
+    background:rgba(242,183,5,.06);
+  }
+  .fade-in{animation:fadeIn .5s ease both}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)}}
+  input[type=text], input[type=number], select{
+    background:var(--panel-2); border:1px solid var(--line); color:var(--text);
+  }
+  input:focus, select:focus{outline:2px solid var(--steel); outline-offset:1px}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- ============ HEADER ============ -->
+<header class="sticky top-0 z-40 backdrop-blur bg-[#0B0F14]/85 border-b border-[var(--line)]">
+  <div class="hazard-strip"></div>
+  <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-md border border-[var(--amber-dim)] flex items-center justify-center font-mono text-[var(--amber)] text-sm font-bold">DD</div>
+      <div>
+        <p class="font-display font-bold text-base leading-none tracking-tight">DONKO DEUTSCHLAND BERUF</p>
+        <p class="font-mono text-[10px] muted mt-1" data-i18n="header.tagline">COTONOU → DEUTSCHLAND · WMS SHOWCASE</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="hidden sm:flex items-center gap-2 font-mono text-[11px] px-3 py-1.5 rounded-full border border-[var(--line)] text-[var(--muted)]">
+        <span class="pulse-dot"></span> AWS Certified · Cloud Practitioner
+      </span>
+      <div class="flex items-center rounded-md border border-[var(--line)] overflow-hidden font-mono text-xs">
+        <button id="lang-fr" class="lang-btn active px-3 py-1.5" onclick="setLang('fr')">FR</button>
+        <button id="lang-de" class="lang-btn px-3 py-1.5" onclick="setLang('de')">DE</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO / PROFIL ============ -->
+<section class="max-w-6xl mx-auto px-5 pt-14 pb-10">
+  <p class="font-mono text-xs amber-text tracking-widest uppercase mb-4" data-i18n="hero.eyebrow">Fiche de poste · Bewerberprofil</p>
+  <h1 class="font-display font-bold text-3xl sm:text-5xl leading-tight max-w-3xl" data-i18n="hero.title">
+    Du savoir autodidacte à la logistique allemande.
+  </h1>
+  <p class="mt-5 max-w-2xl text-[15px] leading-relaxed muted" data-i18n="hero.subtitle">
+    Application vitrine simulant un système de gestion d'entrepôt (WMS), conçue pour démontrer mes compétences en gestion, cloud AWS et développement — en vue d'un Ausbildung en Allemagne.
+  </p>
+
+  <div class="mt-10 grid md:grid-cols-2 gap-5">
+    <!-- Profil card -->
+    <div class="card rounded-xl p-6">
+      <h2 class="font-display font-semibold text-lg mb-1" data-i18n="hero.profileTitle">Profil</h2>
+      <p class="font-mono text-[11px] muted mb-4" data-i18n="hero.profileSub">Bac B · 2020 — AWS Cloud Practitioner · Avril 2026</p>
+      <p class="text-sm leading-relaxed muted" data-i18n="hero.profileText">
+        Formation en gestion (Bac B) alliée à une pratique concrète du développement logiciel et de l'infrastructure cloud. Ce projet réunit ces trois compétences autour d'un cas d'usage réel : la logistique d'entrepôt.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-2">
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text">AWS · S3 / RDS / Lambda</span>
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text">Bac B · Gestion</span>
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] muted">JavaScript</span>
+      </div>
+    </div>
+
+    <!-- Roadmap card -->
+    <div class="card rounded-xl p-6">
+      <h2 class="font-display font-semibold text-lg mb-1" data-i18n="hero.roadmapTitle">Feuille de route</h2>
+      <p class="font-mono text-[11px] muted mb-4" data-i18n="hero.roadmapSub">Cotonou → Allemagne</p>
+      <ol class="space-y-3">
+        <li class="flex gap-3 items-start">
+          <span class="step-num text-[11px] w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5">01</span>
+          <p class="text-sm muted leading-relaxed" data-i18n="hero.step1">Allemand intensif à la FLLAC (UAC) et au laboratoire de la Fondation Vallet (Bénin Excellence), Cotonou.</p>
+        </li>
+        <li class="flex gap-3 items-start">
+          <span class="step-num text-[11px] w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5">02</span>
+          <p class="text-sm muted leading-relaxed" data-i18n="hero.step2">Examen officiel ÖSD (niveau visé B1/B2) chez Spass mit Deutsch, Abomey-Calavi.</p>
+        </li>
+        <li class="flex gap-3 items-start">
+          <span class="step-num text-[11px] w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5">03</span>
+          <p class="text-sm muted leading-relaxed" data-i18n="hero.step3">Ausbildung en Allemagne : Fachkraft für Lagerlogistik ou Fachlagerist.</p>
+        </li>
+        <li class="flex gap-3 items-start">
+          <span class="step-num text-[11px] w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5">04</span>
+          <p class="text-sm muted leading-relaxed" data-i18n="hero.step4">Création d'une UG (Haftungsbeschränkt) pour déployer mes logiciels (facturation/caisse, marketplace) sur le marché européen.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODULE A : STOCKS & MARGES ============ -->
+<section class="max-w-6xl mx-auto px-5 py-10">
+  <div class="flex items-baseline justify-between flex-wrap gap-2 mb-1">
+    <p class="font-mono text-xs amber-text tracking-widest uppercase" data-i18n="modA.eyebrow">Module A</p>
+  </div>
+  <h2 class="font-display font-bold text-2xl mb-2" data-i18n="modA.title">Gestion des stocks &amp; marges</h2>
+  <p class="text-sm muted max-w-2xl mb-6" data-i18n="modA.subtitle">Logique Bac B : calcul en temps réel du prix de revient, de la marge et des alertes de rupture critique.</p>
+
+  <div class="card rounded-xl overflow-hidden">
+    <div class="p-5 grid sm:grid-cols-5 gap-3 border-b border-[var(--line)]">
+      <input id="p-name" type="text" data-i18n-placeholder="modA.formName" placeholder="Nom du produit" class="sm:col-span-2 rounded-md px-3 py-2 text-sm">
+      <input id="p-cost" type="number" min="0" step="1" data-i18n-placeholder="modA.formCost" placeholder="Coût (€)" class="rounded-md px-3 py-2 text-sm font-mono">
+      <input id="p-price" type="number" min="0" step="1" data-i18n-placeholder="modA.formPrice" placeholder="Prix vente (€)" class="rounded-md px-3 py-2 text-sm font-mono">
+      <input id="p-stock" type="number" min="0" step="1" data-i18n-placeholder="modA.formStock" placeholder="Stock" class="rounded-md px-3 py-2 text-sm font-mono">
+      <button onclick="addProduct()" class="btn-amber rounded-md px-4 py-2 text-sm sm:col-span-5" data-i18n="modA.formAdd">+ Ajouter le produit</button>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="text-left font-mono text-[11px] uppercase muted border-b border-[var(--line)]">
+            <th class="px-5 py-3" data-i18n="modA.thProduct">Produit</th>
+            <th class="px-5 py-3" data-i18n="modA.thCost">Coût</th>
+            <th class="px-5 py-3" data-i18n="modA.thPrice">Prix vente</th>
+            <th class="px-5 py-3" data-i18n="modA.thMargin">Marge</th>
+            <th class="px-5 py-3" data-i18n="modA.thStock">Stock</th>
+            <th class="px-5 py-3" data-i18n="modA.thStatus">Statut</th>
+          </tr>
+        </thead>
+        <tbody id="product-body" class="font-mono text-[13px]"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODULE B : PLACEMENT ENTREPÔT ============ -->
+<section class="max-w-6xl mx-auto px-5 py-10">
+  <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="modB.eyebrow">Module B</p>
+  <h2 class="font-display font-bold text-2xl mb-2" data-i18n="modB.title">Algorithme de placement virtuel</h2>
+  <p class="text-sm muted max-w-2xl mb-6" data-i18n="modB.subtitle">Logique « Zero Communication » : le colis scanné est rangé automatiquement, sans concertation orale entre coéquipiers.</p>
+
+  <div class="grid lg:grid-cols-5 gap-5">
+    <div class="card rounded-xl p-6 lg:col-span-2">
+      <h3 class="font-display font-semibold mb-4" data-i18n="modB.formTitle">Scanner un colis</h3>
+      <label class="block font-mono text-[11px] muted mb-1" data-i18n="modB.formWeightLabel">Poids (kg)</label>
+      <input id="pkg-weight" type="number" min="0.1" step="0.1" value="4" class="w-full rounded-md px-3 py-2 text-sm font-mono mb-4">
+
+      <label class="block font-mono text-[11px] muted mb-1" data-i18n="modB.formCatLabel">Catégorie</label>
+      <select id="pkg-cat" class="w-full rounded-md px-3 py-2 text-sm mb-5">
+        <option value="fragile" data-i18n="modB.catFragile">Fragile</option>
+        <option value="standard" data-i18n="modB.catStandard">Standard</option>
+        <option value="lourd" data-i18n="modB.catHeavy">Lourd / Palette</option>
+        <option value="frais" data-i18n="modB.catCold">Frais / Réfrigéré</option>
+      </select>
+
+      <button onclick="scanPackage()" class="btn-amber rounded-md px-4 py-2.5 text-sm w-full" data-i18n="modB.formScan">Scanner &amp; ranger</button>
+
+      <div id="scan-result" class="mt-5 text-sm font-mono min-h-[2.5rem]"></div>
+    </div>
+
+    <div class="card rounded-xl p-6 lg:col-span-3">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-display font-semibold" data-i18n="modB.gridTitle">Grille de l'entrepôt</h3>
+        <span class="font-mono text-[11px] muted" id="grid-legend" data-i18n="modB.gridLegend">Allée-Baie · niveau selon poids</span>
+      </div>
+      <div id="warehouse-grid" class="grid grid-cols-6 gap-1.5 sm:gap-2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODULE C : ARCHITECTURE CLOUD ============ -->
+<section class="max-w-6xl mx-auto px-5 py-10">
+  <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="modC.eyebrow">Module C</p>
+  <h2 class="font-display font-bold text-2xl mb-2" data-i18n="modC.title">Architecture cloud simulée</h2>
+  <p class="text-sm muted max-w-2xl mb-6" data-i18n="modC.subtitle">Infrastructure serverless AWS : archivage documentaire, base de données d'inventaire, calcul planifié des marges.</p>
+
+  <div class="card rounded-xl p-6 sm:p-10">
+    <svg viewBox="0 0 760 220" class="w-full h-auto" id="aws-svg">
+      <line class="cloud-line" id="line1" x1="140" y1="110" x2="330" y2="110"></line>
+      <line class="cloud-line" id="line2" x1="430" y1="110" x2="620" y2="110"></line>
+      <line class="cloud-line" id="line3" x1="380" y1="70" x2="380" y2="150"></line>
+
+      <!-- S3 -->
+      <g class="cursor-pointer" onclick="pulseCloud('line1')">
+        <rect x="40" y="65" width="100" height="90" rx="10" fill="#161C25" stroke="#232B36"/>
+        <text x="90" y="100" text-anchor="middle" fill="#F2B705" font-family="JetBrains Mono" font-size="15" font-weight="700">S3</text>
+        <text x="90" y="120" text-anchor="middle" fill="#8A97A6" font-family="JetBrains Mono" font-size="8" data-i18n="modC.s3">Archives PDF</text>
+      </g>
+
+      <!-- Lambda -->
+      <g class="cursor-pointer" onclick="pulseCloud('line3')">
+        <rect x="330" y="30" width="100" height="80" rx="10" fill="#161C25" stroke="#232B36"/>
+        <text x="380" y="62" text-anchor="middle" fill="#3E7CB1" font-family="JetBrains Mono" font-size="15" font-weight="700">λ</text>
+        <text x="380" y="80" text-anchor="middle" fill="#8A97A6" font-family="JetBrains Mono" font-size="8" data-i18n="modC.lambda">Calcul marges</text>
+      </g>
+
+      <!-- RDS -->
+      <g class="cursor-pointer" onclick="pulseCloud('line2')">
+        <rect x="330" y="130" width="100" height="80" rx="10" fill="#161C25" stroke="#232B36"/>
+        <text x="380" y="162" text-anchor="middle" fill="#3E7CB1" font-family="JetBrains Mono" font-size="13" font-weight="700">RDS</text>
+        <text x="380" y="180" text-anchor="middle" fill="#8A97A6" font-family="JetBrains Mono" font-size="8" data-i18n="modC.rds">PostgreSQL</text>
+      </g>
+
+      <!-- App -->
+      <g class="cursor-pointer" onclick="pulseCloud('line2'); pulseCloud('line1')">
+        <rect x="620" y="65" width="100" height="90" rx="10" fill="#161C25" stroke="#232B36"/>
+        <text x="670" y="100" text-anchor="middle" fill="#E8ECEF" font-family="JetBrains Mono" font-size="12" font-weight="700" data-i18n="modC.appTitle">WMS</text>
+        <text x="670" y="120" text-anchor="middle" fill="#8A97A6" font-family="JetBrains Mono" font-size="8" data-i18n="modC.appSub">Interface web</text>
+      </g>
+    </svg>
+    <p class="text-center font-mono text-[11px] muted mt-3" data-i18n="modC.hint">Cliquez sur un service pour visualiser le flux de données.</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER / CONTACT ============ -->
+<footer class="border-t border-[var(--line)] mt-16">
+  <div class="max-w-6xl mx-auto px-5 py-12">
+    <h2 class="font-display font-bold text-xl mb-1" data-i18n="footer.title">Contact</h2>
+    <p class="text-sm muted mb-8 max-w-xl" data-i18n="footer.subtitle">Ouvert aux opportunités d'Ausbildung, partenariats et échanges techniques.</p>
+
+    <div class="grid sm:grid-cols-2 gap-8">
+      <div>
+        <p class="font-mono text-[11px] uppercase muted mb-3" data-i18n="footer.whatsapp">WhatsApp</p>
+        <div class="flex flex-col gap-2">
+          <a href="https://wa.me/22901968091" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[var(--ok)]"></span> +229 01 96 80 91 06
+          </a>
+          <a href="https://wa.me/22901491057" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[var(--ok)]"></span> +229 01 49 10 57 85
+          </a>
+        </div>
+      </div>
+      <div>
+        <p class="font-mono text-[11px] uppercase muted mb-3" data-i18n="footer.email">E-mail</p>
+        <div class="flex flex-col gap-2">
+          <a href="mailto:empiredonko@gmail.com" class="btn-outline rounded-md px-4 py-2.5 text-sm">empiredonko@gmail.com</a>
+          <a href="mailto:hassanedonko9@gmail.com" class="btn-outline rounded-md px-4 py-2.5 text-sm">hassanedonko9@gmail.com</a>
+          <a href="mailto:hassanedonko10@gmail.com" class="btn-outline rounded-md px-4 py-2.5 text-sm">hassanedonko10@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-[var(--line)] mt-10 pt-6 flex flex-col sm:flex-row justify-between gap-2">
+      <p class="font-mono text-[11px] muted" data-i18n="footer.copy">DONKO DEUTSCHLAND BERUF — Projet vitrine · Cotonou, Bénin</p>
+      <p class="font-mono text-[11px] muted">© 2026</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ================= I18N ================= */
+const translations = {
+  fr: {
+    "header.tagline": "COTONOU → DEUTSCHLAND · WMS SHOWCASE",
+    "hero.eyebrow": "Fiche de poste · Bewerberprofil",
+    "hero.title": "Du savoir autodidacte à la logistique allemande.",
+    "hero.subtitle": "Application vitrine simulant un système de gestion d'entrepôt (WMS), conçue pour démontrer mes compétences en gestion, cloud AWS et développement — en vue d'un Ausbildung en Allemagne.",
+    "hero.profileTitle": "Profil",
+    "hero.profileSub": "Bac B · 2020 — AWS Cloud Practitioner · Avril 2026",
+    "hero.profileText": "Formation en gestion (Bac B) alliée à une pratique concrète du développement logiciel et de l'infrastructure cloud. Ce projet réunit ces trois compétences autour d'un cas d'usage réel : la logistique d'entrepôt.",
+    "hero.roadmapTitle": "Feuille de route",
+    "hero.roadmapSub": "Cotonou → Allemagne",
+    "hero.step1": "Allemand intensif à la FLLAC (UAC) et au laboratoire de la Fondation Vallet (Bénin Excellence), Cotonou.",
+    "hero.step2": "Examen officiel ÖSD (niveau visé B1/B2) chez Spass mit Deutsch, Abomey-Calavi.",
+    "hero.step3": "Ausbildung en Allemagne : Fachkraft für Lagerlogistik ou Fachlagerist.",
+    "hero.step4": "Création d'une UG (Haftungsbeschränkt) pour déployer mes logiciels (facturation/caisse, marketplace) sur le marché européen.",
+    "modA.eyebrow": "Module A",
+    "modA.title": "Gestion des stocks &amp; marges",
+    "modA.subtitle": "Logique Bac B : calcul en temps réel du prix de revient, de la marge et des alertes de rupture critique.",
+    "modA.formName": "Nom du produit",
+    "modA.formCost": "Coût (€)",
+    "modA.formPrice": "Prix vente (€)",
+    "modA.formStock": "Stock",
+    "modA.formAdd": "+ Ajouter le produit",
+    "modA.thProduct": "Produit",
+    "modA.thCost": "Coût",
+    "modA.thPrice": "Prix vente",
+    "modA.thMargin": "Marge",
+    "modA.thStock": "Stock",
+    "modA.thStatus": "Statut",
+    "modA.statusOk": "OK",
+    "modA.statusLow": "Faible",
+    "modA.statusCritical": "Rupture critique",
+    "modB.eyebrow": "Module B",
+    "modB.title": "Algorithme de placement virtuel",
+    "modB.subtitle": "Logique « Zero Communication » : le colis scanné est rangé automatiquement, sans concertation orale entre coéquipiers.",
+    "modB.formTitle": "Scanner un colis",
+    "modB.formWeightLabel": "Poids (kg)",
+    "modB.formCatLabel": "Catégorie",
+    "modB.catFragile": "Fragile",
+    "modB.catStandard": "Standard",
+    "modB.catHeavy": "Lourd / Palette",
+    "modB.catCold": "Frais / Réfrigéré",
+    "modB.formScan": "Scanner &amp; ranger",
+    "modB.gridTitle": "Grille de l'entrepôt",
+    "modB.gridLegend": "Allée-Baie · niveau selon poids",
+    "modB.resultPrefix": "Colis rangé automatiquement en",
+    "modB.resultFull": "Entrepôt plein pour cette catégorie.",
+    "modC.eyebrow": "Module C",
+    "modC.title": "Architecture cloud simulée",
+    "modC.subtitle": "Infrastructure serverless AWS : archivage documentaire, base de données d'inventaire, calcul planifié des marges.",
+    "modC.s3": "Archives PDF",
+    "modC.lambda": "Calcul marges",
+    "modC.rds": "PostgreSQL",
+    "modC.appTitle": "WMS",
+    "modC.appSub": "Interface web",
+    "modC.hint": "Cliquez sur un service pour visualiser le flux de données.",
+    "footer.title": "Contact",
+    "footer.subtitle": "Ouvert aux opportunités d'Ausbildung, partenariats et échanges techniques.",
+    "footer.whatsapp": "WhatsApp",
+    "footer.email": "E-mail",
+    "footer.copy": "DONKO DEUTSCHLAND BERUF — Projet vitrine · Cotonou, Bénin"
+  },
+  de: {
+    "header.tagline": "COTONOU → DEUTSCHLAND · WMS SCHAUFENSTER",
+    "hero.eyebrow": "Stellenprofil · Bewerberprofil",
+    "hero.title": "Vom autodidaktischen Wissen zur deutschen Logistik.",
+    "hero.subtitle": "Schaufenster-Anwendung, die ein Lagerverwaltungssystem (WMS) simuliert und meine Kompetenzen in Betriebswirtschaft, AWS-Cloud und Softwareentwicklung im Hinblick auf eine Ausbildung in Deutschland demonstriert.",
+    "hero.profileTitle": "Profil",
+    "hero.profileSub": "Bac B · 2020 — AWS Cloud Practitioner · April 2026",
+    "hero.profileText": "Kaufmännische Ausbildung (Bac B) verbunden mit praktischer Erfahrung in Softwareentwicklung und Cloud-Infrastruktur. Dieses Projekt vereint diese drei Kompetenzbereiche in einem realen Anwendungsfall: der Lagerlogistik.",
+    "hero.roadmapTitle": "Karriereplan",
+    "hero.roadmapSub": "Cotonou → Deutschland",
+    "hero.step1": "Intensiver Deutschunterricht an der FLLAC (UAC) und im Sprachlabor der Vallet-Stiftung (Bénin Excellence), Cotonou.",
+    "hero.step2": "Offizielle ÖSD-Prüfung (Zielniveau B1/B2) beim Partnerzentrum Spass mit Deutsch, Abomey-Calavi.",
+    "hero.step3": "Ausbildung in Deutschland: Fachkraft für Lagerlogistik oder Fachlagerist.",
+    "hero.step4": "Gründung einer UG (Haftungsbeschränkt) zur Vermarktung meiner Softwarelösungen (Rechnungs-/Kassensystem, Marketplace) in Europa.",
+    "modA.eyebrow": "Modul A",
+    "modA.title": "Bestands- &amp; Margenverwaltung",
+    "modA.subtitle": "Bac-B-Logik: Echtzeitberechnung von Selbstkosten, Gewinnspanne und kritischen Bestandswarnungen.",
+    "modA.formName": "Produktname",
+    "modA.formCost": "Kosten (€)",
+    "modA.formPrice": "Verkaufspreis (€)",
+    "modA.formStock": "Bestand",
+    "modA.formAdd": "+ Produkt hinzufügen",
+    "modA.thProduct": "Produkt",
+    "modA.thCost": "Kosten",
+    "modA.thPrice": "Verkaufspreis",
+    "modA.thMargin": "Marge",
+    "modA.thStock": "Bestand",
+    "modA.thStatus": "Status",
+    "modA.statusOk": "OK",
+    "modA.statusLow": "Niedrig",
+    "modA.statusCritical": "Kritischer Engpass",
+    "modB.eyebrow": "Modul B",
+    "modB.title": "Virtueller Platzierungsalgorithmus",
+    "modB.subtitle": "„Zero Communication“-Logik: Das gescannte Paket wird automatisch eingelagert, ohne mündliche Absprache im Team.",
+    "modB.formTitle": "Paket scannen",
+    "modB.formWeightLabel": "Gewicht (kg)",
+    "modB.formCatLabel": "Kategorie",
+    "modB.catFragile": "Zerbrechlich",
+    "modB.catStandard": "Standard",
+    "modB.catHeavy": "Schwer / Palette",
+    "modB.catCold": "Kühlware",
+    "modB.formScan": "Scannen &amp; einlagern",
+    "modB.gridTitle": "Lagergitter",
+    "modB.gridLegend": "Gang-Bucht · Ebene nach Gewicht",
+    "modB.resultPrefix": "Paket automatisch eingelagert in",
+    "modB.resultFull": "Lager für diese Kategorie voll.",
+    "modC.eyebrow": "Modul C",
+    "modC.title": "Simulierte Cloud-Architektur",
+    "modC.subtitle": "Serverlose AWS-Infrastruktur: Dokumentenarchivierung, Bestandsdatenbank, geplante Margenberechnung.",
+    "modC.s3": "PDF-Archiv",
+    "modC.lambda": "Margenberechnung",
+    "modC.rds": "PostgreSQL",
+    "modC.appTitle": "WMS",
+    "modC.appSub": "Weboberfläche",
+    "modC.hint": "Klicken Sie auf einen Dienst, um den Datenfluss zu sehen.",
+    "footer.title": "Kontakt",
+    "footer.subtitle": "Offen für Ausbildungsplätze, Partnerschaften und fachlichen Austausch.",
+    "footer.whatsapp": "WhatsApp",
+    "footer.email": "E-Mail",
+    "footer.copy": "DONKO DEUTSCHLAND BERUF — Schaufensterprojekt · Cotonou, Benin"
+  }
+};
+
+let currentLang = 'fr';
+
+function t(key){ return translations[currentLang][key] || key; }
+
+function setLang(lang){
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.getElementById('lang-fr').classList.toggle('active', lang==='fr');
+  document.getElementById('lang-de').classList.toggle('active', lang==='de');
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    el.innerHTML = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder')));
+  });
+  renderProducts();
+  buildGrid();
+}
+
+/* ================= MODULE A : STOCKS ================= */
+let products = [
+  { name:'Cartons d\'emballage', cost:1.2, price:2.5, stock:340 },
+  { name:'Palettes EUR', cost:14, price:22, stock:6 },
+  { name:'Étiquettes RFID', cost:0.35, price:0.9, stock:0 }
+];
+
+function addProduct(){
+  const name = document.getElementById('p-name').value.trim();
+  const cost = parseFloat(document.getElementById('p-cost').value);
+  const price = parseFloat(document.getElementById('p-price').value);
+  const stock = parseInt(document.getElementById('p-stock').value);
+  if(!name || isNaN(cost) || isNaN(price) || isNaN(stock)) return;
+  products.push({name, cost, price, stock});
+  document.getElementById('p-name').value='';
+  document.getElementById('p-cost').value='';
+  document.getElementById('p-price').value='';
+  document.getElementById('p-stock').value='';
+  renderProducts();
+}
+
+function renderProducts(){
+  const body = document.getElementById('product-body');
+  body.innerHTML = '';
+  products.forEach(p=>{
+    const margin = p.price - p.cost;
+    const marginPct = p.cost>0 ? ((margin/p.cost)*100).toFixed(0) : '—';
+    let statusKey, statusColor, rowClass='';
+    if(p.stock === 0){ statusKey='modA.statusCritical'; statusColor='text-[var(--danger)]'; rowClass='row-critical'; }
+    else if(p.stock < 10){ statusKey='modA.statusLow'; statusColor='text-[var(--amber)]'; }
+    else { statusKey='modA.statusOk'; statusColor='text-[var(--ok)]'; }
+
+    const tr = document.createElement('tr');
+    tr.className = `border-b border-[var(--line)] fade-in ${rowClass}`;
+    tr.innerHTML = `
+      <td class="px-5 py-3 font-sans">${p.name}</td>
+      <td class="px-5 py-3 muted">${p.cost.toFixed(2)} €</td>
+      <td class="px-5 py-3">${p.price.toFixed(2)} €</td>
+      <td class="px-5 py-3 ${margin>=0?'text-[var(--ok)]':'text-[var(--danger)]'}">${margin.toFixed(2)} € <span class="muted">(${marginPct}%)</span></td>
+      <td class="px-5 py-3">${p.stock}</td>
+      <td class="px-5 py-3 ${statusColor}">${t(statusKey)}</td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+/* ================= MODULE B : ENTREPÔT ================= */
+const AISLES = ['A','B','C','D','E','F'];
+const BAYS = [1,2,3,4,5];
+const ZONES = { fragile:['A','B'], standard:['C','D'], lourd:['E'], frais:['F'] };
+let occupied = {};
+let lastLit = null;
+
+function binKey(aisle, bay, level){ return `${aisle}-${bay}-${level}`; }
+
+function buildGrid(){
+  const grid = document.getElementById('warehouse-grid');
+  grid.innerHTML = '';
+  AISLES.forEach(aisle=>{
+    BAYS.forEach(bay=>{
+      const level = 1;
+      const key = binKey(aisle,bay,level);
+      const div = document.createElement('div');
+      div.className = 'bin' + (occupied[key] ? ' occupied' : '');
+      div.id = 'bin-'+key;
+      div.textContent = `${aisle}${bay}`;
+      grid.appendChild(div);
+    });
+  });
+}
+
+function scanPackage(){
+  const weight = parseFloat(document.getElementById('pkg-weight').value) || 1;
+  const cat = document.getElementById('pkg-cat').value;
+  const level = weight >= 15 ? 1 : (weight >= 5 ? 2 : 3);
+  const candidateAisles = ZONES[cat];
+  let chosen = null;
+
+  for(const aisle of candidateAisles){
+    for(const bay of BAYS){
+      const key = binKey(aisle,bay,level);
+      if(!occupied[key]){ chosen = {aisle,bay,level,key}; break; }
+    }
+    if(chosen) break;
+  }
+
+  const resultEl = document.getElementById('scan-result');
+  if(!chosen){
+    resultEl.innerHTML = `<span class="text-[var(--danger)]">${t('modB.resultFull')}</span>`;
+    return;
+  }
+
+  occupied[chosen.key] = true;
+  if(lastLit){
+    const prevEl = document.getElementById('bin-'+lastLit);
+    if(prevEl) prevEl.classList.remove('lit');
+  }
+  const binEl = document.getElementById('bin-'+chosen.key);
+  if(binEl){
+    binEl.classList.remove('occupied');
+    binEl.classList.add('lit');
+    binEl.textContent = `${chosen.aisle}${chosen.bay}`;
+  }
+  lastLit = chosen.key;
+
+  resultEl.innerHTML = `${t('modB.resultPrefix')} <span class="amber-text font-bold">${chosen.aisle}-${String(chosen.bay).padStart(2,'0')}-N${chosen.level}</span>`;
+}
+
+/* ================= MODULE C : AWS ================= */
+function pulseCloud(id){
+  const line = document.getElementById(id);
+  line.classList.add('active');
+  setTimeout(()=>line.classList.remove('active'), 1400);
+}
+
+/* ================= INIT ================= */
+buildGrid();
+renderProducts();
+</script>
+</body>
+</html>
