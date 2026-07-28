@@ -27,6 +27,21 @@
 
 ---
 
+## 📲 Progressive Web App (PWA)
+
+L'application est installable et fonctionne **100% hors ligne** après le premier chargement :
+
+* **Installation :** un bouton "Installer" apparaît automatiquement dans l'en-tête (Chrome/Edge/Android). Sur iPhone/iPad (Safari) : bouton *Partager* → *Sur l'écran d'accueil*.
+* **Hors ligne :** un service worker met en cache toutes les ressources (page, polices, styles, icônes) dès la première visite. Un badge "Hors ligne" apparaît dans l'en-tête quand la connexion est coupée — l'application reste pleinement utilisable.
+* **Fichiers requis** (à conserver à la racine, à côté de `index.html`) :
+  * `manifest.json` — nom, icônes et couleurs de l'application installée
+  * `sw.js` — service worker (mise en cache et mode hors ligne)
+  * `icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, `apple-touch-icon.png` — icônes de l'application
+
+⚠️ Le premier chargement nécessite une connexion internet (pour récupérer Tailwind CSS et les polices Google Fonts). Ensuite, l'application reste utilisable hors ligne tant que le cache du navigateur n'est pas vidé manuellement.
+
+---
+
 ## 🚀 Utilisation
 
 Aucune installation requise :

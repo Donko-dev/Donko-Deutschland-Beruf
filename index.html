@@ -2,8 +2,21 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>DONKO DEUTSCHLAND BERUF</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0B0F14">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DONKO DE">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="DONKO DEUTSCHLAND BERUF — Système de gestion d'entrepôt (WMS) vitrine, disponible hors ligne.">
+
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -164,6 +177,11 @@
         <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="steel-text"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
         <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="amber-text hidden"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       </button>
+      <button id="install-btn" onclick="installApp()" class="hidden items-center gap-2 btn-amber rounded-md px-3 py-1.5 text-xs font-mono font-bold">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0 5-5m-5 5-5-5"/><path d="M4 20h16"/></svg>
+        <span data-i18n="header.install">Installer</span>
+      </button>
+      <span id="offline-badge" class="hidden font-mono text-[10px] px-2.5 py-1.5 rounded-full border border-[var(--danger)] text-[var(--danger)]" data-i18n="header.offline">Hors ligne</span>
     </div>
   </div>
 </header>
@@ -433,6 +451,51 @@
 </footer>
 
 <script>
+/* ================= PWA : SERVICE WORKER ================= */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch((err) => {
+      console.warn('Service worker non enregistré :', err);
+    });
+  });
+}
+
+/* ================= PWA : INSTALLATION ================= */
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  document.getElementById('install-btn').classList.remove('hidden');
+  document.getElementById('install-btn').classList.add('flex');
+});
+
+function installApp(){
+  const btn = document.getElementById('install-btn');
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  deferredInstallPrompt.userChoice.then(() => {
+    deferredInstallPrompt = null;
+    btn.classList.add('hidden');
+    btn.classList.remove('flex');
+  });
+}
+
+window.addEventListener('appinstalled', () => {
+  const btn = document.getElementById('install-btn');
+  btn.classList.add('hidden');
+  btn.classList.remove('flex');
+});
+
+/* ================= PWA : STATUT HORS LIGNE ================= */
+function updateOnlineStatus(){
+  const badge = document.getElementById('offline-badge');
+  badge.classList.toggle('hidden', navigator.onLine);
+}
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+updateOnlineStatus();
+
 /* ================= THEME ================= */
 let currentTheme = 'dark';
 function toggleTheme(){
@@ -462,6 +525,8 @@ document.addEventListener('click', (e)=>{
 const translations = {
   fr: {
     "header.tagline": "COTONOU → DEUTSCHLAND · WMS SHOWCASE",
+    "header.install": "Installer",
+    "header.offline": "Hors ligne",
     "hero.eyebrow": "Fiche de poste · Bewerberprofil",
     "hero.title": "Du savoir autodidacte à la logistique allemande.",
     "hero.subtitle": "Application vitrine simulant un système de gestion d'entrepôt (WMS), conçue pour démontrer mes compétences en gestion, cloud AWS et développement — en vue d'un Ausbildung en Allemagne.",
@@ -535,6 +600,8 @@ const translations = {
   },
   de: {
     "header.tagline": "COTONOU → DEUTSCHLAND · WMS SCHAUFENSTER",
+    "header.install": "Installieren",
+    "header.offline": "Offline",
     "hero.eyebrow": "Stellenprofil · Bewerberprofil",
     "hero.title": "Vom autodidaktischen Wissen zur deutschen Logistik.",
     "hero.subtitle": "Schaufenster-Anwendung, die ein Lagerverwaltungssystem (WMS) simuliert und meine Kompetenzen in Betriebswirtschaft, AWS-Cloud und Softwareentwicklung im Hinblick auf eine Ausbildung in Deutschland demonstriert.",
