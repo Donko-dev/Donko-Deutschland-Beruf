@@ -21,9 +21,23 @@
     --danger:#E5484D;
     --ok:#3FB27F;
   }
+  html.light{
+    --bg:#F2F4F6;
+    --panel:#FFFFFF;
+    --panel-2:#F6F8FA;
+    --line:#DCE1E6;
+    --text:#131820;
+    --muted:#5B6672;
+    --amber:#B8790A;
+    --amber-dim:#E7C978;
+    --steel:#2C5F86;
+    --danger:#C82F35;
+    --ok:#1F8F5F;
+  }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
+    transition: background-color .35s ease, color .35s ease;
     background:
       radial-gradient(1200px 600px at 85% -10%, rgba(62,124,177,0.10), transparent 60%),
       radial-gradient(900px 500px at -10% 20%, rgba(242,183,5,0.06), transparent 55%),
@@ -39,6 +53,13 @@
     background: repeating-linear-gradient(135deg, var(--amber) 0 14px, #1a1508 14px 28px);
     height:5px;
   }
+  .card, .card-2, header, footer, .bin, input, select, .btn-outline{
+    transition: background-color .35s ease, border-color .35s ease, color .35s ease;
+  }
+  .theme-btn{
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .theme-btn:hover{ transform:rotate(20deg); border-color:var(--amber); }
   ::-webkit-scrollbar{width:10px;height:10px}
   ::-webkit-scrollbar-track{background:var(--bg)}
   ::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
@@ -139,6 +160,10 @@
         <button id="lang-fr" class="lang-btn active px-3 py-1.5" onclick="setLang('fr')">FR</button>
         <button id="lang-de" class="lang-btn px-3 py-1.5" onclick="setLang('de')">DE</button>
       </div>
+      <button id="theme-toggle" onclick="toggleTheme()" class="theme-btn w-8 h-8 rounded-md border border-[var(--line)] flex items-center justify-center" aria-label="Changer de thème" title="Thème clair / sombre">
+        <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="steel-text"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+        <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="amber-text hidden"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
     </div>
   </div>
 </header>
@@ -307,6 +332,44 @@
   </div>
 </section>
 
+<!-- ============ AUTRES PROJETS ============ -->
+<section class="max-w-6xl mx-auto px-5 py-10">
+  <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="projects.eyebrow">Écosystème DONKO</p>
+  <h2 class="font-display font-bold text-2xl mb-2" data-i18n="projects.title">Mes autres applications</h2>
+  <p class="text-sm muted max-w-2xl mb-6" data-i18n="projects.subtitle">Deux outils déjà en ligne, déployés au Bénin, qui illustrent ma capacité à livrer des produits réels et fonctionnels.</p>
+
+  <div class="grid md:grid-cols-2 gap-5">
+    <!-- DONKO ADS -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <svg width="44" height="44" viewBox="0 0 100 100" class="shrink-0 rounded-xl">
+          <rect width="100" height="100" rx="24" fill="#141B2E"/>
+          <circle cx="70" cy="27" r="7" fill="#C1440E"/>
+          <text x="47" y="70" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="58" fill="#E8A93A">D</text>
+        </svg>
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.adsTag">Marketplace &amp; visibilité</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">DONKO ADS</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.adsDesc">Plateforme de petites annonces pour publier boutiques et produits en un clic, avec une visibilité mondiale.</p>
+      <a href="https://donko-dev.github.io/DONKO-ADS/" target="_blank" rel="noopener" class="btn-amber rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.adsCta">Voir la démo live →</a>
+    </div>
+
+    <!-- KALCUL -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <svg width="44" height="44" viewBox="0 0 100 100" class="shrink-0 rounded-xl">
+          <rect width="100" height="100" rx="24" fill="#1B3A5C"/>
+          <text x="50" y="70" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="54" fill="#C9971F">K</text>
+        </svg>
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.kalculTag">Caisse &amp; gestion hors ligne</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">KALCUL</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.kalculDesc">Application de caisse, stock, factures et devis, 100% hors ligne, avec calcul automatique des marges et données conservées sur l'appareil.</p>
+      <a href="https://donko-dev.github.io/Kalcul-pro/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.kalculCta">Tester gratuitement →</a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FOOTER / CONTACT ============ -->
 <footer class="border-t border-[var(--line)] mt-16">
   <div class="max-w-6xl mx-auto px-5 py-12">
@@ -317,20 +380,47 @@
       <div>
         <p class="font-mono text-[11px] uppercase muted mb-3" data-i18n="footer.whatsapp">WhatsApp</p>
         <div class="flex flex-col gap-2">
-          <a href="https://wa.me/22901968091" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[var(--ok)]"></span> +229 01 96 80 91 06
+          <a href="https://wa.me/22901968091" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm flex items-center gap-3">
+            <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
+              <rect x="1" y="1" width="30" height="30" rx="8" fill="#075E54"/>
+              <path d="M16 6.5c-5.25 0-9.5 4.25-9.5 9.5 0 1.7.45 3.3 1.24 4.68L6.5 25.5l5-1.2A9.44 9.44 0 0 0 16 25.5c5.25 0 9.5-4.25 9.5-9.5S21.25 6.5 16 6.5Z" fill="#FFFFFF" fill-opacity="0.12"/>
+              <path d="M16 8.2c-4.3 0-7.8 3.5-7.8 7.8 0 1.5.42 2.9 1.15 4.1l-1.1 3.9 4.02-1.05A7.75 7.75 0 0 0 16 23.8c4.3 0 7.8-3.5 7.8-7.8s-3.5-7.8-7.8-7.8Zm4.55 11.02c-.19.55-1.1 1.05-1.52 1.11-.39.06-.87.08-1.4-.09-.32-.1-.74-.24-1.27-.47-2.24-.97-3.7-3.22-3.81-3.37-.11-.15-.91-1.21-.91-2.32 0-1.1.58-1.65.78-1.87.2-.22.44-.28.59-.28h.42c.13 0 .32-.02.49.38.19.44.63 1.55.69 1.66.06.11.1.24.02.4-.07.15-.11.24-.22.37-.11.13-.24.29-.34.39-.11.11-.23.23-.1.45.13.22.58.96 1.25 1.55.86.77 1.58 1.01 1.8 1.13.22.11.35.09.48-.05.14-.15.55-.64.7-.86.15-.22.29-.19.5-.11.2.07 1.29.61 1.51.72.22.11.37.16.42.25.06.09.06.53-.13 1.08Z" fill="#FFFFFF"/>
+              <rect x="18.5" y="6" width="8" height="8" rx="2" fill="#0B0F14"/>
+              <path d="M20.2 10.4h4.6M21.2 9.1v.9a1 1 0 0 0 1 1h.6a1 1 0 0 0 1-1v-.9" stroke="#F2B705" stroke-width="0.8" stroke-linecap="round"/>
+            </svg>
+            <span class="flex flex-col leading-tight">
+              <span>+229 01 96 80 91 06</span>
+              <span class="text-[10px] muted font-mono" data-i18n="footer.waBusiness">WhatsApp Business</span>
+            </span>
           </a>
-          <a href="https://wa.me/22901491057" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[var(--ok)]"></span> +229 01 49 10 57 85
+          <a href="https://wa.me/22901491057" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm flex items-center gap-3">
+            <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
+              <rect x="1" y="1" width="30" height="30" rx="16" fill="#25D366"/>
+              <path d="M16 8.2c-4.3 0-7.8 3.5-7.8 7.8 0 1.5.42 2.9 1.15 4.1l-1.1 3.9 4.02-1.05A7.75 7.75 0 0 0 16 23.8c4.3 0 7.8-3.5 7.8-7.8s-3.5-7.8-7.8-7.8Zm4.55 11.02c-.19.55-1.1 1.05-1.52 1.11-.39.06-.87.08-1.4-.09-.32-.1-.74-.24-1.27-.47-2.24-.97-3.7-3.22-3.81-3.37-.11-.15-.91-1.21-.91-2.32 0-1.1.58-1.65.78-1.87.2-.22.44-.28.59-.28h.42c.13 0 .32-.02.49.38.19.44.63 1.55.69 1.66.06.11.1.24.02.4-.07.15-.11.24-.22.37-.11.13-.24.29-.34.39-.11.11-.23.23-.1.45.13.22.58.96 1.25 1.55.86.77 1.58 1.01 1.8 1.13.22.11.35.09.48-.05.14-.15.55-.64.7-.86.15-.22.29-.19.5-.11.2.07 1.29.61 1.51.72.22.11.37.16.42.25.06.09.06.53-.13 1.08Z" fill="#FFFFFF"/>
+            </svg>
+            <span class="flex flex-col leading-tight">
+              <span>+229 01 49 10 57 85</span>
+              <span class="text-[10px] muted font-mono" data-i18n="footer.waMessenger">WhatsApp Messenger</span>
+            </span>
           </a>
         </div>
       </div>
       <div>
         <p class="font-mono text-[11px] uppercase muted mb-3" data-i18n="footer.email">E-mail</p>
-        <div class="flex flex-col gap-2">
-          <a href="mailto:empiredonko@gmail.com" class="btn-outline rounded-md px-4 py-2.5 text-sm">empiredonko@gmail.com</a>
-          <a href="mailto:hassanedonko9@gmail.com" class="btn-outline rounded-md px-4 py-2.5 text-sm">hassanedonko9@gmail.com</a>
-          <a href="mailto:hassanedonko10@gmail.com" class="btn-outline rounded-md px-4 py-2.5 text-sm">hassanedonko10@gmail.com</a>
+        <div class="relative inline-block">
+          <button onclick="toggleEmailMenu(event)" class="btn-outline rounded-md px-4 py-2.5 text-sm flex items-center gap-3 w-full sm:w-auto">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="steel-text shrink-0">
+              <rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/>
+              <path d="M3.5 6.5 12 13l8.5-6.5"/>
+            </svg>
+            <span data-i18n="footer.emailCta">Choisir une adresse e-mail</span>
+            <svg id="email-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="muted transition-transform"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div id="email-menu" class="hidden absolute left-0 mt-2 w-full sm:w-72 card rounded-md overflow-hidden shadow-2xl z-30">
+            <a href="mailto:empiredonko@gmail.com" class="block px-4 py-2.5 text-sm hover:bg-[var(--panel-2)]">empiredonko@gmail.com</a>
+            <a href="mailto:hassanedonko9@gmail.com" class="block px-4 py-2.5 text-sm hover:bg-[var(--panel-2)] border-t border-[var(--line)]">hassanedonko9@gmail.com</a>
+            <a href="mailto:hassanedonko10@gmail.com" class="block px-4 py-2.5 text-sm hover:bg-[var(--panel-2)] border-t border-[var(--line)]">hassanedonko10@gmail.com</a>
+          </div>
         </div>
       </div>
     </div>
@@ -343,6 +433,31 @@
 </footer>
 
 <script>
+/* ================= THEME ================= */
+let currentTheme = 'dark';
+function toggleTheme(){
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.classList.toggle('light', currentTheme === 'light');
+  document.getElementById('icon-moon').classList.toggle('hidden', currentTheme === 'light');
+  document.getElementById('icon-sun').classList.toggle('hidden', currentTheme === 'dark');
+}
+
+/* ================= EMAIL MENU ================= */
+function toggleEmailMenu(e){
+  e.stopPropagation();
+  const menu = document.getElementById('email-menu');
+  const chevron = document.getElementById('email-chevron');
+  menu.classList.toggle('hidden');
+  chevron.style.transform = menu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+document.addEventListener('click', (e)=>{
+  const menu = document.getElementById('email-menu');
+  if(menu && !menu.classList.contains('hidden')){
+    menu.classList.add('hidden');
+    document.getElementById('email-chevron').style.transform = 'rotate(0deg)';
+  }
+});
+
 /* ================= I18N ================= */
 const translations = {
   fr: {
@@ -400,10 +515,22 @@ const translations = {
     "modC.appTitle": "WMS",
     "modC.appSub": "Interface web",
     "modC.hint": "Cliquez sur un service pour visualiser le flux de données.",
+    "projects.eyebrow": "Écosystème DONKO",
+    "projects.title": "Mes autres applications",
+    "projects.subtitle": "Deux outils déjà en ligne, déployés au Bénin, qui illustrent ma capacité à livrer des produits réels et fonctionnels.",
+    "projects.adsTag": "Marketplace &amp; visibilité",
+    "projects.adsDesc": "Plateforme de petites annonces pour publier boutiques et produits en un clic, avec une visibilité mondiale.",
+    "projects.adsCta": "Voir la démo live →",
+    "projects.kalculTag": "Caisse &amp; gestion hors ligne",
+    "projects.kalculDesc": "Application de caisse, stock, factures et devis, 100% hors ligne, avec calcul automatique des marges et données conservées sur l'appareil.",
+    "projects.kalculCta": "Tester gratuitement →",
     "footer.title": "Contact",
     "footer.subtitle": "Ouvert aux opportunités d'Ausbildung, partenariats et échanges techniques.",
     "footer.whatsapp": "WhatsApp",
+    "footer.waBusiness": "WhatsApp Business",
+    "footer.waMessenger": "WhatsApp Messenger",
     "footer.email": "E-mail",
+    "footer.emailCta": "Choisir une adresse e-mail",
     "footer.copy": "DONKO DEUTSCHLAND BERUF — Projet vitrine · Cotonou, Bénin"
   },
   de: {
@@ -461,10 +588,22 @@ const translations = {
     "modC.appTitle": "WMS",
     "modC.appSub": "Weboberfläche",
     "modC.hint": "Klicken Sie auf einen Dienst, um den Datenfluss zu sehen.",
+    "projects.eyebrow": "DONKO-Ökosystem",
+    "projects.title": "Meine weiteren Anwendungen",
+    "projects.subtitle": "Zwei bereits live geschaltete Tools, im Benin im Einsatz, die meine Fähigkeit belegen, echte, funktionierende Produkte zu liefern.",
+    "projects.adsTag": "Marktplatz &amp; Sichtbarkeit",
+    "projects.adsDesc": "Kleinanzeigen-Plattform, um Shops und Produkte mit einem Klick zu veröffentlichen — mit weltweiter Sichtbarkeit.",
+    "projects.adsCta": "Live-Demo ansehen →",
+    "projects.kalculTag": "Kasse &amp; Offline-Verwaltung",
+    "projects.kalculDesc": "Kassen-, Bestands-, Rechnungs- und Angebots-App, zu 100% offline nutzbar, mit automatischer Margenberechnung und Daten, die auf dem Gerät bleiben.",
+    "projects.kalculCta": "Kostenlos testen →",
     "footer.title": "Kontakt",
     "footer.subtitle": "Offen für Ausbildungsplätze, Partnerschaften und fachlichen Austausch.",
     "footer.whatsapp": "WhatsApp",
+    "footer.waBusiness": "WhatsApp Business",
+    "footer.waMessenger": "WhatsApp Messenger",
     "footer.email": "E-Mail",
+    "footer.emailCta": "E-Mail-Adresse wählen",
     "footer.copy": "DONKO DEUTSCHLAND BERUF — Schaufensterprojekt · Cotonou, Benin"
   }
 };
