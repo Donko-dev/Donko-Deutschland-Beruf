@@ -163,31 +163,31 @@
     <span style="background:#FCD116"></span>
     <span style="background:#E8112D"></span>
   </div>
-  <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
-    <div class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-md border border-[var(--amber-dim)] flex items-center justify-center font-mono text-[var(--amber)] text-sm font-bold">DD</div>
-      <div>
-        <p class="font-display font-bold text-base leading-none tracking-tight">DONKO DEUTSCHLAND BERUF</p>
-        <p class="font-mono text-[10px] muted mt-1" data-i18n="header.tagline">COTONOU → DEUTSCHLAND · WMS SHOWCASE</p>
+  <div class="max-w-6xl mx-auto px-4 sm:px-5 py-4 flex flex-wrap items-center justify-between gap-y-3 gap-x-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <div class="w-9 h-9 shrink-0 rounded-md border border-[var(--amber-dim)] flex items-center justify-center font-mono text-[var(--amber)] text-sm font-bold">DD</div>
+      <div class="min-w-0">
+        <p class="font-display font-bold text-sm sm:text-base leading-tight tracking-tight truncate">DONKO DEUTSCHLAND BERUF</p>
+        <p class="font-mono text-[10px] muted mt-0.5 truncate" data-i18n="header.tagline">COTONOU → DEUTSCHLAND · WMS SHOWCASE</p>
       </div>
     </div>
-    <div class="flex items-center gap-3">
-      <span class="hidden sm:flex items-center gap-2 font-mono text-[11px] px-3 py-1.5 rounded-full border border-[var(--line)] text-[var(--muted)]">
+    <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+      <span class="hidden lg:flex items-center gap-2 font-mono text-[11px] px-3 py-1.5 rounded-full border border-[var(--line)] text-[var(--muted)]">
         <span class="pulse-dot"></span> AWS Certified · Cloud Practitioner
       </span>
-      <div class="flex items-center rounded-md border border-[var(--line)] overflow-hidden font-mono text-xs">
+      <div class="flex items-center rounded-md border border-[var(--line)] overflow-hidden font-mono text-xs shrink-0">
         <button id="lang-fr" class="lang-btn active px-3 py-1.5" onclick="setLang('fr')">FR</button>
         <button id="lang-de" class="lang-btn px-3 py-1.5" onclick="setLang('de')">DE</button>
       </div>
-      <button id="theme-toggle" onclick="toggleTheme()" class="theme-btn w-8 h-8 rounded-md border border-[var(--line)] flex items-center justify-center" aria-label="Changer de thème" title="Thème clair / sombre">
+      <button id="theme-toggle" onclick="toggleTheme()" class="theme-btn w-8 h-8 shrink-0 rounded-md border border-[var(--line)] flex items-center justify-center" aria-label="Changer de thème" title="Thème clair / sombre">
         <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="steel-text"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
         <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="amber-text hidden"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       </button>
-      <button id="install-btn" onclick="installApp()" class="hidden items-center gap-2 btn-amber rounded-md px-3 py-1.5 text-xs font-mono font-bold">
+      <button id="install-btn" onclick="installApp()" class="hidden items-center gap-2 btn-amber rounded-md px-3 py-1.5 text-xs font-mono font-bold shrink-0">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0 5-5m-5 5-5-5"/><path d="M4 20h16"/></svg>
         <span data-i18n="header.install">Installer</span>
       </button>
-      <span id="offline-badge" class="hidden font-mono text-[10px] px-2.5 py-1.5 rounded-full border border-[var(--danger)] text-[var(--danger)]" data-i18n="header.offline">Hors ligne</span>
+      <span id="offline-badge" class="hidden font-mono text-[10px] px-2.5 py-1.5 rounded-full border border-[var(--danger)] text-[var(--danger)] shrink-0" data-i18n="header.offline">Hors ligne</span>
     </div>
   </div>
 </header>
@@ -302,7 +302,7 @@
       <div id="scan-result" class="mt-5 text-sm font-mono min-h-[2.5rem]"></div>
     </div>
 
-    <div class="card rounded-xl p-6 lg:col-span-3">
+    <div class="card rounded-xl p-4 sm:p-6 lg:col-span-3">
       <div class="flex items-center justify-between mb-4">
         <h3 class="font-display font-semibold" data-i18n="modB.gridTitle">Grille de l'entrepôt</h3>
         <span class="font-mono text-[11px] muted" id="grid-legend" data-i18n="modB.gridLegend">Allée-Baie · niveau selon poids</span>
