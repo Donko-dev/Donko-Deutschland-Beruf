@@ -88,8 +88,8 @@ open index.html   # ou double-clic sur le fichier
 ---
 
 ### 📥 Online-Verfügbarkeit / Direct Contacts
-* **GitHub Portfolio :** [://github.com](https://://github.com)
-* **Web3 Ecosystem :** [donko-dev.github.io/empirecode](https://github.io)
+* **GitHub Portfolio :** https://donko-dev.github.io/empirecode/
+* **Web3 Ecosystem :** donko-dev.github.io/empirecode/
 * **WhatsApp :** [+229 01 96 80 91 06](https://wa.me) | [+229 01 49 10 57 85](https://wa.me)
 * **E-Mail :** [hassanedonko9@gmail.com](mailto:hassanedonko9@gmail.com) | [empiredonko@gmail.com](mailto:empiredonko@gmail.com)
 
