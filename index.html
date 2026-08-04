@@ -159,6 +159,12 @@
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
   }
+  @media print{
+    body.printing-cv > *:not(#cv-section){ display:none !important; }
+    body.printing-cv #cv-section{ padding:0; max-width:100%; }
+    body.printing-cv .no-print{ display:none !important; }
+    body.printing-cv{ background:#fff !important; color:#111 !important; }
+  }
 </style>
 </head>
 <body class="min-h-screen">
@@ -185,8 +191,8 @@
         <span class="pulse-dot"></span> AWS Certified · Cloud Practitioner
       </span>
       <div class="flex items-center rounded-md border border-[var(--line)] overflow-hidden font-mono text-xs shrink-0">
-        <button id="lang-fr" class="lang-btn active px-3 py-1.5" onclick="setLang('fr')">FR</button>
-        <button id="lang-de" class="lang-btn px-3 py-1.5" onclick="setLang('de')">DE</button>
+        <button id="lang-fr" class="lang-btn active px-2.5 py-1.5 text-base leading-none" onclick="setLang('fr')" aria-label="Français" title="Français">🇫🇷</button>
+        <button id="lang-de" class="lang-btn px-2.5 py-1.5 text-base leading-none" onclick="setLang('de')" aria-label="Deutsch" title="Deutsch">🇩🇪</button>
       </div>
       <button id="theme-toggle" onclick="toggleTheme()" class="theme-btn w-8 h-8 shrink-0 rounded-md border border-[var(--line)] flex items-center justify-center" aria-label="Changer de thème" title="Thème clair / sombre">
         <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="steel-text"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
@@ -210,6 +216,23 @@
   <p class="mt-5 max-w-2xl text-[15px] leading-relaxed muted" data-i18n="hero.subtitle">
     Application vitrine simulant un système de gestion d'entrepôt (WMS), conçue pour démontrer mes compétences en gestion, cloud AWS et développement — en vue d'un Ausbildung en Allemagne.
   </p>
+
+  <!-- Photo de profil grand format -->
+  <div class="mt-10 max-w-md">
+    <div class="card rounded-xl overflow-hidden">
+      <img src="DONKO.png" alt="Hassane DONKO" class="w-full h-auto object-cover aspect-[4/5]" loading="lazy" onerror="this.replaceWith(photoFallback())">
+      <div class="p-5 border-t border-[var(--line)]">
+        <p class="font-display font-bold text-base">Hassane DONKO</p>
+        <p class="font-mono text-[11px] amber-text mt-1" data-i18n="hero.photoRole">CEO, EMPIRE DONKO | PROJETS EN GESTION LOGISTIQUE</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Citation -->
+  <blockquote class="mt-8 max-w-2xl border-l-2 border-[var(--amber)] pl-5 py-1">
+    <p class="text-[15px] sm:text-base italic leading-relaxed" data-i18n="hero.quote">« L'Intelligence Artificielle optimise mon code, la gestion pilote mes flux, et la logistique d'entreposage concrétise ma vision. Cette application est le pont entre mes compétences numériques développées au Bénin et mon ambition d'apprentissage en Allemagne. »</p>
+    <p class="font-mono text-[11px] muted mt-3">— Hassane DONKO</p>
+  </blockquote>
 
   <div class="mt-10 grid md:grid-cols-2 gap-5">
     <!-- Profil card -->
@@ -365,11 +388,24 @@
   </div>
 </section>
 
+<!-- ============ PORTFOLIO EMPIRE CODE ============ -->
+<section class="max-w-6xl mx-auto px-5 py-10">
+  <div class="card rounded-xl p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
+    <img src="empirecode.jpg" alt="Empire Code" class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl shrink-0 object-cover" loading="lazy" onerror="this.replaceWith(logoFallback('EC','#141B2E','#E8A93A'))">
+    <div class="flex-grow text-center sm:text-left">
+      <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="portfolio.eyebrow">Portfolio complet</p>
+      <h2 class="font-display font-bold text-2xl mb-2">Empire Code</h2>
+      <p class="text-sm muted leading-relaxed max-w-xl" data-i18n="portfolio.desc">L'ensemble de mes réalisations, projets et démonstrations en ligne — logiciels métiers, ingénierie blockchain et automatisation IA — réunis en un seul endroit.</p>
+    </div>
+    <a href="https://donko-dev.github.io/empirecode/" target="_blank" rel="noopener" class="btn-amber rounded-md px-6 py-3 text-sm font-bold text-center shrink-0 whitespace-nowrap" data-i18n="portfolio.cta">Voir le portfolio →</a>
+  </div>
+</section>
+
 <!-- ============ AUTRES PROJETS ============ -->
 <section class="max-w-6xl mx-auto px-5 py-10">
   <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="projects.eyebrow">Écosystème DONKO</p>
   <h2 class="font-display font-bold text-2xl mb-2" data-i18n="projects.title">Mes autres applications</h2>
-  <p class="text-sm muted max-w-2xl mb-6" data-i18n="projects.subtitle">Cinq outils déjà en ligne, déployés au Bénin, qui illustrent ma capacité à livrer des produits réels et fonctionnels — tous utilisables hors connexion.</p>
+  <p class="text-sm muted max-w-2xl mb-6" data-i18n="projects.subtitle">Treize outils déjà en ligne, développés au Bénin — logiciels métiers, ingénierie blockchain et automatisation IA — qui illustrent ma capacité à livrer des produits réels et fonctionnels.</p>
 
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
     <!-- DONKO ADS -->
@@ -433,6 +469,199 @@
       <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.bdDesc">Cours et exercices de langue allemande, consultables sans connexion internet — pour progresser vers l'ÖSD partout, même sans réseau.</p>
       <a href="https://donko-dev.github.io/bruckedeoffline/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.bdCta">Voir la démo live →</a>
     </div>
+
+    <!-- DONKO INVENTORY -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="donko-inventory.jpg" alt="Donko Inventory" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('DI','#16241C','#E8A93A'))">
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.diTag">Inventaire offline</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">Donko Inventory</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.diDesc">Application de gestion des stocks et d'inventaire, pensée pour un usage hors connexion et une saisie rapide des entrées/sorties.</p>
+      <a href="https://donko-dev.github.io/DONKO-INVENTORY" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.diCta">Voir la démo live →</a>
+    </div>
+
+    <!-- DONKO APP -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="donko-app.jpg" alt="Donko App" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('DA','#241B14','#C9971F'))">
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.daTag">Application DONKO</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">Donko App</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.daDesc">Application compagnon de l'écosystème DONKO, réunissant plusieurs outils métiers dans une interface unique.</p>
+      <a href="https://donko-dev.github.io/donko-app" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.daCta">Voir la démo live →</a>
+    </div>
+
+    <!-- WEB-TO-APK -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="web-to-apk.jpg" alt="Web-To-Apk" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('WA','#141B2E','#E8A93A'))">
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.waTag">Outil de conversion</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">Web-To-Apk</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.waDesc">Outil de conversion d'applications web en fichiers APK Android, pour distribuer facilement mes outils sur mobile.</p>
+      <a href="https://donko-dev.github.io/Web-To-Apk" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.waCta">Voir la démo live →</a>
+    </div>
+
+    <!-- LUCKY POPCORN -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="lucky-popcorn.jpg" alt="Lucky Popcorn" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('LP','#241B14','#C9971F'))">
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.lpTag">Application ludique</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">Lucky Popcorn</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.lpDesc">Application ludique développée pour explorer l'interaction utilisateur et la gamification côté front-end.</p>
+      <a href="https://donko-dev.github.io/LUCKY-POPCORN" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.lpCta">Voir la démo live →</a>
+    </div>
+
+    <!-- AGBÈ L'ALAFIA -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="agbelealafia.jpg" alt="Cabinet Agbélé-Alafia" width="44" height="44" class="shrink-0 rounded-xl bg-white object-contain p-1" loading="lazy" onerror="this.replaceWith(logoFallback('AA','#16241C','#3FB27F'))">
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.aaTag">Site vitrine santé naturelle</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">Cabinet Agbélé-Alafia</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.aaDesc">Site vitrine développé pour un cabinet de Cotonou spécialisé dans les compléments nutritionnels naturels, axés sur la fertilité et le bien-être.</p>
+      <a href="https://agbelealafia.github.io/Agb-l-Alafia/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.aaCta">Voir la démo live →</a>
+    </div>
+
+    <!-- GEMINI AI PROMPTS -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="geminiaiprompts.jpg" alt="Gemini AI Prompts" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('AI','#141B2E','#E8A93A'))">
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.gpTag">Automatisation IA</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">Gemini AI Prompts</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.gpDesc">Bibliothèque de prompts et de workflows pilotés par l'IA (Gemini), utilisés pour automatiser mes développements.</p>
+      <a href="https://geminiaiprompts.webcrafthd.com" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.gpCta">Voir la démo live →</a>
+    </div>
+
+    <!-- TICKETS WIFI ZONE -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="ticketswifizone.jpg" alt="Tickets WiFi Zone" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('TW','#241B14','#C9971F'))">
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.twTag">Réseau &amp; accès</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">Tickets WiFi Zone</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.twDesc">Portail captif Wi-Fi avec billetterie algorithmique pour le contrôle d'accès réseau, développé pour WebCraft HD.</p>
+      <a href="https://ticketswifizone.webcrafthd.com" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.twCta">Voir la démo live →</a>
+    </div>
+
+    <!-- DONKOEXCHANGE -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="donkoexchange.jpg" alt="DonkoExchange" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('DX','#16241C','#3E7CB1'))">
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.dxTag">Fintech &amp; Web3</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">DonkoExchange</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.dxDesc">Passerelle d'échange crypto opérationnelle, automatisant les échanges d'actifs numériques pour les utilisateurs.</p>
+      <a href="https://donkoexchange.webcrafthd.com" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.dxCta">Voir la démo live →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CV ============ -->
+<section id="cv-section" class="max-w-6xl mx-auto px-5 py-10">
+  <div class="flex items-start justify-between flex-wrap gap-4 mb-1">
+    <div>
+      <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="cv.eyebrow">Curriculum Vitae</p>
+      <h2 class="font-display font-bold text-2xl mb-2" data-i18n="cv.title">Mon CV</h2>
+    </div>
+    <button onclick="printCV()" class="no-print btn-outline rounded-md px-4 py-2 text-xs font-mono shrink-0" data-i18n="cv.print">🖨️ Imprimer / PDF</button>
+  </div>
+  <p class="text-sm muted max-w-2xl mb-8" data-i18n="cv.bridge">Mes compétences en ingénierie blockchain et en automatisation IA reposent sur la même rigueur méthodologique que j'applique à la logistique et à la gestion d'entrepôt — la discipline technique au service d'un objectif concret : mon Ausbildung en Allemagne.</p>
+
+  <div class="card rounded-xl p-6 sm:p-8 mb-5">
+    <h3 class="font-display font-bold text-xl">Hassane DONKO</h3>
+    <p class="text-sm amber-text mt-1" data-i18n="cv.headline">Ingénieur Smart Contract | Architecte Web3 &amp; Blockchain | Expert Automatisation IA</p>
+    <p class="font-mono text-[11px] muted mt-3 leading-relaxed">
+      Cotonou, Bénin · +229 01 96 80 91 06 · hassanedonko9@gmail.com · empiredonko@gmail.com<br>
+      Portfolio : <a href="https://donko-dev.github.io/empirecode/" target="_blank" rel="noopener" class="steel-text hover:underline">donko-dev.github.io/empirecode</a> ·
+      GitHub : <a href="https://github.com/Donko-dev" target="_blank" rel="noopener" class="steel-text hover:underline">github.com/Donko-dev</a> ·
+      LinkedIn : <a href="https://linkedin.com/in/hassane-donko-1438b8358" target="_blank" rel="noopener" class="steel-text hover:underline">Hassane Donko</a>
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-5 mb-5">
+    <div class="card rounded-xl p-6">
+      <h4 class="font-display font-semibold mb-3" data-i18n="cv.profileTitle">Profil professionnel</h4>
+      <p class="text-sm muted leading-relaxed" data-i18n="cv.profileText">Ingénieur Blockchain et Architecte Web3 orienté résultats, avec une expérience concrète dans la conception, l'audit et le déploiement de smart contracts sécurisés sur des réseaux compatibles EVM. Fondateur de l'écosystème EMPIRE DONKO, un ensemble d'outils logiciels « offline-first » (sans connexion, serveur ni base de données requise), de solutions Web3, DePIN et de tokenomics avancées conçues de bout en bout. Maîtrise de Solidity, de l'optimisation du gas et des paramètres de sécurité des smart contracts, avec un historique éprouvé de fusion entre l'ingénierie logicielle classique, l'automatisation pilotée par l'IA et les architectures financières décentralisées (DeFi).</p>
+    </div>
+    <div class="card rounded-xl p-6">
+      <h4 class="font-display font-semibold mb-3" data-i18n="cv.skillsTitle">Compétences clés</h4>
+      <ul class="space-y-2.5 text-sm">
+        <li><span class="amber-text font-mono text-[11px]">Blockchain &amp; EVM</span><br><span class="muted" data-i18n="cv.skill1">Solidity, conception de smart contracts, standard BEP-20, vérification BscScan, Hardhat / Remix IDE.</span></li>
+        <li><span class="amber-text font-mono text-[11px]">DeFi &amp; Tokenomics</span><br><span class="muted" data-i18n="cv.skill2">Pools de liquidité, rareté mathématique, taxes automatisées, fonctions de burn.</span></li>
+        <li><span class="amber-text font-mono text-[11px]">Sécurité &amp; Audit</span><br><span class="muted" data-i18n="cv.skill3">Atténuation des vulnérabilités, analyse des vecteurs de menace, contrôles d'accès.</span></li>
+        <li><span class="amber-text font-mono text-[11px]">Systèmes &amp; Automatisation</span><br><span class="muted" data-i18n="cv.skill4">API Gemini, workflows pilotés par l'IA, développement Full-Stack, outils offline-first.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card rounded-xl p-6 sm:p-8 mb-5">
+    <h4 class="font-display font-semibold mb-5" data-i18n="cv.expTitle">Expérience professionnelle</h4>
+
+    <div class="mb-6">
+      <p class="font-display font-semibold text-sm">Architecte Blockchain Principal &amp; Fondateur — EMPIRE DONKO</p>
+      <ul class="mt-2 space-y-1.5 text-sm muted leading-relaxed list-disc list-inside" data-i18n="cv.exp1">
+        <li>Ingénierie de smart contracts Solidity prêts pour la production sur la Binance Smart Chain (BEP-20).</li>
+        <li>Architecture et déploiement de trois actifs cryptographiques avec protocoles monétaires avancés.</li>
+        <li>Contrôles d'accès stricts, propriétés multi-signatures et validations mathématiques contre les schémas d'exploitation.</li>
+      </ul>
+    </div>
+
+    <div class="mb-6">
+      <p class="font-display font-semibold text-sm">Architecte Passerelle de Paiement Crypto — DONKOEXCHANGE &amp; CRYPTPAY</p>
+      <ul class="mt-2 space-y-1.5 text-sm muted leading-relaxed list-disc list-inside" data-i18n="cv.exp2">
+        <li>DonkoExchange (déployé) : passerelle d'échange crypto opérationnelle automatisant les échanges d'actifs numériques.</li>
+        <li>CryptPay (en développement) : passerelle de paiement non-custodiale avec couche IA intégrée.</li>
+        <li>Flux de paiement multi-actifs (BTC, ETH, BNB, USDT) et réduction des frictions cross-chain.</li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="font-display font-semibold text-sm">Développeur Full-Stack &amp; Consultant IT — WEBCRAFT HD</p>
+      <ul class="mt-2 space-y-1.5 text-sm muted leading-relaxed list-disc list-inside" data-i18n="cv.exp3">
+        <li>Architectures web complexes et intégrations API backend sécurisées.</li>
+        <li>Portail captif de tickets Wi-Fi sur mesure avec génération algorithmique (Tickets WiFi Zone).</li>
+        <li>Structuration de bases de données clients optimisées.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-5 mb-5">
+    <div class="card rounded-xl p-6">
+      <h4 class="font-display font-semibold mb-3" data-i18n="cv.eduTitle">Formation &amp; certifications</h4>
+      <ul class="space-y-2 text-sm muted leading-relaxed">
+        <li data-i18n="cv.edu1">Baccalauréat (Série B – Sciences Économiques et Sociales) — 2020</li>
+        <li data-i18n="cv.edu2">Formation Systèmes, Réseaux &amp; Maintenance — infrastructures techniques et logique des protocoles</li>
+        <li data-i18n="cv.edu3">Certifications IT &amp; AWS (Udacity / AWS AI Practitioner)</li>
+      </ul>
+      <h4 class="font-display font-semibold mt-6 mb-3" data-i18n="cv.langTitle">Langues</h4>
+      <ul class="space-y-1.5 text-sm muted">
+        <li><span data-i18n="cv.langFr">Français</span> — <span data-i18n="cv.langFrLvl">Langue maternelle</span></li>
+        <li><span data-i18n="cv.langEn">Anglais</span> — <span data-i18n="cv.langEnLvl">Professionnel</span></li>
+        <li><span data-i18n="cv.langDe">Allemand</span> — <span data-i18n="cv.langDeLvl">Élémentaire (B1)</span></li>
+      </ul>
+    </div>
+    <div class="card rounded-xl p-6">
+      <h4 class="font-display font-semibold mb-3" data-i18n="cv.contractsTitle">Contrats en production (vérifiés sur BscScan)</h4>
+      <ul class="space-y-3 text-sm">
+        <li>
+          <p class="font-mono text-[12px] amber-text">MAJESTIC (MAJ)</p>
+          <a href="https://bscscan.com/address/0xeCb325d3696907517dB717Bbd1eb26eE472E3d0a" target="_blank" rel="noopener" class="font-mono text-[10px] steel-text hover:underline break-all">0xeCb325d3696907517dB717Bbd1eb26eE472E3d0a</a>
+        </li>
+        <li>
+          <p class="font-mono text-[12px] amber-text">RICH (RICH)</p>
+          <a href="https://bscscan.com/address/0x5cb60a940830d6e191323d7d243b67e7b223791e" target="_blank" rel="noopener" class="font-mono text-[10px] steel-text hover:underline break-all">0x5cb60a940830d6e191323d7d243b67e7b223791e</a>
+        </li>
+        <li>
+          <p class="font-mono text-[12px] amber-text">ITAF (ITAF)</p>
+          <a href="https://bscscan.com/address/0xa4fa396e86733ad5ebc80a30fea9c1be602d1462" target="_blank" rel="noopener" class="font-mono text-[10px] steel-text hover:underline break-all">0xa4fa396e86733ad5ebc80a30fea9c1be602d1462</a>
+        </li>
+      </ul>
+      <p class="font-mono text-[10px] muted mt-4" data-i18n="cv.contractsHint">Cliquez sur une adresse pour consulter la vérification en direct sur BscScan.</p>
+    </div>
   </div>
 </section>
 
@@ -440,18 +669,58 @@
 <section class="max-w-6xl mx-auto px-5 py-10">
   <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="gallery.eyebrow">Preuves &amp; coulisses</p>
   <h2 class="font-display font-bold text-2xl mb-2" data-i18n="gallery.title">Galerie</h2>
-  <p class="text-sm muted max-w-2xl mb-6" data-i18n="gallery.subtitle">Photos et vidéos ajoutées automatiquement — déposez un fichier dans le dossier <code class="font-mono text-[12px] px-1.5 py-0.5 rounded card-2">/gallery</code> du dépôt GitHub et il apparaît ici pour tout le monde, sans toucher au code.</p>
+  <p class="text-sm muted max-w-2xl mb-6" data-i18n="gallery.subtitle">Photos et vidéos classées automatiquement par continent. Déposez un fichier à la racine du dépôt GitHub, nommé <code class="font-mono text-[12px] px-1.5 py-0.5 rounded card-2">galerie1A.jpg</code> (Afrique) ou <code class="font-mono text-[12px] px-1.5 py-0.5 rounded card-2">galerie1E.jpg</code> (Europe), et il apparaît ici pour tout le monde, sans toucher au code.</p>
 
-  <div id="gallery-loading" class="font-mono text-xs muted">
+  <div id="gallery-loading" class="font-mono text-xs muted mb-6">
     <span class="pulse-dot"></span> <span data-i18n="gallery.loading">Chargement de la galerie…</span>
   </div>
-  <div id="gallery-empty" class="hidden card rounded-xl p-8 text-center text-sm muted" data-i18n="gallery.empty">
-    Aucun média pour l'instant. Ajoutez des images ou vidéos dans le dossier /gallery sur GitHub.
-  </div>
-  <div id="gallery-error" class="hidden card rounded-xl p-8 text-center text-sm muted" data-i18n="gallery.error">
+  <div id="gallery-error" class="hidden card rounded-xl p-8 text-center text-sm muted mb-6" data-i18n="gallery.error">
     Galerie momentanément indisponible (hors ligne ou limite d'API GitHub atteinte).
   </div>
-  <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+
+  <div id="gallery-content" class="hidden space-y-10">
+    <!-- AFRIQUE -->
+    <div>
+      <div class="flex items-center gap-4 mb-4">
+        <svg width="52" height="52" viewBox="0 0 100 100" class="shrink-0">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#008751" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
+          <circle cx="44" cy="34" r="3.5" fill="#FCD116"/>
+          <circle cx="46" cy="52" r="4.5" fill="#008751"/>
+          <circle cx="58" cy="48" r="3" fill="#E8112D"/>
+          <circle cx="52" cy="66" r="3" fill="#008751"/>
+          <path d="M44 34 L46 52 L58 48 M46 52 L52 66" stroke="var(--muted)" stroke-width="1" opacity="0.5"/>
+        </svg>
+        <div>
+          <p class="font-display font-bold text-lg" data-i18n="gallery.africaTitle">Afrique</p>
+          <p class="font-mono text-[11px] muted" data-i18n="gallery.africaSub">Bénin, Togo… — fichiers galerie<em>N</em>A</p>
+        </div>
+      </div>
+      <div id="gallery-grid-africa" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+      <p id="gallery-empty-africa" class="hidden font-mono text-xs muted mt-3" data-i18n="gallery.emptyAfrica">Aucune photo pour l'instant.</p>
+    </div>
+
+    <!-- EUROPE -->
+    <div>
+      <div class="flex items-center gap-4 mb-4">
+        <svg width="52" height="52" viewBox="0 0 100 100" class="shrink-0">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.35"/>
+          <circle cx="42" cy="40" r="3.5" fill="#DD0000"/>
+          <circle cx="56" cy="38" r="4.5" fill="#FFCE00"/>
+          <circle cx="50" cy="58" r="3" fill="#3E7CB1"/>
+          <circle cx="62" cy="54" r="3" fill="#DD0000"/>
+          <path d="M42 40 L56 38 L50 58 M56 38 L62 54" stroke="var(--muted)" stroke-width="1" opacity="0.5"/>
+        </svg>
+        <div>
+          <p class="font-display font-bold text-lg" data-i18n="gallery.europeTitle">Europe</p>
+          <p class="font-mono text-[11px] muted" data-i18n="gallery.europeSub">Allemagne, Autriche… — fichiers galerie<em>N</em>E</p>
+        </div>
+      </div>
+      <div id="gallery-grid-europe" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+      <p id="gallery-empty-europe" class="hidden font-mono text-xs muted mt-3" data-i18n="gallery.emptyEurope">Aucune photo pour l'instant.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ============ FOOTER / CONTACT ============ -->
@@ -534,64 +803,108 @@ function logoFallback(letter, bg, fg){
   return span;
 }
 
+// Si DONKO.png n'a pas encore été déposé à la racine du dépôt,
+// on affiche un cadre de secours au lieu d'une image cassée.
+function photoFallback(){
+  const div = document.createElement('div');
+  div.className = 'w-full aspect-[4/5] flex items-center justify-center';
+  div.style.cssText = 'background:var(--panel-2);';
+  div.innerHTML = '<span class="font-display font-bold text-5xl amber-text">HD</span>';
+  return div;
+}
+
+/* ================= IMPRESSION CIBLÉE DU CV ================= */
+function printCV(){
+  document.body.classList.add('printing-cv');
+  window.print();
+}
+window.addEventListener('afterprint', () => {
+  document.body.classList.remove('printing-cv');
+});
+
 /* ================= GALERIE DYNAMIQUE (GitHub API) ================= */
-// Le dépôt GitHub Pages sert de source de vérité : tout fichier déposé
-// dans /gallery est listé via l'API GitHub Contents et affiché ici,
-// pour tous les visiteurs, sans modification du code.
+// Le dépôt GitHub Pages sert de source de vérité : tout fichier posé
+// à la RACINE du dépôt, nommé galerie<N>A.ext (Afrique) ou galerie<N>E.ext
+// (Europe), est listé via l'API GitHub Contents, classé automatiquement
+// dans la bonne section, et affiché ici pour tous les visiteurs — sans
+// aucune modification du code.
 const GALLERY_OWNER = 'donko-dev';
 const GALLERY_REPO = 'Donko-Deutschland-Beruf';
-const GALLERY_PATH = 'gallery';
 const IMAGE_EXT = ['png','jpg','jpeg','gif','webp','svg','avif'];
 const VIDEO_EXT = ['mp4','webm','mov','ogg'];
+const GALLERY_NAME_RE = /^galerie(\d+)([AE])\.([a-z0-9]+)$/i;
+
+function buildGalleryItem(f, ext){
+  const wrap = document.createElement('div');
+  wrap.className = 'card rounded-lg overflow-hidden aspect-square fade-in';
+  if(IMAGE_EXT.includes(ext)){
+    const img = document.createElement('img');
+    img.src = f.download_url;
+    img.alt = f.name.replace(/\.[^.]+$/, '');
+    img.loading = 'lazy';
+    img.className = 'w-full h-full object-cover';
+    wrap.appendChild(img);
+  } else {
+    const vid = document.createElement('video');
+    vid.src = f.download_url;
+    vid.controls = true;
+    vid.muted = true;
+    vid.playsInline = true;
+    vid.className = 'w-full h-full object-cover';
+    wrap.appendChild(vid);
+  }
+  return wrap;
+}
 
 async function loadGallery(){
   const loadingEl = document.getElementById('gallery-loading');
-  const emptyEl = document.getElementById('gallery-empty');
   const errorEl = document.getElementById('gallery-error');
-  const grid = document.getElementById('gallery-grid');
+  const contentEl = document.getElementById('gallery-content');
+  const gridAfrica = document.getElementById('gallery-grid-africa');
+  const gridEurope = document.getElementById('gallery-grid-europe');
+  const emptyAfrica = document.getElementById('gallery-empty-africa');
+  const emptyEurope = document.getElementById('gallery-empty-europe');
 
   try{
-    const res = await fetch(`https://api.github.com/repos/${GALLERY_OWNER}/${GALLERY_REPO}/contents/${GALLERY_PATH}`);
+    const res = await fetch(`https://api.github.com/repos/${GALLERY_OWNER}/${GALLERY_REPO}/contents/`);
     if(!res.ok) throw new Error('gallery fetch failed: ' + res.status);
     const files = await res.json();
     if(!Array.isArray(files)) throw new Error('unexpected gallery response');
 
-    const media = files.filter(f=>{
-      const ext = f.name.split('.').pop().toLowerCase();
-      return f.type === 'file' && (IMAGE_EXT.includes(ext) || VIDEO_EXT.includes(ext));
+    const africa = [];
+    const europe = [];
+
+    files.forEach(f=>{
+      if(f.type !== 'file') return;
+      const match = f.name.match(GALLERY_NAME_RE);
+      if(!match) return;
+      const [, num, zone, ext] = match;
+      const extLower = ext.toLowerCase();
+      if(!IMAGE_EXT.includes(extLower) && !VIDEO_EXT.includes(extLower)) return;
+      const entry = { f, ext: extLower, num: parseInt(num, 10) };
+      if(zone.toUpperCase() === 'A') africa.push(entry);
+      else europe.push(entry);
     });
+
+    africa.sort((a,b)=>a.num-b.num);
+    europe.sort((a,b)=>a.num-b.num);
 
     loadingEl.classList.add('hidden');
+    contentEl.classList.remove('hidden');
 
-    if(media.length === 0){
-      emptyEl.classList.remove('hidden');
-      return;
+    if(africa.length === 0){
+      emptyAfrica.classList.remove('hidden');
+    } else {
+      gridAfrica.innerHTML = '';
+      africa.forEach(e=> gridAfrica.appendChild(buildGalleryItem(e.f, e.ext)));
     }
 
-    grid.innerHTML = '';
-    media.forEach(f=>{
-      const ext = f.name.split('.').pop().toLowerCase();
-      const wrap = document.createElement('div');
-      wrap.className = 'card rounded-lg overflow-hidden aspect-square fade-in';
-
-      if(IMAGE_EXT.includes(ext)){
-        const img = document.createElement('img');
-        img.src = f.download_url;
-        img.alt = f.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
-        img.loading = 'lazy';
-        img.className = 'w-full h-full object-cover';
-        wrap.appendChild(img);
-      } else {
-        const vid = document.createElement('video');
-        vid.src = f.download_url;
-        vid.controls = true;
-        vid.muted = true;
-        vid.playsInline = true;
-        vid.className = 'w-full h-full object-cover';
-        wrap.appendChild(vid);
-      }
-      grid.appendChild(wrap);
-    });
+    if(europe.length === 0){
+      emptyEurope.classList.remove('hidden');
+    } else {
+      gridEurope.innerHTML = '';
+      europe.forEach(e=> gridEurope.appendChild(buildGalleryItem(e.f, e.ext)));
+    }
   } catch(err){
     console.warn('Galerie indisponible :', err);
     loadingEl.classList.add('hidden');
@@ -679,6 +992,8 @@ const translations = {
     "hero.eyebrow": "Fiche de poste · Bewerberprofil",
     "hero.title": "Du savoir autodidacte à la logistique allemande.",
     "hero.subtitle": "Application vitrine simulant un système de gestion d'entrepôt (WMS), conçue pour démontrer mes compétences en gestion, cloud AWS et développement — en vue d'un Ausbildung en Allemagne.",
+    "hero.photoRole": "CEO, EMPIRE DONKO | PROJETS EN GESTION LOGISTIQUE",
+    "hero.quote": "« L'Intelligence Artificielle optimise mon code, la gestion pilote mes flux, et la logistique d'entreposage concrétise ma vision. Cette application est le pont entre mes compétences numériques développées au Bénin et mon ambition d'apprentissage en Allemagne. »",
     "hero.profileTitle": "Profil",
     "hero.profileSub": "Bac B · 2020 — AWS Cloud Practitioner · Avril 2026",
     "hero.profileText": "Formation en gestion (Bac B) alliée à une pratique concrète du développement logiciel et de l'infrastructure cloud. Ce projet réunit ces trois compétences autour d'un cas d'usage réel : la logistique d'entrepôt.",
@@ -729,9 +1044,12 @@ const translations = {
     "modC.appTitle": "WMS",
     "modC.appSub": "Interface web",
     "modC.hint": "Cliquez sur un service pour visualiser le flux de données.",
+    "portfolio.eyebrow": "Portfolio complet",
+    "portfolio.desc": "L'ensemble de mes réalisations, projets et démonstrations en ligne — logiciels métiers, ingénierie blockchain et automatisation IA — réunis en un seul endroit.",
+    "portfolio.cta": "Voir le portfolio →",
     "projects.eyebrow": "Écosystème DONKO",
     "projects.title": "Mes autres applications",
-    "projects.subtitle": "Cinq outils déjà en ligne, déployés au Bénin, qui illustrent ma capacité à livrer des produits réels et fonctionnels — tous utilisables hors connexion.",
+    "projects.subtitle": "Treize outils déjà en ligne, développés au Bénin — logiciels métiers, ingénierie blockchain et automatisation IA — qui illustrent ma capacité à livrer des produits réels et fonctionnels.",
     "projects.adsTag": "Marketplace &amp; visibilité",
     "projects.adsDesc": "Plateforme de petites annonces pour publier boutiques et produits en un clic, avec une visibilité mondiale.",
     "projects.adsCta": "Voir la démo live →",
@@ -747,12 +1065,70 @@ const translations = {
     "projects.bdTag": "Apprentissage de l'allemand offline",
     "projects.bdDesc": "Cours et exercices de langue allemande, consultables sans connexion internet — pour progresser vers l'ÖSD partout, même sans réseau.",
     "projects.bdCta": "Voir la démo live →",
+    "projects.diTag": "Inventaire offline",
+    "projects.diDesc": "Application de gestion des stocks et d'inventaire, pensée pour un usage hors connexion et une saisie rapide des entrées/sorties.",
+    "projects.diCta": "Voir la démo live →",
+    "projects.daTag": "Application DONKO",
+    "projects.daDesc": "Application compagnon de l'écosystème DONKO, réunissant plusieurs outils métiers dans une interface unique.",
+    "projects.daCta": "Voir la démo live →",
+    "projects.waTag": "Outil de conversion",
+    "projects.waDesc": "Outil de conversion d'applications web en fichiers APK Android, pour distribuer facilement mes outils sur mobile.",
+    "projects.waCta": "Voir la démo live →",
+    "projects.lpTag": "Application ludique",
+    "projects.lpDesc": "Application ludique développée pour explorer l'interaction utilisateur et la gamification côté front-end.",
+    "projects.lpCta": "Voir la démo live →",
+    "projects.aaTag": "Site vitrine santé naturelle",
+    "projects.aaDesc": "Site vitrine développé pour un cabinet de Cotonou spécialisé dans les compléments nutritionnels naturels, axés sur la fertilité et le bien-être.",
+    "projects.aaCta": "Voir la démo live →",
+    "projects.gpTag": "Automatisation IA",
+    "projects.gpDesc": "Bibliothèque de prompts et de workflows pilotés par l'IA (Gemini), utilisés pour automatiser mes développements.",
+    "projects.gpCta": "Voir la démo live →",
+    "projects.twTag": "Réseau &amp; accès",
+    "projects.twDesc": "Portail captif Wi-Fi avec billetterie algorithmique pour le contrôle d'accès réseau, développé pour WebCraft HD.",
+    "projects.twCta": "Voir la démo live →",
+    "projects.dxTag": "Fintech &amp; Web3",
+    "projects.dxDesc": "Passerelle d'échange crypto opérationnelle, automatisant les échanges d'actifs numériques pour les utilisateurs.",
+    "projects.dxCta": "Voir la démo live →",
+    "cv.eyebrow": "Curriculum Vitae",
+    "cv.title": "Mon CV",
+    "cv.print": "🖨️ Imprimer / PDF",
+    "cv.bridge": "Mes compétences en ingénierie blockchain et en automatisation IA reposent sur la même rigueur méthodologique que j'applique à la logistique et à la gestion d'entrepôt — la discipline technique au service d'un objectif concret : mon Ausbildung en Allemagne.",
+    "cv.headline": "Ingénieur Smart Contract | Architecte Web3 &amp; Blockchain | Expert Automatisation IA",
+    "cv.profileTitle": "Profil professionnel",
+    "cv.profileText": "Ingénieur Blockchain et Architecte Web3 orienté résultats, avec une expérience concrète dans la conception, l'audit et le déploiement de smart contracts sécurisés sur des réseaux compatibles EVM. Fondateur de l'écosystème EMPIRE DONKO, un ensemble d'outils logiciels « offline-first » (sans connexion, serveur ni base de données requise), de solutions Web3, DePIN et de tokenomics avancées conçues de bout en bout. Maîtrise de Solidity, de l'optimisation du gas et des paramètres de sécurité des smart contracts, avec un historique éprouvé de fusion entre l'ingénierie logicielle classique, l'automatisation pilotée par l'IA et les architectures financières décentralisées (DeFi).",
+    "cv.skillsTitle": "Compétences clés",
+    "cv.skill1": "Solidity, conception de smart contracts, standard BEP-20, vérification BscScan, Hardhat / Remix IDE.",
+    "cv.skill2": "Pools de liquidité, rareté mathématique, taxes automatisées, fonctions de burn.",
+    "cv.skill3": "Atténuation des vulnérabilités, analyse des vecteurs de menace, contrôles d'accès.",
+    "cv.skill4": "API Gemini, workflows pilotés par l'IA, développement Full-Stack, outils offline-first.",
+    "cv.expTitle": "Expérience professionnelle",
+    "cv.exp1": "<li>Ingénierie de smart contracts Solidity prêts pour la production sur la Binance Smart Chain (BEP-20).</li><li>Architecture et déploiement de trois actifs cryptographiques avec protocoles monétaires avancés.</li><li>Contrôles d'accès stricts, propriétés multi-signatures et validations mathématiques contre les schémas d'exploitation.</li>",
+    "cv.exp2": "<li>DonkoExchange (déployé) : passerelle d'échange crypto opérationnelle automatisant les échanges d'actifs numériques.</li><li>CryptPay (en développement) : passerelle de paiement non-custodiale avec couche IA intégrée.</li><li>Flux de paiement multi-actifs (BTC, ETH, BNB, USDT) et réduction des frictions cross-chain.</li>",
+    "cv.exp3": "<li>Architectures web complexes et intégrations API backend sécurisées.</li><li>Portail captif de tickets Wi-Fi sur mesure avec génération algorithmique (Tickets WiFi Zone).</li><li>Structuration de bases de données clients optimisées.</li>",
+    "cv.eduTitle": "Formation &amp; certifications",
+    "cv.edu1": "Baccalauréat (Série B – Sciences Économiques et Sociales) — 2020",
+    "cv.edu2": "Formation Systèmes, Réseaux &amp; Maintenance — infrastructures techniques et logique des protocoles",
+    "cv.edu3": "Certifications IT &amp; AWS (Udacity / AWS AI Practitioner)",
+    "cv.langTitle": "Langues",
+    "cv.langFr": "Français",
+    "cv.langFrLvl": "Langue maternelle",
+    "cv.langEn": "Anglais",
+    "cv.langEnLvl": "Professionnel",
+    "cv.langDe": "Allemand",
+    "cv.langDeLvl": "Élémentaire (B1)",
+    "cv.contractsTitle": "Contrats en production (vérifiés sur BscScan)",
+    "cv.contractsHint": "Cliquez sur une adresse pour consulter la vérification en direct sur BscScan.",
     "gallery.eyebrow": "Preuves &amp; coulisses",
     "gallery.title": "Galerie",
-    "gallery.subtitle": "Photos et vidéos ajoutées automatiquement — déposez un fichier dans le dossier <code class=\"font-mono text-[12px] px-1.5 py-0.5 rounded card-2\">/gallery</code> du dépôt GitHub et il apparaît ici pour tout le monde, sans toucher au code.",
+    "gallery.subtitle": "Photos et vidéos classées automatiquement par continent. Déposez un fichier à la racine du dépôt GitHub, nommé <code class=\"font-mono text-[12px] px-1.5 py-0.5 rounded card-2\">galerie1A.jpg</code> (Afrique) ou <code class=\"font-mono text-[12px] px-1.5 py-0.5 rounded card-2\">galerie1E.jpg</code> (Europe), et il apparaît ici pour tout le monde, sans toucher au code.",
     "gallery.loading": "Chargement de la galerie…",
-    "gallery.empty": "Aucun média pour l'instant. Ajoutez des images ou vidéos dans le dossier /gallery sur GitHub.",
     "gallery.error": "Galerie momentanément indisponible (hors ligne ou limite d'API GitHub atteinte).",
+    "gallery.africaTitle": "Afrique",
+    "gallery.africaSub": "Bénin, Togo… — fichiers galerie<em>N</em>A",
+    "gallery.emptyAfrica": "Aucune photo pour l'instant.",
+    "gallery.europeTitle": "Europe",
+    "gallery.europeSub": "Allemagne, Autriche… — fichiers galerie<em>N</em>E",
+    "gallery.emptyEurope": "Aucune photo pour l'instant.",
     "footer.title": "Contact",
     "footer.subtitle": "Ouvert aux opportunités d'Ausbildung, partenariats et échanges techniques.",
     "footer.whatsapp": "WhatsApp",
@@ -769,6 +1145,8 @@ const translations = {
     "hero.eyebrow": "Stellenprofil · Bewerberprofil",
     "hero.title": "Vom autodidaktischen Wissen zur deutschen Logistik.",
     "hero.subtitle": "Schaufenster-Anwendung, die ein Lagerverwaltungssystem (WMS) simuliert und meine Kompetenzen in Betriebswirtschaft, AWS-Cloud und Softwareentwicklung im Hinblick auf eine Ausbildung in Deutschland demonstriert.",
+    "hero.photoRole": "CEO, EMPIRE DONKO | PROJEKTE IM LOGISTIKMANAGEMENT",
+    "hero.quote": "„Künstliche Intelligenz optimiert meinen Code, das Management steuert meine Abläufe, und die Lagerlogistik verwirklicht meine Vision. Diese Anwendung ist die Brücke zwischen meinen im Benin entwickelten digitalen Kompetenzen und meinem Ausbildungsziel in Deutschland.“",
     "hero.profileTitle": "Profil",
     "hero.profileSub": "Bac B · 2020 — AWS Cloud Practitioner · April 2026",
     "hero.profileText": "Kaufmännische Ausbildung (Bac B) verbunden mit praktischer Erfahrung in Softwareentwicklung und Cloud-Infrastruktur. Dieses Projekt vereint diese drei Kompetenzbereiche in einem realen Anwendungsfall: der Lagerlogistik.",
@@ -819,9 +1197,12 @@ const translations = {
     "modC.appTitle": "WMS",
     "modC.appSub": "Weboberfläche",
     "modC.hint": "Klicken Sie auf einen Dienst, um den Datenfluss zu sehen.",
+    "portfolio.eyebrow": "Vollständiges Portfolio",
+    "portfolio.desc": "Alle meine Arbeiten, Projekte und Online-Demos — Business-Software, Blockchain-Engineering und KI-Automatisierung — an einem Ort vereint.",
+    "portfolio.cta": "Portfolio ansehen →",
     "projects.eyebrow": "DONKO-Ökosystem",
     "projects.title": "Meine weiteren Anwendungen",
-    "projects.subtitle": "Fünf bereits live geschaltete Tools, im Benin im Einsatz, die meine Fähigkeit belegen, echte, funktionierende Produkte zu liefern — alle offline nutzbar.",
+    "projects.subtitle": "Dreizehn bereits live geschaltete Tools, im Benin entwickelt — Business-Software, Blockchain-Engineering und KI-Automatisierung — die meine Fähigkeit belegen, echte, funktionierende Produkte zu liefern.",
     "projects.adsTag": "Marktplatz &amp; Sichtbarkeit",
     "projects.adsDesc": "Kleinanzeigen-Plattform, um Shops und Produkte mit einem Klick zu veröffentlichen — mit weltweiter Sichtbarkeit.",
     "projects.adsCta": "Live-Demo ansehen →",
@@ -837,12 +1218,70 @@ const translations = {
     "projects.bdTag": "Deutsch lernen offline",
     "projects.bdDesc": "Deutschkurse und Übungen, ohne Internetverbindung abrufbar — um überall auf die ÖSD-Prüfung hinzuarbeiten, auch ohne Netz.",
     "projects.bdCta": "Live-Demo ansehen →",
+    "projects.diTag": "Inventar offline",
+    "projects.diDesc": "Anwendung zur Bestands- und Inventarverwaltung, für den Offline-Einsatz und schnelle Erfassung von Zu- und Abgängen konzipiert.",
+    "projects.diCta": "Live-Demo ansehen →",
+    "projects.daTag": "DONKO-Anwendung",
+    "projects.daDesc": "Begleit-App des DONKO-Ökosystems, die mehrere Business-Tools in einer einzigen Oberfläche vereint.",
+    "projects.daCta": "Live-Demo ansehen →",
+    "projects.waTag": "Konvertierungstool",
+    "projects.waDesc": "Tool zur Umwandlung von Webanwendungen in Android-APK-Dateien, um meine Tools einfach mobil zu verbreiten.",
+    "projects.waCta": "Live-Demo ansehen →",
+    "projects.lpTag": "Unterhaltungs-App",
+    "projects.lpDesc": "Spielerische Anwendung zur Erprobung von Nutzerinteraktion und Gamification im Frontend.",
+    "projects.lpCta": "Live-Demo ansehen →",
+    "projects.aaTag": "Naturheilkunde-Website",
+    "projects.aaDesc": "Schaufenster-Website für ein Cabinet in Cotonou, spezialisiert auf natürliche Nahrungsergänzungsmittel für Fruchtbarkeit und Wohlbefinden.",
+    "projects.aaCta": "Live-Demo ansehen →",
+    "projects.gpTag": "KI-Automatisierung",
+    "projects.gpDesc": "Bibliothek von Prompts und KI-gesteuerten Workflows (Gemini), die meine Entwicklungsarbeit automatisieren.",
+    "projects.gpCta": "Live-Demo ansehen →",
+    "projects.twTag": "Netzwerk &amp; Zugang",
+    "projects.twDesc": "Wi-Fi-Captive-Portal mit algorithmischem Ticketsystem zur Zugangskontrolle, entwickelt für WebCraft HD.",
+    "projects.twCta": "Live-Demo ansehen →",
+    "projects.dxTag": "Fintech &amp; Web3",
+    "projects.dxDesc": "Operative Krypto-Wechselplattform, die den Austausch digitaler Vermögenswerte für Nutzer automatisiert.",
+    "projects.dxCta": "Live-Demo ansehen →",
+    "cv.eyebrow": "Lebenslauf",
+    "cv.title": "Mein Lebenslauf",
+    "cv.print": "🖨️ Drucken / PDF",
+    "cv.bridge": "Meine Kompetenzen in Blockchain-Engineering und KI-Automatisierung beruhen auf derselben methodischen Sorgfalt, die ich auch in der Logistik und Lagerverwaltung anwende — technische Disziplin im Dienst eines konkreten Ziels: meiner Ausbildung in Deutschland.",
+    "cv.headline": "Smart-Contract-Ingenieur | Web3- &amp; Blockchain-Architekt | Experte für KI-Automatisierung",
+    "cv.profileTitle": "Berufsprofil",
+    "cv.profileText": "Ergebnisorientierter Blockchain-Ingenieur und Web3-Architekt mit praktischer Erfahrung in Konzeption, Audit und Deployment sicherer Smart Contracts auf EVM-kompatiblen Netzwerken. Gründer des EMPIRE-DONKO-Ökosystems, einer Sammlung von „Offline-First“-Softwaretools (ohne Internetverbindung, Server oder Datenbank), sowie von Web3-, DePIN- und fortgeschrittenen Tokenomics-Lösungen, die vollständig eigenständig entwickelt wurden. Fundierte Kenntnisse in Solidity, Gas-Optimierung und Sicherheitsparametern von Smart Contracts, mit nachgewiesener Erfahrung in der Verbindung von klassischer Softwareentwicklung, KI-gesteuerter Automatisierung und dezentralen Finanzarchitekturen (DeFi).",
+    "cv.skillsTitle": "Kernkompetenzen",
+    "cv.skill1": "Solidity, Smart-Contract-Design, BEP-20-Token-Standard, BscScan-Verifizierung, Hardhat / Remix IDE.",
+    "cv.skill2": "Liquiditätspools, mathematisch gesteuerte Knappheit, automatisierte Steuerstrukturen, Burn-Funktionen.",
+    "cv.skill3": "Schwachstellenminderung, Analyse von Bedrohungsvektoren, Zugriffskontrollen zur Laufzeit.",
+    "cv.skill4": "Gemini-API-Integration, KI-gesteuerte Workflows, Full-Stack-Entwicklung, Offline-First-Tools.",
+    "cv.expTitle": "Berufserfahrung",
+    "cv.exp1": "<li>Entwicklung produktionsreifer Solidity-Smart-Contracts auf der Binance Smart Chain (BEP-20).</li><li>Architektur und Deployment von drei kryptografischen Assets mit fortgeschrittenen Geldprotokollen.</li><li>Strikte Zugriffskontrollen, Multi-Signatur-Eigenschaften und mathematische Validierungen gegen gängige Exploit-Muster.</li>",
+    "cv.exp2": "<li>DonkoExchange (live): operative Krypto-Wechselplattform zur Automatisierung digitaler Vermögensübertragungen.</li><li>CryptPay (in Entwicklung): nicht-verwahrende Zahlungsplattform mit integrierter KI-Schicht.</li><li>Multi-Asset-Zahlungsflüsse (BTC, ETH, BNB, USDT) und Reduzierung von Cross-Chain-Reibung.</li>",
+    "cv.exp3": "<li>Komplexe Webarchitekturen und sichere Backend-API-Integrationen.</li><li>Maßgeschneidertes Wi-Fi-Ticket-Captive-Portal mit algorithmischer Generierung (Tickets WiFi Zone).</li><li>Optimierte Strukturierung von Kundendatenbanken.</li>",
+    "cv.eduTitle": "Ausbildung &amp; Zertifikate",
+    "cv.edu1": "Abitur / Baccalauréat (Wirtschafts- und Sozialwissenschaften) — 2020",
+    "cv.edu2": "Fachausbildung System-, Netzwerk- &amp; IT-Wartung — technische Infrastruktur und Protokolllogik",
+    "cv.edu3": "IT- &amp; AWS-Zertifikate (Udacity / AWS AI Practitioner)",
+    "cv.langTitle": "Sprachen",
+    "cv.langFr": "Französisch",
+    "cv.langFrLvl": "Muttersprache",
+    "cv.langEn": "Englisch",
+    "cv.langEnLvl": "Berufliches Niveau",
+    "cv.langDe": "Deutsch",
+    "cv.langDeLvl": "Grundkenntnisse (B1)",
+    "cv.contractsTitle": "Produktive Verträge (auf BscScan verifiziert)",
+    "cv.contractsHint": "Klicken Sie auf eine Adresse, um die Live-Verifizierung auf BscScan einzusehen.",
     "gallery.eyebrow": "Beweise &amp; Einblicke",
     "gallery.title": "Galerie",
-    "gallery.subtitle": "Fotos und Videos werden automatisch hinzugefügt — legen Sie eine Datei im Ordner <code class=\"font-mono text-[12px] px-1.5 py-0.5 rounded card-2\">/gallery</code> des GitHub-Repositorys ab, und sie erscheint hier für alle, ohne Code-Änderung.",
+    "gallery.subtitle": "Fotos und Videos werden automatisch nach Kontinent sortiert. Legen Sie eine Datei im Root-Verzeichnis des GitHub-Repositorys ab, benannt <code class=\"font-mono text-[12px] px-1.5 py-0.5 rounded card-2\">galerie1A.jpg</code> (Afrika) oder <code class=\"font-mono text-[12px] px-1.5 py-0.5 rounded card-2\">galerie1E.jpg</code> (Europa), und sie erscheint hier für alle, ohne Code-Änderung.",
     "gallery.loading": "Galerie wird geladen…",
-    "gallery.empty": "Noch keine Medien vorhanden. Fügen Sie Bilder oder Videos im Ordner /gallery auf GitHub hinzu.",
     "gallery.error": "Galerie vorübergehend nicht verfügbar (offline oder GitHub-API-Limit erreicht).",
+    "gallery.africaTitle": "Afrika",
+    "gallery.africaSub": "Benin, Togo… — Dateien galerie<em>N</em>A",
+    "gallery.emptyAfrica": "Noch keine Fotos vorhanden.",
+    "gallery.europeTitle": "Europa",
+    "gallery.europeSub": "Deutschland, Österreich… — Dateien galerie<em>N</em>E",
+    "gallery.emptyEurope": "Noch keine Fotos vorhanden.",
     "footer.title": "Kontakt",
     "footer.subtitle": "Offen für Ausbildungsplätze, Partnerschaften und fachlichen Austausch.",
     "footer.whatsapp": "WhatsApp",
