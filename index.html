@@ -64,10 +64,17 @@
   .card-2{background:var(--panel-2);border:1px solid var(--line);}
   .flag-bar{
     display:flex;
-    height:5px;
+    height:6px;
     width:100%;
+    position:fixed;
+    left:0;
+    right:0;
+    z-index:60;
   }
+  .flag-bar.flag-bar-top{ top:0; }
+  .flag-bar.flag-bar-bottom{ bottom:0; }
   .flag-bar > span{ flex:1 1 0; }
+  body{ padding-top:6px; padding-bottom:6px; }
   .card, .card-2, header, footer, .bin, input, select, .btn-outline{
     transition: background-color .35s ease, border-color .35s ease, color .35s ease;
   }
@@ -156,13 +163,15 @@
 </head>
 <body class="min-h-screen">
 
+<!-- ============ BANDES DRAPEAUX FIXES ============ -->
+<div class="flag-bar flag-bar-top" aria-hidden="true" title="🇧🇯 Bénin">
+  <span style="background:#008751"></span>
+  <span style="background:#FCD116"></span>
+  <span style="background:#E8112D"></span>
+</div>
+
 <!-- ============ HEADER ============ -->
-<header class="sticky top-0 z-40 backdrop-blur bg-[#0B0F14]/85 border-b border-[var(--line)]">
-  <div class="flag-bar" aria-hidden="true" title="🇧🇯 Bénin">
-    <span style="background:#008751"></span>
-    <span style="background:#FCD116"></span>
-    <span style="background:#E8112D"></span>
-  </div>
+<header class="sticky top-[6px] z-40 backdrop-blur bg-[#0B0F14]/85 border-b border-[var(--line)]">
   <div class="max-w-6xl mx-auto px-4 sm:px-5 py-4 flex flex-wrap items-center justify-between gap-y-3 gap-x-4">
     <div class="flex items-center gap-3 min-w-0">
       <div class="w-9 h-9 shrink-0 rounded-md border border-[var(--amber-dim)] flex items-center justify-center font-mono text-[var(--amber)] text-sm font-bold">DD</div>
@@ -360,9 +369,9 @@
 <section class="max-w-6xl mx-auto px-5 py-10">
   <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="projects.eyebrow">Écosystème DONKO</p>
   <h2 class="font-display font-bold text-2xl mb-2" data-i18n="projects.title">Mes autres applications</h2>
-  <p class="text-sm muted max-w-2xl mb-6" data-i18n="projects.subtitle">Deux outils déjà en ligne, déployés au Bénin, qui illustrent ma capacité à livrer des produits réels et fonctionnels.</p>
+  <p class="text-sm muted max-w-2xl mb-6" data-i18n="projects.subtitle">Cinq outils déjà en ligne, déployés au Bénin, qui illustrent ma capacité à livrer des produits réels et fonctionnels — tous utilisables hors connexion.</p>
 
-  <div class="grid md:grid-cols-2 gap-5">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
     <!-- DONKO ADS -->
     <div class="card rounded-xl p-6 flex flex-col">
       <div class="flex items-center gap-3 mb-4">
@@ -390,6 +399,51 @@
       <h3 class="font-display font-bold text-xl mb-2">KALCUL</h3>
       <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.kalculDesc">Application de caisse, stock, factures et devis, 100% hors ligne, avec calcul automatique des marges et données conservées sur l'appareil.</p>
       <a href="https://donko-dev.github.io/Kalcul-pro/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.kalculCta">Tester gratuitement →</a>
+    </div>
+
+    <!-- SMART LOGISTICS -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <svg width="44" height="44" viewBox="0 0 100 100" class="shrink-0 rounded-xl">
+          <rect width="100" height="100" rx="24" fill="#16241C"/>
+          <circle cx="70" cy="27" r="7" fill="#3E7CB1"/>
+          <text x="50" y="70" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="54" fill="#E8A93A">S</text>
+        </svg>
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.slTag">Logistique numérique offline</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">Smart Logistics</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.slDesc">Gestion numérique de la logistique — suivi des flux, des stocks et des expéditions, 100% utilisable hors connexion.</p>
+      <a href="https://donko-dev.github.io/smartlogistics/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.slCta">Voir la démo live →</a>
+    </div>
+
+    <!-- CLIPSAFE -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <svg width="44" height="44" viewBox="0 0 100 100" class="shrink-0 rounded-xl">
+          <rect width="100" height="100" rx="24" fill="#241B14"/>
+          <circle cx="70" cy="27" r="7" fill="#3FB27F"/>
+          <text x="50" y="70" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="52" fill="#C9971F">C</text>
+        </svg>
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.csTag">Gestion documentaire offline</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">ClipSafe</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.csDesc">Suivi intelligent des prêts de documents papier — qui a emprunté quoi, quand et pour combien de temps — 100% hors connexion.</p>
+      <a href="https://donko-dev.github.io/clipsafe/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.csCta">Voir la démo live →</a>
+    </div>
+
+    <!-- BRÜCKEDE OFFLINE -->
+    <div class="card rounded-xl p-6 flex flex-col">
+      <div class="flex items-center gap-3 mb-4">
+        <svg width="44" height="44" viewBox="0 0 100 100" class="shrink-0 rounded-xl">
+          <rect width="100" height="100" rx="24" fill="#141B2E"/>
+          <circle cx="70" cy="27" r="7" fill="#DD0000"/>
+          <text x="50" y="70" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="54" fill="#E8A93A">B</text>
+        </svg>
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.bdTag">Apprentissage de l'allemand offline</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">BrückeDE Offline</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.bdDesc">Cours et exercices de langue allemande, consultables sans connexion internet — pour progresser vers l'ÖSD partout, même sans réseau.</p>
+      <a href="https://donko-dev.github.io/bruckedeoffline/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.bdCta">Voir la démo live →</a>
     </div>
   </div>
 </section>
@@ -456,7 +510,7 @@
   </div>
 </footer>
 
-<div class="flag-bar" aria-hidden="true" title="🇩🇪 Deutschland">
+<div class="flag-bar flag-bar-bottom" aria-hidden="true" title="🇩🇪 Deutschland">
   <span style="background:#000000"></span>
   <span style="background:#DD0000"></span>
   <span style="background:#FFCE00"></span>
@@ -594,13 +648,22 @@ const translations = {
     "modC.hint": "Cliquez sur un service pour visualiser le flux de données.",
     "projects.eyebrow": "Écosystème DONKO",
     "projects.title": "Mes autres applications",
-    "projects.subtitle": "Deux outils déjà en ligne, déployés au Bénin, qui illustrent ma capacité à livrer des produits réels et fonctionnels.",
+    "projects.subtitle": "Cinq outils déjà en ligne, déployés au Bénin, qui illustrent ma capacité à livrer des produits réels et fonctionnels — tous utilisables hors connexion.",
     "projects.adsTag": "Marketplace &amp; visibilité",
     "projects.adsDesc": "Plateforme de petites annonces pour publier boutiques et produits en un clic, avec une visibilité mondiale.",
     "projects.adsCta": "Voir la démo live →",
     "projects.kalculTag": "Caisse &amp; gestion hors ligne",
     "projects.kalculDesc": "Application de caisse, stock, factures et devis, 100% hors ligne, avec calcul automatique des marges et données conservées sur l'appareil.",
     "projects.kalculCta": "Tester gratuitement →",
+    "projects.slTag": "Logistique numérique offline",
+    "projects.slDesc": "Gestion numérique de la logistique — suivi des flux, des stocks et des expéditions, 100% utilisable hors connexion.",
+    "projects.slCta": "Voir la démo live →",
+    "projects.csTag": "Gestion documentaire offline",
+    "projects.csDesc": "Suivi intelligent des prêts de documents papier — qui a emprunté quoi, quand et pour combien de temps — 100% hors connexion.",
+    "projects.csCta": "Voir la démo live →",
+    "projects.bdTag": "Apprentissage de l'allemand offline",
+    "projects.bdDesc": "Cours et exercices de langue allemande, consultables sans connexion internet — pour progresser vers l'ÖSD partout, même sans réseau.",
+    "projects.bdCta": "Voir la démo live →",
     "footer.title": "Contact",
     "footer.subtitle": "Ouvert aux opportunités d'Ausbildung, partenariats et échanges techniques.",
     "footer.whatsapp": "WhatsApp",
@@ -669,13 +732,22 @@ const translations = {
     "modC.hint": "Klicken Sie auf einen Dienst, um den Datenfluss zu sehen.",
     "projects.eyebrow": "DONKO-Ökosystem",
     "projects.title": "Meine weiteren Anwendungen",
-    "projects.subtitle": "Zwei bereits live geschaltete Tools, im Benin im Einsatz, die meine Fähigkeit belegen, echte, funktionierende Produkte zu liefern.",
+    "projects.subtitle": "Fünf bereits live geschaltete Tools, im Benin im Einsatz, die meine Fähigkeit belegen, echte, funktionierende Produkte zu liefern — alle offline nutzbar.",
     "projects.adsTag": "Marktplatz &amp; Sichtbarkeit",
     "projects.adsDesc": "Kleinanzeigen-Plattform, um Shops und Produkte mit einem Klick zu veröffentlichen — mit weltweiter Sichtbarkeit.",
     "projects.adsCta": "Live-Demo ansehen →",
     "projects.kalculTag": "Kasse &amp; Offline-Verwaltung",
     "projects.kalculDesc": "Kassen-, Bestands-, Rechnungs- und Angebots-App, zu 100% offline nutzbar, mit automatischer Margenberechnung und Daten, die auf dem Gerät bleiben.",
     "projects.kalculCta": "Kostenlos testen →",
+    "projects.slTag": "Digitale Logistik offline",
+    "projects.slDesc": "Digitale Logistikverwaltung — Nachverfolgung von Warenflüssen, Beständen und Sendungen, zu 100% offline nutzbar.",
+    "projects.slCta": "Live-Demo ansehen →",
+    "projects.csTag": "Dokumentenverwaltung offline",
+    "projects.csDesc": "Intelligente Nachverfolgung von Papierdokument-Ausleihen — wer was wann und für wie lange ausgeliehen hat — zu 100% offline.",
+    "projects.csCta": "Live-Demo ansehen →",
+    "projects.bdTag": "Deutsch lernen offline",
+    "projects.bdDesc": "Deutschkurse und Übungen, ohne Internetverbindung abrufbar — um überall auf die ÖSD-Prüfung hinzuarbeiten, auch ohne Netz.",
+    "projects.bdCta": "Live-Demo ansehen →",
     "footer.title": "Kontakt",
     "footer.subtitle": "Offen für Ausbildungsplätze, Partnerschaften und fachlichen Austausch.",
     "footer.whatsapp": "WhatsApp",
