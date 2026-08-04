@@ -404,11 +404,7 @@
     <!-- SMART LOGISTICS -->
     <div class="card rounded-xl p-6 flex flex-col">
       <div class="flex items-center gap-3 mb-4">
-        <svg width="44" height="44" viewBox="0 0 100 100" class="shrink-0 rounded-xl">
-          <rect width="100" height="100" rx="24" fill="#16241C"/>
-          <circle cx="70" cy="27" r="7" fill="#3E7CB1"/>
-          <text x="50" y="70" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="54" fill="#E8A93A">S</text>
-        </svg>
+        <img src="logos/logo-smartlogistics.png" alt="Smart Logistics" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('S','#16241C','#E8A93A'))">
         <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.slTag">Logistique numérique offline</span>
       </div>
       <h3 class="font-display font-bold text-xl mb-2">Smart Logistics</h3>
@@ -419,11 +415,7 @@
     <!-- CLIPSAFE -->
     <div class="card rounded-xl p-6 flex flex-col">
       <div class="flex items-center gap-3 mb-4">
-        <svg width="44" height="44" viewBox="0 0 100 100" class="shrink-0 rounded-xl">
-          <rect width="100" height="100" rx="24" fill="#241B14"/>
-          <circle cx="70" cy="27" r="7" fill="#3FB27F"/>
-          <text x="50" y="70" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="52" fill="#C9971F">C</text>
-        </svg>
+        <img src="logos/logo-clipsafe.png" alt="ClipSafe" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('C','#241B14','#C9971F'))">
         <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.csTag">Gestion documentaire offline</span>
       </div>
       <h3 class="font-display font-bold text-xl mb-2">ClipSafe</h3>
@@ -434,11 +426,7 @@
     <!-- BRÜCKEDE OFFLINE -->
     <div class="card rounded-xl p-6 flex flex-col">
       <div class="flex items-center gap-3 mb-4">
-        <svg width="44" height="44" viewBox="0 0 100 100" class="shrink-0 rounded-xl">
-          <rect width="100" height="100" rx="24" fill="#141B2E"/>
-          <circle cx="70" cy="27" r="7" fill="#DD0000"/>
-          <text x="50" y="70" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="54" fill="#E8A93A">B</text>
-        </svg>
+        <img src="logos/logo-bruckedeoffline.png" alt="BrückeDE Offline" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('B','#141B2E','#E8A93A'))">
         <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.bdTag">Apprentissage de l'allemand offline</span>
       </div>
       <h3 class="font-display font-bold text-xl mb-2">BrückeDE Offline</h3>
@@ -446,6 +434,24 @@
       <a href="https://donko-dev.github.io/bruckedeoffline/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.bdCta">Voir la démo live →</a>
     </div>
   </div>
+</section>
+
+<!-- ============ GALERIE DYNAMIQUE ============ -->
+<section class="max-w-6xl mx-auto px-5 py-10">
+  <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="gallery.eyebrow">Preuves &amp; coulisses</p>
+  <h2 class="font-display font-bold text-2xl mb-2" data-i18n="gallery.title">Galerie</h2>
+  <p class="text-sm muted max-w-2xl mb-6" data-i18n="gallery.subtitle">Photos et vidéos ajoutées automatiquement — déposez un fichier dans le dossier <code class="font-mono text-[12px] px-1.5 py-0.5 rounded card-2">/gallery</code> du dépôt GitHub et il apparaît ici pour tout le monde, sans toucher au code.</p>
+
+  <div id="gallery-loading" class="font-mono text-xs muted">
+    <span class="pulse-dot"></span> <span data-i18n="gallery.loading">Chargement de la galerie…</span>
+  </div>
+  <div id="gallery-empty" class="hidden card rounded-xl p-8 text-center text-sm muted" data-i18n="gallery.empty">
+    Aucun média pour l'instant. Ajoutez des images ou vidéos dans le dossier /gallery sur GitHub.
+  </div>
+  <div id="gallery-error" class="hidden card rounded-xl p-8 text-center text-sm muted" data-i18n="gallery.error">
+    Galerie momentanément indisponible (hors ligne ou limite d'API GitHub atteinte).
+  </div>
+  <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"></div>
 </section>
 
 <!-- ============ FOOTER / CONTACT ============ -->
@@ -517,6 +523,83 @@
 </div>
 
 <script>
+/* ================= LOGO FALLBACK ================= */
+// Si un fichier logos/*.png n'a pas encore été déposé sur GitHub,
+// on affiche un badge monogramme de secours au lieu d'une image cassée.
+function logoFallback(letter, bg, fg){
+  const span = document.createElement('span');
+  span.className = 'shrink-0 rounded-xl flex items-center justify-center font-display font-bold';
+  span.style.cssText = `width:44px;height:44px;background:${bg};color:${fg};font-size:20px;`;
+  span.textContent = letter;
+  return span;
+}
+
+/* ================= GALERIE DYNAMIQUE (GitHub API) ================= */
+// Le dépôt GitHub Pages sert de source de vérité : tout fichier déposé
+// dans /gallery est listé via l'API GitHub Contents et affiché ici,
+// pour tous les visiteurs, sans modification du code.
+const GALLERY_OWNER = 'donko-dev';
+const GALLERY_REPO = 'Donko-Deutschland-Beruf';
+const GALLERY_PATH = 'gallery';
+const IMAGE_EXT = ['png','jpg','jpeg','gif','webp','svg','avif'];
+const VIDEO_EXT = ['mp4','webm','mov','ogg'];
+
+async function loadGallery(){
+  const loadingEl = document.getElementById('gallery-loading');
+  const emptyEl = document.getElementById('gallery-empty');
+  const errorEl = document.getElementById('gallery-error');
+  const grid = document.getElementById('gallery-grid');
+
+  try{
+    const res = await fetch(`https://api.github.com/repos/${GALLERY_OWNER}/${GALLERY_REPO}/contents/${GALLERY_PATH}`);
+    if(!res.ok) throw new Error('gallery fetch failed: ' + res.status);
+    const files = await res.json();
+    if(!Array.isArray(files)) throw new Error('unexpected gallery response');
+
+    const media = files.filter(f=>{
+      const ext = f.name.split('.').pop().toLowerCase();
+      return f.type === 'file' && (IMAGE_EXT.includes(ext) || VIDEO_EXT.includes(ext));
+    });
+
+    loadingEl.classList.add('hidden');
+
+    if(media.length === 0){
+      emptyEl.classList.remove('hidden');
+      return;
+    }
+
+    grid.innerHTML = '';
+    media.forEach(f=>{
+      const ext = f.name.split('.').pop().toLowerCase();
+      const wrap = document.createElement('div');
+      wrap.className = 'card rounded-lg overflow-hidden aspect-square fade-in';
+
+      if(IMAGE_EXT.includes(ext)){
+        const img = document.createElement('img');
+        img.src = f.download_url;
+        img.alt = f.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+        img.loading = 'lazy';
+        img.className = 'w-full h-full object-cover';
+        wrap.appendChild(img);
+      } else {
+        const vid = document.createElement('video');
+        vid.src = f.download_url;
+        vid.controls = true;
+        vid.muted = true;
+        vid.playsInline = true;
+        vid.className = 'w-full h-full object-cover';
+        wrap.appendChild(vid);
+      }
+      grid.appendChild(wrap);
+    });
+  } catch(err){
+    console.warn('Galerie indisponible :', err);
+    loadingEl.classList.add('hidden');
+    errorEl.classList.remove('hidden');
+  }
+}
+loadGallery();
+
 /* ================= PWA : SERVICE WORKER ================= */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -664,6 +747,12 @@ const translations = {
     "projects.bdTag": "Apprentissage de l'allemand offline",
     "projects.bdDesc": "Cours et exercices de langue allemande, consultables sans connexion internet — pour progresser vers l'ÖSD partout, même sans réseau.",
     "projects.bdCta": "Voir la démo live →",
+    "gallery.eyebrow": "Preuves &amp; coulisses",
+    "gallery.title": "Galerie",
+    "gallery.subtitle": "Photos et vidéos ajoutées automatiquement — déposez un fichier dans le dossier <code class=\"font-mono text-[12px] px-1.5 py-0.5 rounded card-2\">/gallery</code> du dépôt GitHub et il apparaît ici pour tout le monde, sans toucher au code.",
+    "gallery.loading": "Chargement de la galerie…",
+    "gallery.empty": "Aucun média pour l'instant. Ajoutez des images ou vidéos dans le dossier /gallery sur GitHub.",
+    "gallery.error": "Galerie momentanément indisponible (hors ligne ou limite d'API GitHub atteinte).",
     "footer.title": "Contact",
     "footer.subtitle": "Ouvert aux opportunités d'Ausbildung, partenariats et échanges techniques.",
     "footer.whatsapp": "WhatsApp",
@@ -748,6 +837,12 @@ const translations = {
     "projects.bdTag": "Deutsch lernen offline",
     "projects.bdDesc": "Deutschkurse und Übungen, ohne Internetverbindung abrufbar — um überall auf die ÖSD-Prüfung hinzuarbeiten, auch ohne Netz.",
     "projects.bdCta": "Live-Demo ansehen →",
+    "gallery.eyebrow": "Beweise &amp; Einblicke",
+    "gallery.title": "Galerie",
+    "gallery.subtitle": "Fotos und Videos werden automatisch hinzugefügt — legen Sie eine Datei im Ordner <code class=\"font-mono text-[12px] px-1.5 py-0.5 rounded card-2\">/gallery</code> des GitHub-Repositorys ab, und sie erscheint hier für alle, ohne Code-Änderung.",
+    "gallery.loading": "Galerie wird geladen…",
+    "gallery.empty": "Noch keine Medien vorhanden. Fügen Sie Bilder oder Videos im Ordner /gallery auf GitHub hinzu.",
+    "gallery.error": "Galerie vorübergehend nicht verfügbar (offline oder GitHub-API-Limit erreicht).",
     "footer.title": "Kontakt",
     "footer.subtitle": "Offen für Ausbildungsplätze, Partnerschaften und fachlichen Austausch.",
     "footer.whatsapp": "WhatsApp",
