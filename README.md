@@ -29,11 +29,11 @@
 
 ## 🖼️ Logos des applications
 
-Placez ces fichiers dans un dossier `logos/` à la racine du dépôt (à côté de `index.html`) :
+Placez ces fichiers à la **racine du dépôt**, à côté de `index.html` (pas dans un sous-dossier) :
 
-* `logos/logo-smartlogistics.png`
-* `logos/logo-clipsafe.png`
-* `logos/logo-bruckedeoffline.png`
+* `logo-smartlogistics.png`
+* `logo-clipsafe.png`
+* `logo-bruckedeoffline.png`
 
 Si un fichier est manquant, un badge monogramme de secours (S / C / B) s'affiche automatiquement à la place — le site ne casse jamais visuellement.
 
