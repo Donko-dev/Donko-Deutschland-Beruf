@@ -514,8 +514,8 @@
 <!-- ============ GALERIE DYNAMIQUE ============ -->
 <section id="section-gallery" class="max-w-6xl mx-auto px-5 py-10">
   <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="gallery.eyebrow">Preuves &amp; coulisses</p>
-  <h2 class="font-display font-bold text-2xl mb-2" data-i18n="gallery.title">Galerie</h2>
-  <p class="text-sm muted max-w-2xl mb-6" data-i18n="gallery.subtitle">Photos et vidéos classées automatiquement par continent. Déposez un fichier à la racine du dépôt GitHub, nommé <code class="font-mono text-[12px] px-1.5 py-0.5 rounded card-2">galerie1A.jpg</code> (Afrique) ou <code class="font-mono text-[12px] px-1.5 py-0.5 rounded card-2">galerie1E.jpg</code> (Europe), et il apparaît ici pour tout le monde, sans toucher au code.</p>
+  <h2 class="font-display font-bold text-2xl mb-2" data-i18n="gallery.title">Galerie : Photos &amp; Vidéos</h2>
+  <p class="text-sm muted max-w-2xl mb-6" data-i18n="gallery.subtitle">Un aperçu de mon parcours en images — de mes débuts à Cotonou à mes premiers pas en Allemagne, mis à jour au fil de mon aventure.</p>
 
   <div id="gallery-loading" class="font-mono text-xs muted mb-6">
     <span class="pulse-dot"></span> <span data-i18n="gallery.loading">Chargement de la galerie…</span>
@@ -1019,8 +1019,8 @@ const translations = {
     "cv.contractsTitle": "Contrats en production (vérifiés sur BscScan)",
     "cv.contractsHint": "Cliquez sur une adresse pour consulter la vérification en direct sur BscScan.",
     "gallery.eyebrow": "Preuves &amp; coulisses",
-    "gallery.title": "Galerie",
-    "gallery.subtitle": "Photos et vidéos classées automatiquement par continent. Déposez un fichier à la racine du dépôt GitHub, nommé <code class=\"font-mono text-[12px] px-1.5 py-0.5 rounded card-2\">galerie1A.jpg</code> (Afrique) ou <code class=\"font-mono text-[12px] px-1.5 py-0.5 rounded card-2\">galerie1E.jpg</code> (Europe), et il apparaît ici pour tout le monde, sans toucher au code.",
+    "gallery.title": "Galerie : Photos &amp; Vidéos",
+    "gallery.subtitle": "Un aperçu de mon parcours en images — de mes débuts à Cotonou à mes premiers pas en Allemagne, mis à jour au fil de mon aventure.",
     "gallery.loading": "Chargement de la galerie…",
     "gallery.error": "Galerie momentanément indisponible (hors ligne ou limite d'API GitHub atteinte).",
     "gallery.africaTitle": "Afrique",
@@ -1172,8 +1172,8 @@ const translations = {
     "cv.contractsTitle": "Produktive Verträge (auf BscScan verifiziert)",
     "cv.contractsHint": "Klicken Sie auf eine Adresse, um die Live-Verifizierung auf BscScan einzusehen.",
     "gallery.eyebrow": "Beweise &amp; Einblicke",
-    "gallery.title": "Galerie",
-    "gallery.subtitle": "Fotos und Videos werden automatisch nach Kontinent sortiert. Legen Sie eine Datei im Root-Verzeichnis des GitHub-Repositorys ab, benannt <code class=\"font-mono text-[12px] px-1.5 py-0.5 rounded card-2\">galerie1A.jpg</code> (Afrika) oder <code class=\"font-mono text-[12px] px-1.5 py-0.5 rounded card-2\">galerie1E.jpg</code> (Europa), und sie erscheint hier für alle, ohne Code-Änderung.",
+    "gallery.title": "Galerie: Fotos &amp; Videos",
+    "gallery.subtitle": "Ein Einblick in meinen Werdegang in Bildern — von meinen Anfängen in Cotonou bis zu meinen ersten Schritten in Deutschland, laufend aktualisiert.",
     "gallery.loading": "Galerie wird geladen…",
     "gallery.error": "Galerie vorübergehend nicht verfügbar (offline oder GitHub-API-Limit erreicht).",
     "gallery.africaTitle": "Afrika",
@@ -1431,7 +1431,7 @@ function renderEcosystemApps(){
 
     const imgClasses = app.logoWhiteBg
       ? 'shrink-0 rounded-xl bg-white object-contain p-1'
-      : 'shrink-0 rounded-xl';
+      : 'shrink-0 rounded-xl object-cover';
 
     const tagClass = app.ctaStyle === 'amber' ? 'steel-text' : 'amber-text';
     const ctaClass = app.ctaStyle === 'amber'
