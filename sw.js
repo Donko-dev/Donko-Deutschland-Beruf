@@ -3,11 +3,12 @@
    externes (Tailwind CDN, Google Fonts) au premier chargement, pour un
    fonctionnement 100% hors ligne dès la deuxième visite. */
 
-const CACHE_NAME = 'donko-deutschland-beruf-v7';
+const CACHE_NAME = 'donko-deutschland-beruf-v8';
 
 const PRECACHE_URLS = [
   './',
   './index.html',
+  './data.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',

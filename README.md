@@ -27,15 +27,55 @@
 
 ---
 
-## 🖼️ Logos des applications
+## ⚙️ Contenu éditable sans coder — data.js + admin.html
 
-Placez ces fichiers à la **racine du dépôt**, à côté de `index.html` (pas dans un sous-dossier) :
+Le site charge son contenu structuré (identité, contacts, liens, couleurs, sections actives, liste des applications) depuis **`data.js`**, un fichier séparé qui **doit rester à la racine du dépôt**, à côté de `index.html`.
 
-* `logo-smartlogistics.png`
-* `logo-clipsafe.png`
-* `logo-bruckedeoffline.png`
+Pour le modifier **sans toucher au code** :
 
-Si un fichier est manquant, un badge monogramme de secours (S / C / B) s'affiche automatiquement à la place — le site ne casse jamais visuellement.
+1. Ouvrez **`admin.html`** en local, en double-cliquant dessus (ne jamais l'uploader sur GitHub — c'est un outil personnel, hors ligne).
+2. Entrez le mot de passe.
+3. Modifiez ce que vous voulez : nom du site, contacts, liens, couleurs, sections à afficher/masquer, ajout/suppression/édition des applications.
+4. Cliquez sur **"Télécharger data.js"**.
+5. Téléversez ce nouveau `data.js` sur GitHub, à la racine, en remplacement de l'ancien.
+6. Les changements sont visibles par tout le monde immédiatement.
+
+⚠️ **Important sur la sécurité du mot de passe :** `admin.html` fonctionne entièrement dans le navigateur, sans serveur. Le mot de passe protège contre une ouverture accidentelle, mais n'est **pas une sécurité forte** — toute personne techniquement avertie ayant accès au fichier pourrait la contourner. Ne le déployez jamais sur un site public ; gardez-le uniquement sur votre appareil.
+
+---
+
+## 🖼️ Images à déposer à la racine du dépôt
+
+Tous les fichiers ci-dessous vont **directement à la racine**, à côté de `index.html` — aucun sous-dossier.
+
+**Photo de profil** (section Profil, grand format) :
+* `DONKO.png`
+
+**Logo du bouton Portfolio (Empire Code)** — déjà fourni et intégré :
+* `empirecode.jpg`
+
+**Logos des applications de l'écosystème** :
+* `logo-smartlogistics.png`, `logo-clipsafe.png`, `logo-bruckedeoffline.png` (déjà en place)
+* `donko-inventory.jpg`, `donko-app.jpg`, `web-to-apk.jpg`, `lucky-popcorn.jpg`, `agbelealafia.jpg`, `geminiaiprompts.jpg`, `ticketswifizone.jpg`, `donkoexchange.jpg`
+
+Si un fichier est manquant, un badge de secours (initiales) s'affiche automatiquement à la place — le site ne casse jamais visuellement.
+
+---
+
+## 📸 Galerie dynamique par continent (zéro code)
+
+La galerie classe automatiquement chaque photo/vidéo dans la bonne section (**Afrique** ou **Europe**) selon son nom de fichier — toujours à plat, à la racine du dépôt, sans sous-dossier :
+
+* Afrique : `galerie1A.jpg`, `galerie2A.jpg`, `galerie3A.jpg`, … (Bénin, Togo, etc.)
+* Europe : `galerie1E.jpg`, `galerie2E.jpg`, `galerie3E.jpg`, … (Allemagne, Autriche, etc.)
+
+Formats acceptés : `.png .jpg .jpeg .gif .webp .svg .avif` (images) et `.mp4 .webm .mov .ogg` (vidéos). Le numéro peut monter à l'infini (`galerie47E.jpg`, etc.). Il suffit d'uploader le fichier sur GitHub avec le bon nom — il apparaît automatiquement dans la bonne section pour tous les visiteurs, sans toucher au code.
+
+---
+
+## 📄 CV en ligne
+
+Le site intègre désormais une section **CV** complète et bilingue (FR/DE) : profil professionnel, compétences clés, expérience, formation, contrats blockchain vérifiés sur BscScan et langues. Un bouton **"🖨️ Imprimer / PDF"** permet d'exporter uniquement cette section (le reste de la page est masqué à l'impression).
 
 ---
 

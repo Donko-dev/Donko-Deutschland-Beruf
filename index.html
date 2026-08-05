@@ -46,7 +46,9 @@
     --steel:#2C5F86;
     --danger:#C82F35;
     --ok:#1F8F5F;
+    --header-bg: rgba(242,244,246,0.9);
   }
+  :root{ --header-bg: rgba(11,15,20,0.85); }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
@@ -160,10 +162,11 @@
     *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
   }
   @media print{
+    @page{ margin: 14mm; }
     body.printing-cv > *:not(#cv-section){ display:none !important; }
-    body.printing-cv #cv-section{ padding:0; max-width:100%; }
+    body.printing-cv #cv-section{ display:block !important; padding:0 !important; max-width:100% !important; margin:0 !important; }
     body.printing-cv .no-print{ display:none !important; }
-    body.printing-cv{ background:#fff !important; color:#111 !important; }
+    body.printing-cv{ background:#fff !important; color:#111 !important; padding:0 !important; }
   }
 </style>
 </head>
@@ -177,12 +180,12 @@
 </div>
 
 <!-- ============ HEADER ============ -->
-<header class="sticky top-[6px] z-40 backdrop-blur bg-[#0B0F14]/85 border-b border-[var(--line)]">
+<header class="sticky top-[6px] z-40 backdrop-blur border-b border-[var(--line)]" style="background-color:var(--header-bg);">
   <div class="max-w-6xl mx-auto px-4 sm:px-5 py-4 flex flex-wrap items-center justify-between gap-y-3 gap-x-4">
     <div class="flex items-center gap-3 min-w-0">
       <div class="w-9 h-9 shrink-0 rounded-md border border-[var(--amber-dim)] flex items-center justify-center font-mono text-[var(--amber)] text-sm font-bold">DD</div>
       <div class="min-w-0">
-        <p class="font-display font-bold text-sm sm:text-base leading-tight tracking-tight truncate">DONKO DEUTSCHLAND BERUF</p>
+        <p id="site-name" class="font-display font-bold text-sm sm:text-base leading-tight tracking-tight truncate">DONKO DEUTSCHLAND BERUF</p>
         <p class="font-mono text-[10px] muted mt-0.5 truncate" data-i18n="header.tagline">COTONOU → DEUTSCHLAND · WMS SHOWCASE</p>
       </div>
     </div>
@@ -276,7 +279,7 @@
 </section>
 
 <!-- ============ MODULE A : STOCKS & MARGES ============ -->
-<section class="max-w-6xl mx-auto px-5 py-10">
+<section id="section-moduleA" class="max-w-6xl mx-auto px-5 py-10">
   <div class="flex items-baseline justify-between flex-wrap gap-2 mb-1">
     <p class="font-mono text-xs amber-text tracking-widest uppercase" data-i18n="modA.eyebrow">Module A</p>
   </div>
@@ -310,7 +313,7 @@
 </section>
 
 <!-- ============ MODULE B : PLACEMENT ENTREPÔT ============ -->
-<section class="max-w-6xl mx-auto px-5 py-10">
+<section id="section-moduleB" class="max-w-6xl mx-auto px-5 py-10">
   <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="modB.eyebrow">Module B</p>
   <h2 class="font-display font-bold text-2xl mb-2" data-i18n="modB.title">Algorithme de placement virtuel</h2>
   <p class="text-sm muted max-w-2xl mb-6" data-i18n="modB.subtitle">Logique « Zero Communication » : le colis scanné est rangé automatiquement, sans concertation orale entre coéquipiers.</p>
@@ -345,7 +348,7 @@
 </section>
 
 <!-- ============ MODULE C : ARCHITECTURE CLOUD ============ -->
-<section class="max-w-6xl mx-auto px-5 py-10">
+<section id="section-moduleC" class="max-w-6xl mx-auto px-5 py-10">
   <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="modC.eyebrow">Module C</p>
   <h2 class="font-display font-bold text-2xl mb-2" data-i18n="modC.title">Architecture cloud simulée</h2>
   <p class="text-sm muted max-w-2xl mb-6" data-i18n="modC.subtitle">Infrastructure serverless AWS : archivage documentaire, base de données d'inventaire, calcul planifié des marges.</p>
@@ -389,7 +392,7 @@
 </section>
 
 <!-- ============ PORTFOLIO EMPIRE CODE ============ -->
-<section class="max-w-6xl mx-auto px-5 py-10">
+<section id="section-portfolio" class="max-w-6xl mx-auto px-5 py-10">
   <div class="card rounded-xl p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-8">
     <img src="empirecode.jpg" alt="Empire Code" class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl shrink-0 object-cover" loading="lazy" onerror="this.replaceWith(logoFallback('EC','#141B2E','#E8A93A'))">
     <div class="flex-grow text-center sm:text-left">
@@ -397,167 +400,17 @@
       <h2 class="font-display font-bold text-2xl mb-2">Empire Code</h2>
       <p class="text-sm muted leading-relaxed max-w-xl" data-i18n="portfolio.desc">L'ensemble de mes réalisations, projets et démonstrations en ligne — logiciels métiers, ingénierie blockchain et automatisation IA — réunis en un seul endroit.</p>
     </div>
-    <a href="https://donko-dev.github.io/empirecode/" target="_blank" rel="noopener" class="btn-amber rounded-md px-6 py-3 text-sm font-bold text-center shrink-0 whitespace-nowrap" data-i18n="portfolio.cta">Voir le portfolio →</a>
+    <a id="portfolio-cta-btn" href="https://donko-dev.github.io/empirecode/" target="_blank" rel="noopener" class="btn-amber rounded-md px-6 py-3 text-sm font-bold text-center shrink-0 whitespace-nowrap" data-i18n="portfolio.cta">Voir le portfolio →</a>
   </div>
 </section>
 
 <!-- ============ AUTRES PROJETS ============ -->
-<section class="max-w-6xl mx-auto px-5 py-10">
+<section id="section-ecosystem" class="max-w-6xl mx-auto px-5 py-10">
   <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="projects.eyebrow">Écosystème DONKO</p>
   <h2 class="font-display font-bold text-2xl mb-2" data-i18n="projects.title">Mes autres applications</h2>
   <p class="text-sm muted max-w-2xl mb-6" data-i18n="projects.subtitle">Treize outils déjà en ligne, développés au Bénin — logiciels métiers, ingénierie blockchain et automatisation IA — qui illustrent ma capacité à livrer des produits réels et fonctionnels.</p>
 
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-    <!-- DONKO ADS -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <svg width="44" height="44" viewBox="0 0 100 100" class="shrink-0 rounded-xl">
-          <rect width="100" height="100" rx="24" fill="#141B2E"/>
-          <circle cx="70" cy="27" r="7" fill="#C1440E"/>
-          <text x="47" y="70" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="58" fill="#E8A93A">D</text>
-        </svg>
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.adsTag">Marketplace &amp; visibilité</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">DONKO ADS</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.adsDesc">Plateforme de petites annonces pour publier boutiques et produits en un clic, avec une visibilité mondiale.</p>
-      <a href="https://donko-dev.github.io/DONKO-ADS/" target="_blank" rel="noopener" class="btn-amber rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.adsCta">Voir la démo live →</a>
-    </div>
-
-    <!-- KALCUL -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <svg width="44" height="44" viewBox="0 0 100 100" class="shrink-0 rounded-xl">
-          <rect width="100" height="100" rx="24" fill="#1B3A5C"/>
-          <text x="50" y="70" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="54" fill="#C9971F">K</text>
-        </svg>
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.kalculTag">Caisse &amp; gestion hors ligne</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">KALCUL</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.kalculDesc">Application de caisse, stock, factures et devis, 100% hors ligne, avec calcul automatique des marges et données conservées sur l'appareil.</p>
-      <a href="https://donko-dev.github.io/Kalcul-pro/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.kalculCta">Tester gratuitement →</a>
-    </div>
-
-    <!-- SMART LOGISTICS -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <img src="logo-smartlogistics.png" alt="Smart Logistics" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('S','#16241C','#E8A93A'))">
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.slTag">Logistique numérique offline</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">Smart Logistics</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.slDesc">Gestion numérique de la logistique — suivi des flux, des stocks et des expéditions, 100% utilisable hors connexion.</p>
-      <a href="https://donko-dev.github.io/smartlogistics/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.slCta">Voir la démo live →</a>
-    </div>
-
-    <!-- CLIPSAFE -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <img src="logo-clipsafe.png" alt="ClipSafe" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('C','#241B14','#C9971F'))">
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.csTag">Gestion documentaire offline</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">ClipSafe</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.csDesc">Suivi intelligent des prêts de documents papier — qui a emprunté quoi, quand et pour combien de temps — 100% hors connexion.</p>
-      <a href="https://donko-dev.github.io/clipsafe/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.csCta">Voir la démo live →</a>
-    </div>
-
-    <!-- BRÜCKEDE OFFLINE -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <img src="logo-bruckedeoffline.png" alt="BrückeDE Offline" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('B','#141B2E','#E8A93A'))">
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.bdTag">Apprentissage de l'allemand offline</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">BrückeDE Offline</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.bdDesc">Cours et exercices de langue allemande, consultables sans connexion internet — pour progresser vers l'ÖSD partout, même sans réseau.</p>
-      <a href="https://donko-dev.github.io/bruckedeoffline/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.bdCta">Voir la démo live →</a>
-    </div>
-
-    <!-- DONKO INVENTORY -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <img src="donko-inventory.jpg" alt="Donko Inventory" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('DI','#16241C','#E8A93A'))">
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.diTag">Inventaire offline</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">Donko Inventory</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.diDesc">Application de gestion des stocks et d'inventaire, pensée pour un usage hors connexion et une saisie rapide des entrées/sorties.</p>
-      <a href="https://donko-dev.github.io/DONKO-INVENTORY" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.diCta">Voir la démo live →</a>
-    </div>
-
-    <!-- DONKO APP -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <img src="donko-app.jpg" alt="Donko App" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('DA','#241B14','#C9971F'))">
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.daTag">Application DONKO</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">Donko App</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.daDesc">Application compagnon de l'écosystème DONKO, réunissant plusieurs outils métiers dans une interface unique.</p>
-      <a href="https://donko-dev.github.io/donko-app" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.daCta">Voir la démo live →</a>
-    </div>
-
-    <!-- WEB-TO-APK -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <img src="web-to-apk.jpg" alt="Web-To-Apk" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('WA','#141B2E','#E8A93A'))">
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.waTag">Outil de conversion</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">Web-To-Apk</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.waDesc">Outil de conversion d'applications web en fichiers APK Android, pour distribuer facilement mes outils sur mobile.</p>
-      <a href="https://donko-dev.github.io/Web-To-Apk" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.waCta">Voir la démo live →</a>
-    </div>
-
-    <!-- LUCKY POPCORN -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <img src="lucky-popcorn.jpg" alt="Lucky Popcorn" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('LP','#241B14','#C9971F'))">
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.lpTag">Application ludique</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">Lucky Popcorn</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.lpDesc">Application ludique développée pour explorer l'interaction utilisateur et la gamification côté front-end.</p>
-      <a href="https://donko-dev.github.io/LUCKY-POPCORN" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.lpCta">Voir la démo live →</a>
-    </div>
-
-    <!-- AGBÈ L'ALAFIA -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <img src="agbelealafia.jpg" alt="Cabinet Agbélé-Alafia" width="44" height="44" class="shrink-0 rounded-xl bg-white object-contain p-1" loading="lazy" onerror="this.replaceWith(logoFallback('AA','#16241C','#3FB27F'))">
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.aaTag">Site vitrine santé naturelle</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">Cabinet Agbélé-Alafia</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.aaDesc">Site vitrine développé pour un cabinet de Cotonou spécialisé dans les compléments nutritionnels naturels, axés sur la fertilité et le bien-être.</p>
-      <a href="https://agbelealafia.github.io/Agb-l-Alafia/" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.aaCta">Voir la démo live →</a>
-    </div>
-
-    <!-- GEMINI AI PROMPTS -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <img src="geminiaiprompts.jpg" alt="Gemini AI Prompts" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('AI','#141B2E','#E8A93A'))">
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.gpTag">Automatisation IA</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">Gemini AI Prompts</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.gpDesc">Bibliothèque de prompts et de workflows pilotés par l'IA (Gemini), utilisés pour automatiser mes développements.</p>
-      <a href="https://geminiaiprompts.webcrafthd.com" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.gpCta">Voir la démo live →</a>
-    </div>
-
-    <!-- TICKETS WIFI ZONE -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <img src="ticketswifizone.jpg" alt="Tickets WiFi Zone" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('TW','#241B14','#C9971F'))">
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] steel-text w-fit" data-i18n="projects.twTag">Réseau &amp; accès</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">Tickets WiFi Zone</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.twDesc">Portail captif Wi-Fi avec billetterie algorithmique pour le contrôle d'accès réseau, développé pour WebCraft HD.</p>
-      <a href="https://ticketswifizone.webcrafthd.com" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.twCta">Voir la démo live →</a>
-    </div>
-
-    <!-- DONKOEXCHANGE -->
-    <div class="card rounded-xl p-6 flex flex-col">
-      <div class="flex items-center gap-3 mb-4">
-        <img src="donkoexchange.jpg" alt="DonkoExchange" width="44" height="44" class="shrink-0 rounded-xl" loading="lazy" onerror="this.replaceWith(logoFallback('DX','#16241C','#3E7CB1'))">
-        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] amber-text w-fit" data-i18n="projects.dxTag">Fintech &amp; Web3</span>
-      </div>
-      <h3 class="font-display font-bold text-xl mb-2">DonkoExchange</h3>
-      <p class="text-sm muted leading-relaxed mb-6 flex-grow" data-i18n="projects.dxDesc">Passerelle d'échange crypto opérationnelle, automatisant les échanges d'actifs numériques pour les utilisateurs.</p>
-      <a href="https://donkoexchange.webcrafthd.com" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm text-center" data-i18n="projects.dxCta">Voir la démo live →</a>
-    </div>
-  </div>
+  <div id="ecosystem-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
 </section>
 
 <!-- ============ CV ============ -->
@@ -576,9 +429,9 @@
     <p class="text-sm amber-text mt-1" data-i18n="cv.headline">Ingénieur Smart Contract | Architecte Web3 &amp; Blockchain | Expert Automatisation IA</p>
     <p class="font-mono text-[11px] muted mt-3 leading-relaxed">
       Cotonou, Bénin · +229 01 96 80 91 06 · hassanedonko9@gmail.com · empiredonko@gmail.com<br>
-      Portfolio : <a href="https://donko-dev.github.io/empirecode/" target="_blank" rel="noopener" class="steel-text hover:underline">donko-dev.github.io/empirecode</a> ·
-      GitHub : <a href="https://github.com/Donko-dev" target="_blank" rel="noopener" class="steel-text hover:underline">github.com/Donko-dev</a> ·
-      LinkedIn : <a href="https://linkedin.com/in/hassane-donko-1438b8358" target="_blank" rel="noopener" class="steel-text hover:underline">Hassane Donko</a>
+      Portfolio : <a id="cv-portfolio-link" href="https://donko-dev.github.io/empirecode/" target="_blank" rel="noopener" class="steel-text hover:underline">donko-dev.github.io/empirecode</a> ·
+      GitHub : <a id="cv-github-link" href="https://github.com/Donko-dev" target="_blank" rel="noopener" class="steel-text hover:underline">github.com/Donko-dev</a> ·
+      LinkedIn : <a id="cv-linkedin-link" href="https://linkedin.com/in/hassane-donko-1438b8358" target="_blank" rel="noopener" class="steel-text hover:underline">Hassane Donko</a>
     </p>
   </div>
 
@@ -666,7 +519,7 @@
 </section>
 
 <!-- ============ GALERIE DYNAMIQUE ============ -->
-<section class="max-w-6xl mx-auto px-5 py-10">
+<section id="section-gallery" class="max-w-6xl mx-auto px-5 py-10">
   <p class="font-mono text-xs amber-text tracking-widest uppercase mb-1" data-i18n="gallery.eyebrow">Preuves &amp; coulisses</p>
   <h2 class="font-display font-bold text-2xl mb-2" data-i18n="gallery.title">Galerie</h2>
   <p class="text-sm muted max-w-2xl mb-6" data-i18n="gallery.subtitle">Photos et vidéos classées automatiquement par continent. Déposez un fichier à la racine du dépôt GitHub, nommé <code class="font-mono text-[12px] px-1.5 py-0.5 rounded card-2">galerie1A.jpg</code> (Afrique) ou <code class="font-mono text-[12px] px-1.5 py-0.5 rounded card-2">galerie1E.jpg</code> (Europe), et il apparaît ici pour tout le monde, sans toucher au code.</p>
@@ -733,7 +586,7 @@
       <div>
         <p class="font-mono text-[11px] uppercase muted mb-3" data-i18n="footer.whatsapp">WhatsApp</p>
         <div class="flex flex-col gap-2">
-          <a href="https://wa.me/22901968091" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm flex items-center gap-3">
+          <a id="wa-business-link" href="https://wa.me/22901968091" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm flex items-center gap-3">
             <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
               <rect x="1" y="1" width="30" height="30" rx="8" fill="#075E54"/>
               <path d="M16 6.5c-5.25 0-9.5 4.25-9.5 9.5 0 1.7.45 3.3 1.24 4.68L6.5 25.5l5-1.2A9.44 9.44 0 0 0 16 25.5c5.25 0 9.5-4.25 9.5-9.5S21.25 6.5 16 6.5Z" fill="#FFFFFF" fill-opacity="0.12"/>
@@ -742,17 +595,17 @@
               <path d="M20.2 10.4h4.6M21.2 9.1v.9a1 1 0 0 0 1 1h.6a1 1 0 0 0 1-1v-.9" stroke="#F2B705" stroke-width="0.8" stroke-linecap="round"/>
             </svg>
             <span class="flex flex-col leading-tight">
-              <span>+229 01 96 80 91 06</span>
+              <span id="wa-business-number">+229 01 96 80 91 06</span>
               <span class="text-[10px] muted font-mono" data-i18n="footer.waBusiness">WhatsApp Business</span>
             </span>
           </a>
-          <a href="https://wa.me/22901491057" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm flex items-center gap-3">
+          <a id="wa-messenger-link" href="https://wa.me/22901491057" target="_blank" rel="noopener" class="btn-outline rounded-md px-4 py-2.5 text-sm flex items-center gap-3">
             <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
               <rect x="1" y="1" width="30" height="30" rx="16" fill="#25D366"/>
               <path d="M16 8.2c-4.3 0-7.8 3.5-7.8 7.8 0 1.5.42 2.9 1.15 4.1l-1.1 3.9 4.02-1.05A7.75 7.75 0 0 0 16 23.8c4.3 0 7.8-3.5 7.8-7.8s-3.5-7.8-7.8-7.8Zm4.55 11.02c-.19.55-1.1 1.05-1.52 1.11-.39.06-.87.08-1.4-.09-.32-.1-.74-.24-1.27-.47-2.24-.97-3.7-3.22-3.81-3.37-.11-.15-.91-1.21-.91-2.32 0-1.1.58-1.65.78-1.87.2-.22.44-.28.59-.28h.42c.13 0 .32-.02.49.38.19.44.63 1.55.69 1.66.06.11.1.24.02.4-.07.15-.11.24-.22.37-.11.13-.24.29-.34.39-.11.11-.23.23-.1.45.13.22.58.96 1.25 1.55.86.77 1.58 1.01 1.8 1.13.22.11.35.09.48-.05.14-.15.55-.64.7-.86.15-.22.29-.19.5-.11.2.07 1.29.61 1.51.72.22.11.37.16.42.25.06.09.06.53-.13 1.08Z" fill="#FFFFFF"/>
             </svg>
             <span class="flex flex-col leading-tight">
-              <span>+229 01 49 10 57 85</span>
+              <span id="wa-messenger-number">+229 01 49 10 57 85</span>
               <span class="text-[10px] muted font-mono" data-i18n="footer.waMessenger">WhatsApp Messenger</span>
             </span>
           </a>
@@ -770,9 +623,9 @@
             <svg id="email-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="muted transition-transform"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div id="email-menu" class="hidden absolute left-0 mt-2 w-full sm:w-72 card rounded-md overflow-hidden shadow-2xl z-30">
-            <a href="mailto:empiredonko@gmail.com" class="block px-4 py-2.5 text-sm hover:bg-[var(--panel-2)]">empiredonko@gmail.com</a>
-            <a href="mailto:hassanedonko9@gmail.com" class="block px-4 py-2.5 text-sm hover:bg-[var(--panel-2)] border-t border-[var(--line)]">hassanedonko9@gmail.com</a>
-            <a href="mailto:hassanedonko10@gmail.com" class="block px-4 py-2.5 text-sm hover:bg-[var(--panel-2)] border-t border-[var(--line)]">hassanedonko10@gmail.com</a>
+            <a id="email-link-0" href="mailto:empiredonko@gmail.com" class="block px-4 py-2.5 text-sm hover:bg-[var(--panel-2)]">empiredonko@gmail.com</a>
+            <a id="email-link-1" href="mailto:hassanedonko9@gmail.com" class="block px-4 py-2.5 text-sm hover:bg-[var(--panel-2)] border-t border-[var(--line)]">hassanedonko9@gmail.com</a>
+            <a id="email-link-2" href="mailto:hassanedonko10@gmail.com" class="block px-4 py-2.5 text-sm hover:bg-[var(--panel-2)] border-t border-[var(--line)]">hassanedonko10@gmail.com</a>
           </div>
         </div>
       </div>
@@ -791,6 +644,7 @@
   <span style="background:#FFCE00"></span>
 </div>
 
+<script src="data.js"></script>
 <script>
 /* ================= LOGO FALLBACK ================= */
 // Si un fichier logos/*.png n'a pas encore été déposé sur GitHub,
@@ -816,10 +670,31 @@ function photoFallback(){
 /* ================= IMPRESSION CIBLÉE DU CV ================= */
 function printCV(){
   document.body.classList.add('printing-cv');
-  window.print();
+  // Sur mobile (Android/Chrome notamment), window.print() peut être déclenché
+  // avant que le navigateur ait repeint la page avec la nouvelle classe,
+  // ce qui imprime l'ancien état (site complet). On force deux cycles de
+  // rendu avant d'ouvrir la boîte d'impression pour garantir le repaint.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.print();
+    });
+  });
 }
-window.addEventListener('afterprint', () => {
+function stopPrintingCV(){
   document.body.classList.remove('printing-cv');
+}
+window.addEventListener('afterprint', stopPrintingCV);
+// Filet de sécurité : certains navigateurs mobiles ne déclenchent pas
+// toujours 'afterprint' de façon fiable après un retour à l'onglet.
+if(window.matchMedia){
+  const printMql = window.matchMedia('print');
+  const handlePrintChange = (mql) => { if(!mql.matches) stopPrintingCV(); };
+  if(printMql.addEventListener) printMql.addEventListener('change', handlePrintChange);
+}
+window.addEventListener('focus', () => {
+  if(document.body.classList.contains('printing-cv')){
+    setTimeout(stopPrintingCV, 400);
+  }
 });
 
 /* ================= GALERIE DYNAMIQUE (GitHub API) ================= */
@@ -965,6 +840,7 @@ function toggleTheme(){
   document.documentElement.classList.toggle('light', currentTheme === 'light');
   document.getElementById('icon-moon').classList.toggle('hidden', currentTheme === 'light');
   document.getElementById('icon-sun').classList.toggle('hidden', currentTheme === 'dark');
+  if(window.SITE_DATA) applyThemeColors();
 }
 
 /* ================= EMAIL MENU ================= */
@@ -1310,6 +1186,7 @@ function setLang(lang){
   });
   renderProducts();
   buildGrid();
+  if(window.SITE_DATA) renderEcosystemApps();
 }
 
 /* ================= MODULE A : STOCKS ================= */
@@ -1427,9 +1304,152 @@ function pulseCloud(id){
   setTimeout(()=>line.classList.remove('active'), 1400);
 }
 
+/* ================= APPLICATION DE data.js ================= */
+// Toutes les données structurées (identité, contacts, liens, couleurs,
+// sections actives, applications) viennent de data.js (window.SITE_DATA).
+// Ce fichier peut être régénéré via admin.html, un outil local qui ne
+// touche jamais directement au code du site.
+
+function applyThemeColors(){
+  if(!window.SITE_DATA || !SITE_DATA.colors) return;
+  const root = document.documentElement;
+  const c = SITE_DATA.colors;
+  if(currentTheme === 'light'){
+    if(c.amberLight) root.style.setProperty('--amber', c.amberLight);
+    if(c.steelLight) root.style.setProperty('--steel', c.steelLight);
+  } else {
+    if(c.amber) root.style.setProperty('--amber', c.amber);
+    if(c.steel) root.style.setProperty('--steel', c.steel);
+  }
+}
+
+function applySectionToggles(){
+  if(!window.SITE_DATA || !SITE_DATA.sections) return;
+  const map = {
+    moduleA: 'section-moduleA',
+    moduleB: 'section-moduleB',
+    moduleC: 'section-moduleC',
+    portfolio: 'section-portfolio',
+    ecosystem: 'section-ecosystem',
+    cv: 'cv-section',
+    gallery: 'section-gallery'
+  };
+  Object.keys(map).forEach(key=>{
+    const el = document.getElementById(map[key]);
+    if(!el) return;
+    const visible = SITE_DATA.sections[key] !== false;
+    el.style.display = visible ? '' : 'none';
+  });
+}
+
+function applyContactsAndLinks(){
+  if(!window.SITE_DATA) return;
+  const d = SITE_DATA;
+
+  if(d.identity && d.identity.siteName){
+    const nameEl = document.getElementById('site-name');
+    if(nameEl) nameEl.textContent = d.identity.siteName;
+  }
+
+  if(d.contacts){
+    const wb = d.contacts.whatsappBusiness;
+    if(wb){
+      const link = document.getElementById('wa-business-link');
+      const num = document.getElementById('wa-business-number');
+      if(link) link.href = wb.link;
+      if(num) num.textContent = wb.number;
+    }
+    const wm = d.contacts.whatsappMessenger;
+    if(wm){
+      const link = document.getElementById('wa-messenger-link');
+      const num = document.getElementById('wa-messenger-number');
+      if(link) link.href = wm.link;
+      if(num) num.textContent = wm.number;
+    }
+    if(Array.isArray(d.contacts.emails)){
+      d.contacts.emails.forEach((email, i)=>{
+        const el = document.getElementById('email-link-' + i);
+        if(el){
+          el.href = 'mailto:' + email;
+          el.textContent = email;
+        }
+      });
+    }
+  }
+
+  if(d.socialLinks){
+    const portfolioBtn = document.getElementById('portfolio-cta-btn');
+    if(portfolioBtn && d.socialLinks.portfolio) portfolioBtn.href = d.socialLinks.portfolio;
+    const cvPortfolio = document.getElementById('cv-portfolio-link');
+    if(cvPortfolio && d.socialLinks.portfolio){
+      cvPortfolio.href = d.socialLinks.portfolio;
+      cvPortfolio.textContent = d.socialLinks.portfolio.replace(/^https?:\/\//, '').replace(/\/$/, '');
+    }
+    const cvGithub = document.getElementById('cv-github-link');
+    if(cvGithub && d.socialLinks.github){
+      cvGithub.href = d.socialLinks.github;
+      cvGithub.textContent = d.socialLinks.github.replace(/^https?:\/\//, '');
+    }
+    const cvLinkedin = document.getElementById('cv-linkedin-link');
+    if(cvLinkedin && d.socialLinks.linkedin) cvLinkedin.href = d.socialLinks.linkedin;
+  }
+}
+
+function renderEcosystemApps(){
+  if(!window.SITE_DATA || !Array.isArray(SITE_DATA.apps)) return;
+  const grid = document.getElementById('ecosystem-grid');
+  if(!grid) return;
+  grid.innerHTML = '';
+
+  SITE_DATA.apps.forEach(app=>{
+    const card = document.createElement('div');
+    card.className = 'card rounded-xl p-6 flex flex-col';
+
+    const imgClasses = app.logoWhiteBg
+      ? 'shrink-0 rounded-xl bg-white object-contain p-1'
+      : 'shrink-0 rounded-xl';
+
+    const tagClass = app.ctaStyle === 'amber' ? 'steel-text' : 'amber-text';
+    const ctaClass = app.ctaStyle === 'amber'
+      ? 'btn-amber rounded-md px-4 py-2.5 text-sm text-center'
+      : 'btn-outline rounded-md px-4 py-2.5 text-sm text-center';
+
+    const lang = currentLang === 'de' ? 'de' : 'fr';
+
+    card.innerHTML = `
+      <div class="flex items-center gap-3 mb-4">
+        <img src="${app.logo}" alt="${app.name}" width="44" height="44" class="${imgClasses}" loading="lazy">
+        <span class="font-mono text-[11px] px-2.5 py-1 rounded border border-[var(--line)] ${tagClass} w-fit">${app.tag[lang]}</span>
+      </div>
+      <h3 class="font-display font-bold text-xl mb-2">${app.name}</h3>
+      <p class="text-sm muted leading-relaxed mb-6 flex-grow">${app.desc[lang]}</p>
+      <a href="${app.url}" target="_blank" rel="noopener" class="${ctaClass}">${app.cta[lang]}</a>
+    `;
+
+    const img = card.querySelector('img');
+    img.addEventListener('error', () => {
+      img.replaceWith(logoFallback(app.fallbackLetter, app.fallbackBg, app.fallbackFg));
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+function applySiteData(){
+  if(!window.SITE_DATA){
+    console.warn('data.js introuvable : le site utilise son contenu par défaut.');
+    return;
+  }
+  applyContactsAndLinks();
+  applyThemeColors();
+  applySectionToggles();
+  renderEcosystemApps();
+}
+
 /* ================= INIT ================= */
 buildGrid();
 renderProducts();
+applySiteData();
 </script>
 </body>
 </html>
