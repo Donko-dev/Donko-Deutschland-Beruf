@@ -124,20 +124,6 @@ window.SITE_DATA = {
       cta: { fr: "Voir la démo live →", de: "Live-Demo ansehen →" }
     },
     {
-      id: "donko-inventory",
-      name: "Donko Inventory",
-      url: "https://donko-dev.github.io/DONKO-INVENTORY",
-      logo: "donko-inventory.jpg",
-      fallbackLetter: "DI", fallbackBg: "#16241C", fallbackFg: "#E8A93A",
-      ctaStyle: "outline",
-      tag: { fr: "Inventaire offline", de: "Inventar offline" },
-      desc: {
-        fr: "Application de gestion des stocks et d'inventaire, pensée pour un usage hors connexion et une saisie rapide des entrées/sorties.",
-        de: "Anwendung zur Bestands- und Inventarverwaltung, für den Offline-Einsatz und schnelle Erfassung von Zu- und Abgängen konzipiert."
-      },
-      cta: { fr: "Voir la démo live →", de: "Live-Demo ansehen →" }
-    },
-    {
       id: "donko-app",
       name: "Donko App",
       url: "https://donko-dev.github.io/donko-app",
@@ -233,6 +219,49 @@ window.SITE_DATA = {
       desc: {
         fr: "Passerelle d'échange crypto opérationnelle, automatisant les échanges d'actifs numériques pour les utilisateurs.",
         de: "Operative Krypto-Wechselplattform, die den Austausch digitaler Vermögenswerte für Nutzer automatisiert."
+      },
+      cta: { fr: "Voir la démo live →", de: "Live-Demo ansehen →" }
+    },
+    {
+      id: "ramacouture",
+      name: "Rama Bazin & Couture",
+      url: "https://donko-dev.github.io/ramacouture/",
+      logo: "ramacouture.jpg",
+      fallbackLetter: "RC", fallbackBg: "#241B14", fallbackFg: "#C9971F",
+      ctaStyle: "outline",
+      tag: { fr: "Mode & couture", de: "Mode & Schneiderei" },
+      desc: {
+        fr: "Atelier de vente de bazin et de couture générale, avec présentation des créations et prise de contact en ligne.",
+        de: "Atelier für Bazin-Stoffe und allgemeine Schneiderei, mit Präsentation der Kreationen und Online-Kontaktaufnahme."
+      },
+      cta: { fr: "Voir la démo live →", de: "Live-Demo ansehen →" }
+    },
+    {
+      id: "possiblevideographie",
+      name: "Possible Vidéographie",
+      url: "https://donko-dev.github.io/possiblevideographie/",
+      logo: "possiblevideographie.jpg",
+      logoWhiteBg: true,
+      fallbackLetter: "PV", fallbackBg: "#141B2E", fallbackFg: "#3E7CB1",
+      ctaStyle: "outline",
+      tag: { fr: "Vidéaste & montage", de: "Videograf & Schnitt" },
+      desc: {
+        fr: "Site vitrine d'un vidéaste (cadreur et monteur) présentant ses réalisations et ses services de production vidéo.",
+        de: "Schaufenster-Website eines Videografen (Kameramann und Cutter) mit seinen Arbeiten und Videoproduktionsdiensten."
+      },
+      cta: { fr: "Voir la démo live →", de: "Live-Demo ansehen →" }
+    },
+    {
+      id: "zakari-gruppe",
+      name: "Zakari Gruppe",
+      url: "https://donko-dev.github.io/ZAKARI-GRUPPE/",
+      logo: "zakari-gruppe.jpg",
+      fallbackLetter: "ZG", fallbackBg: "#0B0F14", fallbackFg: "#C9971F",
+      ctaStyle: "outline",
+      tag: { fr: "Véhicules & nettoyage", de: "Fahrzeuge & Reinigung" },
+      desc: {
+        fr: "Entreprise proposant la vente de véhicules neufs et d'occasion ainsi que des services de nettoyage de biens immobiliers.",
+        de: "Unternehmen für den Verkauf von Neu- und Gebrauchtfahrzeugen sowie Reinigungsdienstleistungen für Immobilien."
       },
       cta: { fr: "Voir la démo live →", de: "Live-Demo ansehen →" }
     }
