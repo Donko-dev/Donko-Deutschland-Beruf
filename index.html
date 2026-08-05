@@ -524,45 +524,45 @@
     Galerie momentanément indisponible (hors ligne ou limite d'API GitHub atteinte).
   </div>
 
-  <div id="gallery-content" class="hidden space-y-10">
+  <div id="gallery-content" class="hidden space-y-12">
     <!-- AFRIQUE -->
     <div>
-      <div class="flex items-center gap-4 mb-4">
-        <svg width="52" height="52" viewBox="0 0 100 100" class="shrink-0">
-          <circle cx="50" cy="50" r="46" fill="none" stroke="var(--line)" stroke-width="1.5"/>
-          <circle cx="50" cy="50" r="46" fill="none" stroke="#008751" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
-          <circle cx="44" cy="34" r="3.5" fill="#FCD116"/>
-          <circle cx="46" cy="52" r="4.5" fill="#008751"/>
-          <circle cx="58" cy="48" r="3" fill="#E8112D"/>
-          <circle cx="52" cy="66" r="3" fill="#008751"/>
-          <path d="M44 34 L46 52 L58 48 M46 52 L52 66" stroke="var(--muted)" stroke-width="1" opacity="0.5"/>
-        </svg>
-        <div>
-          <p class="font-display font-bold text-lg" data-i18n="gallery.africaTitle">Afrique</p>
-          <p class="font-mono text-[11px] muted" data-i18n="gallery.africaSub">Bénin, Togo… — fichiers galerie<em>N</em>A</p>
+      <div class="rounded-xl overflow-hidden border border-[var(--line)] shadow-lg mb-5">
+        <div class="flex h-[5px] w-full">
+          <span class="flex-1" style="background:#008751"></span>
+          <span class="flex-1" style="background:#FCD116"></span>
+          <span class="flex-1" style="background:#E8112D"></span>
+        </div>
+        <div class="relative bg-white flex items-center justify-center h-64 sm:h-80">
+          <img src="map-africa.jpg" alt="Localisation du Bénin en Afrique" class="max-h-full max-w-full object-contain p-4" loading="lazy">
+          <div class="absolute bottom-3 left-3 flex items-center gap-2 bg-[#0B0F14]/90 backdrop-blur px-3.5 py-2 rounded-lg border border-[var(--amber-dim)]">
+            <span class="text-lg leading-none">🇧🇯</span>
+            <span class="font-display font-bold text-sm text-white" data-i18n="gallery.africaTitle">Afrique</span>
+          </div>
         </div>
       </div>
+      <p class="font-mono text-[11px] muted mb-4" data-i18n="gallery.africaSub">Bénin, Togo… — fichiers galerie<em>N</em>A</p>
       <div id="gallery-grid-africa" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"></div>
       <p id="gallery-empty-africa" class="hidden font-mono text-xs muted mt-3" data-i18n="gallery.emptyAfrica">Aucune photo pour l'instant.</p>
     </div>
 
     <!-- EUROPE -->
     <div>
-      <div class="flex items-center gap-4 mb-4">
-        <svg width="52" height="52" viewBox="0 0 100 100" class="shrink-0">
-          <circle cx="50" cy="50" r="46" fill="none" stroke="var(--line)" stroke-width="1.5"/>
-          <circle cx="50" cy="50" r="46" fill="none" stroke="#000000" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.35"/>
-          <circle cx="42" cy="40" r="3.5" fill="#DD0000"/>
-          <circle cx="56" cy="38" r="4.5" fill="#FFCE00"/>
-          <circle cx="50" cy="58" r="3" fill="#3E7CB1"/>
-          <circle cx="62" cy="54" r="3" fill="#DD0000"/>
-          <path d="M42 40 L56 38 L50 58 M56 38 L62 54" stroke="var(--muted)" stroke-width="1" opacity="0.5"/>
-        </svg>
-        <div>
-          <p class="font-display font-bold text-lg" data-i18n="gallery.europeTitle">Europe</p>
-          <p class="font-mono text-[11px] muted" data-i18n="gallery.europeSub">Allemagne, Autriche… — fichiers galerie<em>N</em>E</p>
+      <div class="rounded-xl overflow-hidden border border-[var(--line)] shadow-lg mb-5">
+        <div class="flex h-[5px] w-full">
+          <span class="flex-1" style="background:#000000"></span>
+          <span class="flex-1" style="background:#DD0000"></span>
+          <span class="flex-1" style="background:#FFCE00"></span>
+        </div>
+        <div class="relative bg-white flex items-center justify-center h-64 sm:h-80">
+          <img src="map-europe.jpg" alt="Localisation de l'Allemagne en Europe" class="max-h-full max-w-full object-contain p-4" loading="lazy">
+          <div class="absolute bottom-3 left-3 flex items-center gap-2 bg-[#0B0F14]/90 backdrop-blur px-3.5 py-2 rounded-lg border border-[var(--amber-dim)]">
+            <span class="text-lg leading-none">🇩🇪</span>
+            <span class="font-display font-bold text-sm text-white" data-i18n="gallery.europeTitle">Europe</span>
+          </div>
         </div>
       </div>
+      <p class="font-mono text-[11px] muted mb-4" data-i18n="gallery.europeSub">Allemagne, Autriche… — fichiers galerie<em>N</em>E</p>
       <div id="gallery-grid-europe" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"></div>
       <p id="gallery-empty-europe" class="hidden font-mono text-xs muted mt-3" data-i18n="gallery.emptyEurope">Aucune photo pour l'instant.</p>
     </div>
