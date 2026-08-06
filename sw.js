@@ -3,7 +3,7 @@
    externes (Tailwind CDN, Google Fonts) au premier chargement, pour un
    fonctionnement 100% hors ligne dès la deuxième visite. */
 
-const CACHE_NAME = 'donko-deutschland-beruf-v13';
+const CACHE_NAME = 'donko-deutschland-beruf-v15';
 
 const PRECACHE_URLS = [
   './',
@@ -41,6 +41,23 @@ self.addEventListener('fetch', (event) => {
 
   // Ne traiter que les requêtes GET (ignorer POST, mailto:, etc.)
   if (req.method !== 'GET') return;
+
+  const url = new URL(req.url);
+
+  // data.js est le contenu modifiable du site : il doit toujours refléter
+  // la dernière version publiée sur GitHub dès qu'une connexion est
+  // disponible. Stratégie réseau-d'abord, avec repli sur le cache
+  // uniquement hors ligne.
+  if (url.pathname.endsWith('/data.js')) {
+    event.respondWith(
+      fetch(req, { cache: 'no-store' }).then((res) => {
+        const clone = res.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put('./data.js', clone));
+        return res;
+      }).catch(() => caches.match('./data.js'))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(req).then((cached) => {

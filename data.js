@@ -1,16 +1,23 @@
 /* ==========================================================================
    DONKO DEUTSCHLAND BERUF — data.js
-   Généré depuis admin.html le 05/08/2026 18:35:24
    --------------------------------------------------------------------------
+   Ce fichier contient le contenu modifiable du site : identité, contacts,
+   liens, couleurs, sections activées/désactivées, textes et applications.
+
    ⚠️ NE PAS SUPPRIMER LA LIGNE "window.SITE_DATA = " — index.html en dépend.
+
+   Pour modifier ce contenu SANS toucher au code : utilisez admin.html
+   (outil local, non déployé sur GitHub).
    ========================================================================== */
 
 window.SITE_DATA = {
-  "identity": {
+
+  identity: {
     "siteName": "DONKO DEUTSCHLAND BERUF",
     "photoName": "Hassane DONKO"
   },
-  "contacts": {
+
+  contacts: {
     "whatsappBusiness": {
       "number": "+229 01 96 80 91 06",
       "link": "https://wa.me/22901968091"
@@ -25,18 +32,21 @@ window.SITE_DATA = {
       "hassanedonko10@gmail.com"
     ]
   },
-  "socialLinks": {
+
+  socialLinks: {
     "portfolio": "https://donko-dev.github.io/empirecode/",
     "github": "https://github.com/Donko-dev",
     "linkedin": "https://linkedin.com/in/hassane-donko-1438b8358"
   },
-  "colors": {
+
+  colors: {
     "amber": "#f2b705",
     "amberLight": "#b8790a",
     "steel": "#3e7cb1",
     "steelLight": "#2c5f86"
   },
-  "sections": {
+
+  sections: {
     "moduleA": true,
     "moduleB": true,
     "moduleC": true,
@@ -45,7 +55,8 @@ window.SITE_DATA = {
     "cv": true,
     "gallery": true
   },
-  "apps": [
+
+  apps: [
     {
       "id": "donko-ads",
       "name": "DONKO ADS",
@@ -379,7 +390,7 @@ window.SITE_DATA = {
       }
     },
     {
-      "id": "nouvelle-app-1785950690059",
+      "id": "prompt-ai",
       "name": "Prompt AI",
       "url": "https://donko-dev.github.io/Prompt-AI/",
       "logo": "promptai.jpg",
@@ -400,5 +411,61 @@ window.SITE_DATA = {
         "de": "Live-Demo ansehen →"
       }
     }
-  ]
+  ],
+  // Textes éditables du site (header, hero, citation, footer, CV).
+  // Modifiez-les depuis admin.html — ils remplacent le texte par défaut
+  // dans les deux langues.
+  texts: {
+    header: {
+      tagline: { fr: "COTONOU → DEUTSCHLAND · WMS SHOWCASE", de: "COTONOU → DEUTSCHLAND · WMS SCHAUFENSTER" }
+    },
+    hero: {
+      title: {
+        fr: "Du savoir autodidacte à la logistique allemande.",
+        de: "Vom autodidaktischen Wissen zur deutschen Logistik."
+      },
+      subtitle: {
+        fr: "Application vitrine simulant un système de gestion d'entrepôt (WMS), conçue pour démontrer mes compétences en gestion, cloud AWS et développement — en vue d'un Ausbildung en Allemagne.",
+        de: "Schaufenster-Anwendung, die ein Lagerverwaltungssystem (WMS) simuliert und meine Kompetenzen in Betriebswirtschaft, AWS-Cloud und Softwareentwicklung im Hinblick auf eine Ausbildung in Deutschland demonstriert."
+      },
+      photoRole: {
+        fr: "CEO, EMPIRE DONKO | PROJETS EN GESTION LOGISTIQUE",
+        de: "CEO, EMPIRE DONKO | PROJEKTE IM LOGISTIKMANAGEMENT"
+      },
+      quote: {
+        fr: "« L'Intelligence Artificielle optimise mon code, la gestion pilote mes flux, et la logistique d'entreposage concrétise ma vision. Cette application est le pont entre mes compétences numériques développées au Bénin et mon ambition d'apprentissage en Allemagne. »",
+        de: "„Künstliche Intelligenz optimiert meinen Code, das Management steuert meine Abläufe, und die Lagerlogistik verwirklicht meine Vision. Diese Anwendung ist die Brücke zwischen meinen im Benin entwickelten digitalen Kompetenzen und meinem Ausbildungsziel in Deutschland.“"
+      }
+    },
+    footer: {
+      subtitle: {
+        fr: "Ouvert aux opportunités d'Ausbildung, partenariats et échanges techniques.",
+        de: "Offen für Ausbildungsplätze, Partnerschaften und fachlichen Austausch."
+      },
+      powered: { fr: "Powered by EMPIRE DONKO", de: "Powered by EMPIRE DONKO" }
+    },
+    cv: {
+      headline: {
+        fr: "Ingénieur Smart Contract | Architecte Web3 & Blockchain | Expert Automatisation IA",
+        de: "Smart-Contract-Ingenieur | Web3- & Blockchain-Architekt | Experte für KI-Automatisierung"
+      },
+      bridge: {
+        fr: "Mes compétences en ingénierie blockchain et en automatisation IA reposent sur la même rigueur méthodologique que j'applique à la logistique et à la gestion d'entrepôt — la discipline technique au service d'un objectif concret : mon Ausbildung en Allemagne.",
+        de: "Meine Kompetenzen in Blockchain-Engineering und KI-Automatisierung beruhen auf derselben methodischen Sorgfalt, die ich auch in der Logistik und Lagerverwaltung anwende — technische Disziplin im Dienst eines konkreten Ziels: meiner Ausbildung in Deutschland."
+      },
+      profileText: {
+        fr: "Ingénieur Blockchain et Architecte Web3 orienté résultats, avec une expérience concrète dans la conception, l'audit et le déploiement de smart contracts sécurisés sur des réseaux compatibles EVM. Fondateur de l'écosystème EMPIRE DONKO, un ensemble d'outils logiciels « offline-first » (sans connexion, serveur ni base de données requise), de solutions Web3, DePIN et de tokenomics avancées conçues de bout en bout. Maîtrise de Solidity, de l'optimisation du gas et des paramètres de sécurité des smart contracts, avec un historique éprouvé de fusion entre l'ingénierie logicielle classique, l'automatisation pilotée par l'IA et les architectures financières décentralisées (DeFi).",
+        de: "Ergebnisorientierter Blockchain-Ingenieur und Web3-Architekt mit praktischer Erfahrung in Konzeption, Audit und Deployment sicherer Smart Contracts auf EVM-kompatiblen Netzwerken. Gründer des EMPIRE-DONKO-Ökosystems, einer Sammlung von „Offline-First“-Softwaretools (ohne Internetverbindung, Server oder Datenbank), sowie von Web3-, DePIN- und fortgeschrittenen Tokenomics-Lösungen, die vollständig eigenständig entwickelt wurden. Fundierte Kenntnisse in Solidity, Gas-Optimierung und Sicherheitsparametern von Smart Contracts, mit nachgewiesener Erfahrung in der Verbindung von klassischer Softwareentwicklung, KI-gesteuerter Automatisierung und dezentralen Finanzarchitekturen (DeFi)."
+      }
+    }
+  },
+
+  // Légendes des photos/vidéos de la galerie : clé = nom exact du fichier
+  // sur GitHub (ex. "galerie1A.jpg"), valeur = légende bilingue affichée
+  // sous la photo. Une photo sans entrée ici s'affiche simplement sans
+  // légende.
+  galleryCaptions: {
+    // "galerie1A.jpg": { fr: "Ma légende en français", de: "Meine Bildunterschrift" }
+  }
+
 };
