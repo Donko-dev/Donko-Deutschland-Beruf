@@ -1,6 +1,6 @@
 /* ==========================================================================
    DONKO DEUTSCHLAND BERUF — data.js
-   Généré depuis admin.html le 06/08/2026 22:58:34
+   Généré depuis admin.html le 06/08/2026 23:13:39
    --------------------------------------------------------------------------
    ⚠️ NE PAS SUPPRIMER LA LIGNE "window.SITE_DATA = " — index.html en dépend.
    ========================================================================== */
@@ -404,7 +404,7 @@ window.SITE_DATA = {
   "texts": {
     "header": {
       "tagline": {
-        "fr": "BÉNIN → ALLEMAGNE · Voici une vitrine complète de nos solutions de gestion d'entrepôt (SGE).",
+        "fr": "BÉNIN → ALLEMAGNE · Solutions WMS",
         "de": "BENIN → DEUTSCHLAND · WMS SCHAUFENSTER"
       }
     },
