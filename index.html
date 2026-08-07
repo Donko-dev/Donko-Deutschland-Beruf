@@ -183,6 +183,19 @@
   #nav-overlay{ opacity:0; transition:opacity .28s ease; }
   #nav-overlay.open{ opacity:1; }
 
+  .lightbox-seek{
+    -webkit-appearance:none; appearance:none; height:4px; border-radius:4px;
+    background:rgba(255,255,255,.25); outline:none; cursor:pointer;
+  }
+  .lightbox-seek::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none; width:13px; height:13px; border-radius:50%;
+    background:var(--amber); cursor:pointer; margin-top:0;
+  }
+  .lightbox-seek::-moz-range-thumb{
+    width:13px; height:13px; border-radius:50%; background:var(--amber); border:none; cursor:pointer;
+  }
+  .lightbox-seek::-moz-range-track{ height:4px; border-radius:4px; background:rgba(255,255,255,.25); }
+
   #splash-screen{ transition:opacity .5s ease, visibility .5s ease; }
   #splash-screen.hide{ opacity:0; visibility:hidden; pointer-events:none; }
   .splash-logo-wrap{ position:relative; width:92px; height:92px; margin-bottom:22px; }
@@ -307,16 +320,32 @@
 
 <!-- ============ LIGHTBOX GALERIE ============ -->
 <div id="lightbox" onclick="if(event.target===this) closeLightbox()" class="hidden fixed inset-0 z-[150] bg-black/90 flex items-center justify-center p-4 sm:p-8">
-  <button onclick="closeLightbox()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 border border-white/20 flex items-center justify-center text-white z-10" aria-label="Fermer">
+  <button onclick="closeLightbox()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 border border-white/20 flex items-center justify-center text-white z-20" aria-label="Fermer">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
-  <div class="max-w-3xl w-full flex flex-col items-center">
+
+  <button id="lightbox-prev" onclick="event.stopPropagation(); lightboxPrev()" class="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 border border-white/20 flex items-center justify-center text-white z-20" aria-label="Précédent">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+  </button>
+  <button id="lightbox-next" onclick="event.stopPropagation(); lightboxNext()" class="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 border border-white/20 flex items-center justify-center text-white z-20" aria-label="Suivant">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+  </button>
+
+  <div class="max-w-3xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
     <div id="lightbox-media" class="w-full flex items-center justify-center"></div>
-    <div id="lightbox-controls" class="hidden flex items-center justify-center gap-3 mt-4">
-      <button id="lightbox-playpause" onclick="toggleLightboxPlay()" class="w-11 h-11 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white text-lg" aria-label="Lecture / Pause">▶️</button>
-      <button id="lightbox-mute" onclick="toggleLightboxMute()" class="w-11 h-11 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white text-lg" aria-label="Son">🔊</button>
+    <div id="lightbox-controls" class="hidden w-full max-w-md mt-4">
+      <div class="flex items-center gap-2.5">
+        <span id="lightbox-time-current" class="font-mono text-[11px] text-white/70 w-9 text-right shrink-0">0:00</span>
+        <input id="lightbox-seek" type="range" min="0" max="100" value="0" step="0.1" class="lightbox-seek flex-1">
+        <span id="lightbox-time-duration" class="font-mono text-[11px] text-white/70 w-9 shrink-0">0:00</span>
+      </div>
+      <div class="flex items-center justify-center gap-3 mt-3">
+        <button id="lightbox-playpause" onclick="toggleLightboxPlay()" class="w-11 h-11 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white text-lg" aria-label="Lecture / Pause">▶️</button>
+        <button id="lightbox-mute" onclick="toggleLightboxMute()" class="w-11 h-11 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white text-lg" aria-label="Son">🔊</button>
+      </div>
     </div>
     <p id="lightbox-caption" class="hidden text-center text-sm text-white/80 mt-4 font-mono"></p>
+    <p id="lightbox-counter" class="hidden text-center text-[11px] font-mono text-white/50 mt-2"></p>
   </div>
 </div>
 
@@ -857,7 +886,8 @@ const IMAGE_EXT = ['png','jpg','jpeg','gif','webp','svg','avif'];
 const VIDEO_EXT = ['mp4','webm','mov','ogg'];
 const GALLERY_NAME_RE = /^galerie(\d+)([AE])\.([a-z0-9]+)$/i;
 
-function buildGalleryItem(f, ext){
+function buildGalleryItem(entry, list, index){
+  const f = entry.f, ext = entry.ext;
   const wrap = document.createElement('div');
   wrap.className = 'card rounded-lg overflow-hidden fade-in flex flex-col cursor-pointer group';
 
@@ -891,7 +921,7 @@ function buildGalleryItem(f, ext){
   }
   wrap.appendChild(mediaBox);
 
-  wrap.addEventListener('click', () => openLightbox(f.download_url, ext, captionText));
+  wrap.addEventListener('click', () => openLightbox(list, index));
 
   if(captionText){
     const caption = document.createElement('p');
@@ -904,18 +934,48 @@ function buildGalleryItem(f, ext){
   return wrap;
 }
 
-/* ================= LIGHTBOX GALERIE (lecture/pause, son on/off) ================= */
+/* ================= LIGHTBOX GALERIE (navigation, lecture, minuteur) ================= */
 let lightboxVideo = null;
+let lightboxList = null;
+let lightboxIndex = -1;
+let lightboxSeekDragging = false;
 
 document.addEventListener('keydown', (e)=>{
-  if(e.key !== 'Escape') return;
   const lb = document.getElementById('lightbox');
-  if(lb && !lb.classList.contains('hidden')) closeLightbox();
-  const panel = document.getElementById('nav-panel');
-  if(panel && panel.classList.contains('open')) closeMenu();
+  const lbOpen = lb && !lb.classList.contains('hidden');
+  if(e.key === 'Escape'){
+    if(lbOpen) closeLightbox();
+    const panel = document.getElementById('nav-panel');
+    if(panel && panel.classList.contains('open')) closeMenu();
+  } else if(lbOpen && e.key === 'ArrowRight'){
+    lightboxNext();
+  } else if(lbOpen && e.key === 'ArrowLeft'){
+    lightboxPrev();
+  }
 });
 
-function openLightbox(url, ext, caption){
+function formatLightboxTime(seconds){
+  if(!isFinite(seconds) || seconds < 0) seconds = 0;
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return m + ':' + String(s).padStart(2, '0');
+}
+
+function openLightbox(list, index){
+  lightboxList = list;
+  lightboxIndex = index;
+  renderLightboxMedia();
+  document.getElementById('lightbox').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderLightboxMedia(){
+  const entry = lightboxList[lightboxIndex];
+  const f = entry.f, ext = entry.ext;
+  const lang = currentLang === 'de' ? 'de' : 'fr';
+  const captionEntry = window.SITE_DATA && SITE_DATA.galleryCaptions && SITE_DATA.galleryCaptions[f.name];
+  const caption = captionEntry ? captionEntry[lang] : null;
+
   const mediaBox = document.getElementById('lightbox-media');
   const controls = document.getElementById('lightbox-controls');
   mediaBox.innerHTML = '';
@@ -925,30 +985,43 @@ function openLightbox(url, ext, caption){
 
   if(IMAGE_EXT.includes(ext)){
     const img = document.createElement('img');
-    img.src = url;
-    img.className = 'max-h-[72vh] w-auto max-w-full mx-auto object-contain rounded-lg';
+    img.src = f.download_url;
+    img.className = 'max-h-[68vh] w-auto max-w-full mx-auto object-contain rounded-lg';
     mediaBox.appendChild(img);
   } else {
     const vid = document.createElement('video');
-    vid.src = url;
-    vid.className = 'max-h-[72vh] w-auto max-w-full mx-auto rounded-lg bg-black';
+    vid.src = f.download_url;
+    vid.className = 'max-h-[68vh] w-auto max-w-full mx-auto rounded-lg bg-black';
     vid.playsInline = true;
     vid.controls = false;
     vid.preload = 'auto';
     // Pas d'autoplay avec le son : bloqué par la plupart des navigateurs
-    // mobiles, ce qui pouvait donner l'impression que la vidéo "ne
-    // s'ouvre pas". La lecture démarre volontairement au clic sur le
-    // bouton ▶️ ci-dessous, ce qui fonctionne toujours de façon fiable.
+    // mobiles. La lecture démarre volontairement au clic sur ▶️.
     vid.muted = false;
     mediaBox.appendChild(vid);
     lightboxVideo = vid;
     controls.classList.remove('hidden');
+
+    const seek = document.getElementById('lightbox-seek');
+    const curEl = document.getElementById('lightbox-time-current');
+    const durEl = document.getElementById('lightbox-time-duration');
+    seek.value = 0;
+    curEl.textContent = '0:00';
+    durEl.textContent = '0:00';
 
     vid.addEventListener('play', updateLightboxIcons);
     vid.addEventListener('pause', updateLightboxIcons);
     vid.addEventListener('volumechange', updateLightboxIcons);
     vid.addEventListener('error', () => showLightboxError());
     vid.addEventListener('loadeddata', () => hideLightboxError());
+    vid.addEventListener('loadedmetadata', () => {
+      seek.max = vid.duration || 0;
+      durEl.textContent = formatLightboxTime(vid.duration);
+    });
+    vid.addEventListener('timeupdate', () => {
+      if(!lightboxSeekDragging) seek.value = vid.currentTime;
+      curEl.textContent = formatLightboxTime(vid.currentTime);
+    });
     updateLightboxIcons();
   }
 
@@ -956,13 +1029,36 @@ function openLightbox(url, ext, caption){
   capEl.textContent = caption || '';
   capEl.classList.toggle('hidden', !caption);
 
-  document.getElementById('lightbox').classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
+  const counterEl = document.getElementById('lightbox-counter');
+  if(lightboxList.length > 1){
+    counterEl.textContent = (lightboxIndex + 1) + ' / ' + lightboxList.length;
+    counterEl.classList.remove('hidden');
+  } else {
+    counterEl.classList.add('hidden');
+  }
+
+  const showNav = lightboxList.length > 1;
+  document.getElementById('lightbox-prev').classList.toggle('hidden', !showNav);
+  document.getElementById('lightbox-next').classList.toggle('hidden', !showNav);
+}
+
+function lightboxNext(){
+  if(!lightboxList) return;
+  lightboxIndex = (lightboxIndex + 1) % lightboxList.length;
+  renderLightboxMedia();
+}
+
+function lightboxPrev(){
+  if(!lightboxList) return;
+  lightboxIndex = (lightboxIndex - 1 + lightboxList.length) % lightboxList.length;
+  renderLightboxMedia();
 }
 
 function closeLightbox(){
   if(lightboxVideo){ lightboxVideo.pause(); }
   lightboxVideo = null;
+  lightboxList = null;
+  lightboxIndex = -1;
   document.getElementById('lightbox').classList.add('hidden');
   document.getElementById('lightbox-media').innerHTML = '';
   document.body.style.overflow = '';
@@ -1012,6 +1108,22 @@ function hideLightboxError(){
   if(errEl) errEl.classList.add('hidden');
 }
 
+// Barre de défilement vidéo : on écoute une seule fois au chargement de la
+// page (l'élément #lightbox-seek est toujours le même, seule la vidéo
+// affectée change à chaque navigation).
+document.addEventListener('DOMContentLoaded', () => {
+  const seek = document.getElementById('lightbox-seek');
+  if(!seek) return;
+  seek.addEventListener('input', () => {
+    lightboxSeekDragging = true;
+    if(lightboxVideo){
+      lightboxVideo.currentTime = parseFloat(seek.value);
+      document.getElementById('lightbox-time-current').textContent = formatLightboxTime(lightboxVideo.currentTime);
+    }
+  });
+  seek.addEventListener('change', () => { lightboxSeekDragging = false; });
+});
+
 // Fichiers Afrique/Europe mis en cache après le premier chargement, pour
 // pouvoir ré-afficher les légendes dans la bonne langue sans refaire un
 // appel réseau à chaque changement FR/DE (l'API GitHub est limitée en
@@ -1025,11 +1137,11 @@ function renderGalleryGrids(){
   const gridEurope = document.getElementById('gallery-grid-europe');
   if(gridAfrica){
     gridAfrica.innerHTML = '';
-    cachedGalleryAfrica.forEach(e=> gridAfrica.appendChild(buildGalleryItem(e.f, e.ext)));
+    cachedGalleryAfrica.forEach((e,i)=> gridAfrica.appendChild(buildGalleryItem(e, cachedGalleryAfrica, i)));
   }
   if(gridEurope){
     gridEurope.innerHTML = '';
-    cachedGalleryEurope.forEach(e=> gridEurope.appendChild(buildGalleryItem(e.f, e.ext)));
+    cachedGalleryEurope.forEach((e,i)=> gridEurope.appendChild(buildGalleryItem(e, cachedGalleryEurope, i)));
   }
 }
 
@@ -1075,14 +1187,14 @@ async function loadGallery(){
       emptyAfrica.classList.remove('hidden');
     } else {
       gridAfrica.innerHTML = '';
-      africa.forEach(e=> gridAfrica.appendChild(buildGalleryItem(e.f, e.ext)));
+      africa.forEach((e,i)=> gridAfrica.appendChild(buildGalleryItem(e, africa, i)));
     }
 
     if(europe.length === 0){
       emptyEurope.classList.remove('hidden');
     } else {
       gridEurope.innerHTML = '';
-      europe.forEach(e=> gridEurope.appendChild(buildGalleryItem(e.f, e.ext)));
+      europe.forEach((e,i)=> gridEurope.appendChild(buildGalleryItem(e, europe, i)));
     }
   } catch(err){
     console.warn('Galerie indisponible :', err);
