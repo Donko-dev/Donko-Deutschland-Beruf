@@ -921,6 +921,7 @@ function openLightbox(url, ext, caption){
   mediaBox.innerHTML = '';
   controls.classList.add('hidden');
   lightboxVideo = null;
+  hideLightboxError();
 
   if(IMAGE_EXT.includes(ext)){
     const img = document.createElement('img');
@@ -930,16 +931,24 @@ function openLightbox(url, ext, caption){
   } else {
     const vid = document.createElement('video');
     vid.src = url;
-    vid.className = 'max-h-[72vh] w-auto max-w-full mx-auto rounded-lg';
+    vid.className = 'max-h-[72vh] w-auto max-w-full mx-auto rounded-lg bg-black';
     vid.playsInline = true;
-    vid.autoplay = true;
+    vid.controls = false;
+    vid.preload = 'auto';
+    // Pas d'autoplay avec le son : bloqué par la plupart des navigateurs
+    // mobiles, ce qui pouvait donner l'impression que la vidéo "ne
+    // s'ouvre pas". La lecture démarre volontairement au clic sur le
+    // bouton ▶️ ci-dessous, ce qui fonctionne toujours de façon fiable.
     vid.muted = false;
     mediaBox.appendChild(vid);
     lightboxVideo = vid;
     controls.classList.remove('hidden');
+
     vid.addEventListener('play', updateLightboxIcons);
     vid.addEventListener('pause', updateLightboxIcons);
     vid.addEventListener('volumechange', updateLightboxIcons);
+    vid.addEventListener('error', () => showLightboxError());
+    vid.addEventListener('loadeddata', () => hideLightboxError());
     updateLightboxIcons();
   }
 
@@ -961,7 +970,14 @@ function closeLightbox(){
 
 function toggleLightboxPlay(){
   if(!lightboxVideo) return;
-  if(lightboxVideo.paused) lightboxVideo.play(); else lightboxVideo.pause();
+  if(lightboxVideo.paused){
+    const playPromise = lightboxVideo.play();
+    if(playPromise && playPromise.catch){
+      playPromise.catch(() => showLightboxError());
+    }
+  } else {
+    lightboxVideo.pause();
+  }
 }
 
 function toggleLightboxMute(){
@@ -975,6 +991,25 @@ function updateLightboxIcons(){
   const muteBtn = document.getElementById('lightbox-mute');
   if(playBtn) playBtn.innerHTML = lightboxVideo.paused ? '▶️' : '⏸️';
   if(muteBtn) muteBtn.innerHTML = lightboxVideo.muted ? '🔇' : '🔊';
+}
+
+function showLightboxError(){
+  let errEl = document.getElementById('lightbox-error');
+  if(!errEl){
+    errEl = document.createElement('p');
+    errEl.id = 'lightbox-error';
+    errEl.className = 'text-center text-sm text-red-300 mt-3 max-w-xs mx-auto';
+    errEl.textContent = currentLang === 'de'
+      ? 'Video kann nicht abgespielt werden. Prüfen Sie Ihre Verbindung oder versuchen Sie es erneut.'
+      : "Impossible de lire cette vidéo. Vérifiez votre connexion ou réessayez.";
+    document.getElementById('lightbox-caption').insertAdjacentElement('afterend', errEl);
+  }
+  errEl.classList.remove('hidden');
+}
+
+function hideLightboxError(){
+  const errEl = document.getElementById('lightbox-error');
+  if(errEl) errEl.classList.add('hidden');
 }
 
 // Fichiers Afrique/Europe mis en cache après le premier chargement, pour

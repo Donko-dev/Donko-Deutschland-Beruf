@@ -3,7 +3,7 @@
    externes (Tailwind CDN, Google Fonts) au premier chargement, pour un
    fonctionnement 100% hors ligne dès la deuxième visite. */
 
-const CACHE_NAME = 'donko-deutschland-beruf-v16';
+const CACHE_NAME = 'donko-deutschland-beruf-v17';
 
 const PRECACHE_URLS = [
   './',
@@ -42,7 +42,27 @@ self.addEventListener('fetch', (event) => {
   // Ne traiter que les requêtes GET (ignorer POST, mailto:, etc.)
   if (req.method !== 'GET') return;
 
+  // Les vidéos (et parfois les gros fichiers) sont chargées par le
+  // navigateur via des requêtes "Range" (octets par octets) pour permettre
+  // le streaming et le déplacement dans la vidéo. Le Cache API interdit
+  // de mettre en cache une réponse partielle (206) : essayer de le faire
+  // cassait la lecture, surtout pour les vidéos volumineuses qui ont
+  // presque toujours besoin de ce mécanisme. On laisse donc ces requêtes
+  // passer directement au réseau, sans passer par le service worker.
+  if (req.headers.has('range')) {
+    return;
+  }
+
   const url = new URL(req.url);
+
+  // Les médias de la galerie (photos/vidéos) viennent de GitHub, pas du
+  // même domaine que le site. Inutile et risqué de les mettre en cache
+  // via ce service worker (gros volumes, quota, formats variés) : on les
+  // laisse filer directement au réseau, le navigateur gère déjà très bien
+  // son propre cache HTTP pour ces fichiers.
+  if (url.hostname !== self.location.hostname) {
+    return;
+  }
 
   // data.js est le contenu modifiable du site : il doit toujours refléter
   // la dernière version publiée sur GitHub dès qu'une connexion est
